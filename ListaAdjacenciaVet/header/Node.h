@@ -14,8 +14,6 @@ class Node
     private:
         NodeInfo *nodeInfo;
         list<Adjacencia*> adjacenciaList;
-
-        Adjacencia* getAdjacencia(int idNodeAdj);
     public:
         Node();
         ~Node();
@@ -26,6 +24,7 @@ class Node
         void addAdjacencia(int idNodeAdj);
         void removeAdjacencia(int idNodeAdj);
         bool existsAdjacencia(int idNodeAdj);
+        Adjacencia* getAdjacencia(int idNodeAdj);
         list<Adjacencia*> getAdjacenciaList();
 
         int getGrau();

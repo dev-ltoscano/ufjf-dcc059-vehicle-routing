@@ -1,4 +1,6 @@
 #include "../header/ListaAdjacenciaVet.h"
+#include "../header/Helper.h"
+#include <algorithm>
 
 ListaAdjacenciaVet::ListaAdjacenciaVet(int nodeCount, bool isDirected)
 {
@@ -11,6 +13,16 @@ ListaAdjacenciaVet::ListaAdjacenciaVet(int nodeCount, bool isDirected)
 ListaAdjacenciaVet::~ListaAdjacenciaVet()
 {
     delete this->nodeList;
+}
+
+int ListaAdjacenciaVet::getNodeCount()
+{
+    return this->nodeCount;
+}
+
+Node* ListaAdjacenciaVet::getNodeList()
+{
+    return this->nodeList;
 }
 
 bool ListaAdjacenciaVet::existsNode(int idNode)
@@ -196,4 +208,47 @@ bool ListaAdjacenciaVet::containsCiclo(int startIdNode)
 bool ListaAdjacenciaVet::containsCaminho(int startIdNode, int endIdNode)
 {
     return this->path(startIdNode, endIdNode, new int[this->nodeCount]);
+}
+
+void ListaAdjacenciaVet::minCaminho(int startIdNode)
+{
+    int *rot = new int[this->nodeCount];
+    float *dij = new float[this->nodeCount];
+
+    rot[startIdNode] = startIdNode;
+    dij[startIdNode] = 0;
+
+    for(int i = 1; i < this->nodeCount; i++)
+    {
+        rot[i] = -1;
+        dij[i] = -999;
+    }
+
+    Helper *help = new Helper();
+    int j = 1;
+
+    while(j < this->nodeCount)
+    {
+        int r = help->getMinAdj(this->nodeList, this->nodeCount);
+
+        for(int i = 0; i < this->nodeCount; i++)
+        {
+            Adjacencia* adjir = (this->nodeList[r]).getAdjacencia(i);
+            float p = min(dij[i], (dij[r] + adjir->getAdjacenciaInfo()->getWeight()));
+
+            if(p < dij[i])
+            {
+                rot[i] = r;
+                dij[i] = p;
+            }
+        }
+
+        j++;
+    }
+
+    for(int i = 0; i < this->nodeCount; i++)
+    {
+        cout << "rot["<< i << "]: " << rot[i] << endl;
+        cout << "dij["<< i << "]: " << dij[i] << endl;
+    }
 }

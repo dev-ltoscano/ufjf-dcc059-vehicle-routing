@@ -34,12 +34,14 @@
 		</Compiler>
 		<Unit filename="header/Adjacencia.h" />
 		<Unit filename="header/AdjacenciaInfo.h" />
+		<Unit filename="header/Helper.h" />
 		<Unit filename="header/ListaAdjacenciaVet.h" />
 		<Unit filename="header/Node.h" />
 		<Unit filename="header/NodeInfo.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="source/Adjacencia.cpp" />
 		<Unit filename="source/AdjacenciaInfo.cpp" />
+		<Unit filename="source/Helper.cpp" />
 		<Unit filename="source/ListaAdjacenciaVet.cpp" />
 		<Unit filename="source/Node.cpp" />
 		<Unit filename="source/NodeInfo.cpp" />

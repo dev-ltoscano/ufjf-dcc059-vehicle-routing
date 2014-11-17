@@ -23,10 +23,13 @@ class ListaAdjacenciaVet
         ListaAdjacenciaVet(int nodeCount, bool isDirected);
         ~ListaAdjacenciaVet();
 
+        int getNodeCount();
+        Node* getNodeList();
+
         void addAdjacencia(int idNode1, int idNode2);
         void removeAdjacencia(int idNode1, int idNode2);
         bool existsAdjacencia(int idNode1, int idNode2);
-        void getAdjacenciaInfo(int idNode1, int idNode2);
+        Adjacencia* getAdjacenciaInfo(int idNode1, int idNode2);
 
         int getGrau(int idNode);
         void getNodeInfo(int idNode);
@@ -35,6 +38,7 @@ class ListaAdjacenciaVet
         int compConexaCount(); // Verifica quantas componentes conexas o grafo possui
         bool containsCiclo(int startIdNode); // Verifica se o grafo possui ciclos
         bool containsCaminho(int startIdNode, int endIdNode); // Verifica se existe caminho entre dois nós
+        void minCaminho(int startIdNode); // Caminho mínimo a partir do nó inicial (Dijkstra)
 };
 
 #endif // LISTAADJACENCIAVET_H_INCLUDED
