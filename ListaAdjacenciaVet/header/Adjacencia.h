@@ -1,17 +1,21 @@
 #ifndef ADJACENCIA_H_INCLUDED
 #define ADJACENCIA_H_INCLUDED
 
-#include "AdjacenciaInfo.h"
-
 class Adjacencia
 {
     private:
-        AdjacenciaInfo *adjInfo;
-    public:
-        Adjacencia(AdjacenciaInfo *adjInfo);
-        ~Adjacencia();
+        int idNode1; // Nó i pertencente a adjacência
+        int idNode2; // Nó j pertencente a adjacência
 
-        AdjacenciaInfo* getAdjacenciaInfo();
+        float weight; // Peso da aresta
+    public:
+        Adjacencia(int idNode, int idNodeAdj, float weight);
+
+        int getIdNode1();
+        int getIdNode2();
+
+        float getWeight();
+        void setWeight(float weight);
 };
 
 #endif // ADJACENCIA_H_INCLUDED

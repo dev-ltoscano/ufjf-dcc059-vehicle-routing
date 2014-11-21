@@ -1,31 +1,30 @@
 # depslib dependency file v1.0
-1414094506 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\main.cpp
+1416441001 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\main.cpp
 	<iostream>
 	<stdlib.h>
 	"header/ListaAdjacenciaVet.h"
 
-1416076779 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\listaadjacenciavet.cpp
+1416439505 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\listaadjacenciavet.cpp
 	"../header/ListaAdjacenciaVet.h"
 	"../header/Helper.h"
 	<algorithm>
 
-1416076242 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\listaadjacenciavet.h
+1416437818 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\listaadjacenciavet.h
 	<iostream>
 	"Node.h"
 
-1416076242 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\node.h
+1416438118 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\node.h
 	<iostream>
 	<list>
 	"NodeInfo.h"
 	"Adjacencia.h"
 
-1414012493 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\adjacencia.cpp
+1416438041 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\adjacencia.cpp
 	"../header/Adjacencia.h"
 
-1414012502 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\adjacencia.h
-	"AdjacenciaInfo.h"
+1416438050 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\adjacencia.h
 
-1414068852 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\node.cpp
+1416438309 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\node.cpp
 	"../header/Node.h"
 
 1414014577 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\nodeinfo.h
@@ -38,7 +37,41 @@
 1414014605 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\nodeinfo.cpp
 	"../header/NodeInfo.h"
 
-1416075756 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\helper.cpp
+1414094506 source:c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\main.cpp
+	<iostream>
+	<stdlib.h>
+	"header/ListaAdjacenciaVet.h"
+
+1416166381 c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\header\listaadjacenciavet.h
+	<iostream>
+	"Node.h"
+
+1414068824 c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\header\node.h
+	<iostream>
+	<list>
+	"NodeInfo.h"
+	"Adjacencia.h"
+
+1414014577 c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\header\nodeinfo.h
+
+1414012502 c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\header\adjacencia.h
+	"AdjacenciaInfo.h"
+
+1414014531 c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\header\adjacenciainfo.h
+
+1414012493 source:c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\source\adjacencia.cpp
+	"../header/Adjacencia.h"
+
+1414014484 source:c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\source\adjacenciainfo.cpp
+	"../header/AdjacenciaInfo.h"
+
+1414068852 source:c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\source\node.cpp
+	"../header/Node.h"
+
+1414014605 source:c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\source\nodeinfo.cpp
+	"../header/NodeInfo.h"
+
+1416437023 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\helper.cpp
 	"../header/Helper.h"
 
 1416074571 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\helper.h

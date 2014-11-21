@@ -38,7 +38,7 @@ void ListaAdjacenciaVet::depth(int idNode, int *nodeVet)
     for (typename list<Adjacencia*>::iterator it = nodeAdjList.begin(); it != nodeAdjList.end(); it++)
     {
         Adjacencia *nodeAdj = (*it);
-        int idNodeAdj = nodeAdj->getAdjacenciaInfo()->getIdNodeAdj(); // Pega o id do nó adjacente
+        int idNodeAdj = nodeAdj->getIdNode2(); // Pega o id do nó adjacente
 
         if(nodeVet[idNodeAdj] != 1)
         {
@@ -61,7 +61,7 @@ bool ListaAdjacenciaVet::cicle(int idNode, int startIdNode, int *nodeVet)
     for (typename list<Adjacencia*>::iterator it = nodeAdjList.begin(); it != nodeAdjList.end(); it++)
     {
         Adjacencia *nodeAdj = (*it);
-        int idNodeAdj = nodeAdj->getAdjacenciaInfo()->getIdNodeAdj(); // Pega o id do nó adjacente
+        int idNodeAdj = nodeAdj->getIdNode2(); // Pega o id do nó adjacente
 
         if(nodeVet[idNodeAdj] != 1)
         {
@@ -86,7 +86,7 @@ bool ListaAdjacenciaVet::path(int idNode, int endIdNode,  int *nodeVet)
     for (typename list<Adjacencia*>::iterator it = nodeAdjList.begin(); it != nodeAdjList.end(); it++)
     {
         Adjacencia *nodeAdj = (*it);
-        int idNodeAdj = nodeAdj->getAdjacenciaInfo()->getIdNodeAdj(); // Pega o id do nó adjacente
+        int idNodeAdj = nodeAdj->getIdNode2(); // Pega o id do nó adjacente
 
         if(nodeVet[idNodeAdj] != 1)
         {
@@ -97,18 +97,18 @@ bool ListaAdjacenciaVet::path(int idNode, int endIdNode,  int *nodeVet)
     return false;
 }
 
-void ListaAdjacenciaVet::addAdjacencia(int idNode1, int idNode2)
+void ListaAdjacenciaVet::addAdjacencia(int idNode1, int idNode2, float weight)
 {
     if(existsNode(idNode1) && existsNode(idNode2))
     {
         if(isDirected)
         {
-            (this->nodeList[idNode1]).addAdjacencia(idNode2);
+            (this->nodeList[idNode1]).addAdjacencia(idNode1, idNode2, weight);
         }
         else
         {
-            (this->nodeList[idNode1]).addAdjacencia(idNode2);
-            (this->nodeList[idNode2]).addAdjacencia(idNode1);
+            (this->nodeList[idNode1]).addAdjacencia(idNode1, idNode2, weight);
+            (this->nodeList[idNode2]).addAdjacencia(idNode2, idNode1, weight);
         }
     }
     else
@@ -202,7 +202,7 @@ int ListaAdjacenciaVet::compConexaCount()
 bool ListaAdjacenciaVet::containsCiclo(int startIdNode)
 {
     list<Adjacencia*>::iterator it = this->nodeList[startIdNode].getAdjacenciaList().begin();
-    return this->path((*it)->getAdjacenciaInfo()->getIdNodeAdj(), startIdNode, new int[this->nodeCount]);
+    return this->path((*it)->getIdNode2(), startIdNode, new int[this->nodeCount]);
 }
 
 bool ListaAdjacenciaVet::containsCaminho(int startIdNode, int endIdNode)
@@ -234,7 +234,7 @@ void ListaAdjacenciaVet::minCaminho(int startIdNode)
         for(int i = 0; i < this->nodeCount; i++)
         {
             Adjacencia* adjir = (this->nodeList[r]).getAdjacencia(i);
-            float p = min(dij[i], (dij[r] + adjir->getAdjacenciaInfo()->getWeight()));
+            float p = min(dij[i], (dij[r] + adjir->getWeight()));
 
             if(p < dij[i])
             {

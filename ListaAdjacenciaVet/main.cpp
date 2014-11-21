@@ -20,7 +20,7 @@ ListaAdjacenciaVet* createGrafo(int maxNodes, int maxGrau)
 
             if((i != nodeAdj) && (!grafo->existsAdjacencia(i, nodeAdj)))
             {
-                grafo->addAdjacencia(i, nodeAdj);
+                grafo->addAdjacencia(i, nodeAdj, 0);
                 j++;
             }
         }
@@ -31,23 +31,18 @@ ListaAdjacenciaVet* createGrafo(int maxNodes, int maxGrau)
 
 int main()
 {
-//    ListaAdjacenciaVet *grafo = createGrafo(50, 25);
+    ListaAdjacenciaVet *grafo = createGrafo(50, 25);
 
-    ListaAdjacenciaVet *grafo = new ListaAdjacenciaVet(5, false);
-
-    grafo->addAdjacencia(0, 1);
-    grafo->addAdjacencia(1, 2);
-    grafo->addAdjacencia(2, 3);
-    grafo->addAdjacencia(3, 0);
+//    ListaAdjacenciaVet *grafo = new ListaAdjacenciaVet(4, false);
+//
+//    grafo->addAdjacencia(0, 1, 0);
+//    grafo->addAdjacencia(1, 2, 0);
+//    grafo->addAdjacencia(2, 3, 0);
+//    grafo->addAdjacencia(3, 0, 0);
 
     cout << "Conexo: " << grafo->isConexo() << endl;
     cout << "Componentes: " << grafo->compConexaCount() << endl;
-
-    for(int i = 0; i < 50; i++)
-    {
-        cout << "Caminho: " << grafo->containsCaminho(0, i) << endl;
-    }
-
+    cout << "Ciclo: " << grafo->containsCiclo(0) << endl;
 
 //    system("PAUSE");
 

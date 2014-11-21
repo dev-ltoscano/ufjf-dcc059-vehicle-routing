@@ -12,16 +12,17 @@ using namespace std;
 class Node
 {
     private:
-        NodeInfo *nodeInfo;
+        float weight;
+
         list<Adjacencia*> adjacenciaList;
     public:
         Node();
         ~Node();
 
-        NodeInfo* getNodeInfo();
-        void setNodeInfo(NodeInfo *nodeInfo);
+        float getWeight();
+        void setWeight(float weight);
 
-        void addAdjacencia(int idNodeAdj);
+        void addAdjacencia(int idNode1, int idNode2, float weight);
         void removeAdjacencia(int idNodeAdj);
         bool existsAdjacencia(int idNodeAdj);
         Adjacencia* getAdjacencia(int idNodeAdj);

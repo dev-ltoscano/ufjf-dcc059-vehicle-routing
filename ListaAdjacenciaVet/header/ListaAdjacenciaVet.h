@@ -26,7 +26,7 @@ class ListaAdjacenciaVet
         int getNodeCount();
         Node* getNodeList();
 
-        void addAdjacencia(int idNode1, int idNode2);
+        void addAdjacencia(int idNode1, int idNode2, float weight);
         void removeAdjacencia(int idNode1, int idNode2);
         bool existsAdjacencia(int idNode1, int idNode2);
         Adjacencia* getAdjacenciaInfo(int idNode1, int idNode2);

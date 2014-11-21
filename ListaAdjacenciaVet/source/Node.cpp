@@ -1,9 +1,6 @@
 #include "../header/Node.h"
 
-Node::Node()
-{
-    this->nodeInfo = new NodeInfo(0);
-}
+Node::Node() { }
 
 Node::~Node()
 {
@@ -11,38 +8,36 @@ Node::~Node()
     {
         delete (*it);
     }
-
-    delete this->nodeInfo;
 }
 
 Adjacencia* Node::getAdjacencia(int idNodeAdj)
 {
     for (list<Adjacencia*>::iterator it = adjacenciaList.begin(); it != adjacenciaList.end(); it++)
     {
-        if((*it)->getAdjacenciaInfo()->getIdNodeAdj() == idNodeAdj)
+        if((*it)->getIdNode2() == idNodeAdj)
             return (*it);
     }
 
     return NULL;
 }
 
-NodeInfo* Node::getNodeInfo()
+float Node::getWeight()
 {
-    return this->nodeInfo;
+    return this->weight;
 }
 
-void Node::setNodeInfo(NodeInfo *nodeInfo)
+void Node::setWeight(float weight)
 {
-    this->nodeInfo = nodeInfo;
+    this->weight = weight;
 }
 
-void Node::addAdjacencia(int idNodeAdj)
+void Node::addAdjacencia(int idNode1, int idNode2, float weight)
 {
-    Adjacencia *nodeAdj = this->getAdjacencia(idNodeAdj);
+    Adjacencia *nodeAdj = this->getAdjacencia(idNode2);
 
     if(nodeAdj == NULL)
     {
-        this->adjacenciaList.push_front(new Adjacencia(new AdjacenciaInfo(idNodeAdj, 0)));
+        this->adjacenciaList.push_front(new Adjacencia(idNode1, idNode2, weight));
     }
     else
     {
@@ -50,9 +45,9 @@ void Node::addAdjacencia(int idNodeAdj)
     }
 }
 
-void Node::removeAdjacencia(int idNodeAdj)
+void Node::removeAdjacencia(int idNode2)
 {
-    Adjacencia *nodeAdj = this->getAdjacencia(idNodeAdj);
+    Adjacencia *nodeAdj = this->getAdjacencia(idNode2);
 
     if(nodeAdj != NULL)
     {

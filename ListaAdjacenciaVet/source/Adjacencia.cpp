@@ -1,16 +1,28 @@
 #include "../header/Adjacencia.h"
 
-Adjacencia::Adjacencia(AdjacenciaInfo *adjInfo)
+Adjacencia::Adjacencia(int idNode1, int idNode2, float weight)
 {
-    this->adjInfo = adjInfo;
+    this->idNode1 = idNode1;
+    this->idNode2 = idNode2;
+    this->weight = weight;
 }
 
-Adjacencia::~Adjacencia()
+int Adjacencia::getIdNode1()
 {
-    delete this->adjInfo;
+    return this->idNode1;
 }
 
-AdjacenciaInfo* Adjacencia::getAdjacenciaInfo()
+int Adjacencia::getIdNode2()
 {
-    return this->adjInfo;
+    return this->idNode2;
+}
+
+float Adjacencia::getWeight()
+{
+    return this->weight;
+}
+
+void Adjacencia::setWeight(float weight)
+{
+    this->weight = weight;
 }

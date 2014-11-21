@@ -12,12 +12,10 @@ int Helper::getMinAdj(Node *nodeList, int nodeCount)
 
     for(int i = 0; i < nodeCount; i++)
     {
-        NodeInfo *info = nodeList[i].getNodeInfo();
-
-        if(info->getWeight() < minWeight)
+        if(nodeList[i].getWeight() < minWeight)
         {
             idAdj = i;
-            minWeight = info->getWeight();
+            minWeight = nodeList[i].getWeight();
         }
     }
 
