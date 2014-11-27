@@ -32,15 +32,21 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="header/Adjacencia.h" />
+		<Unit filename="header/FileHelper.h" />
 		<Unit filename="header/Helper.h" />
-		<Unit filename="header/ListaAdjacenciaVet.h" />
-		<Unit filename="header/Node.h" />
+		<Unit filename="header/grafo/Adjacencia.h" />
+		<Unit filename="header/grafo/ListaAdjacenciaVet.h" />
+		<Unit filename="header/grafo/Vertice.h" />
+		<Unit filename="header/structure/list/NodeList.h" />
+		<Unit filename="header/structure/list/OrderedList.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="source/Adjacencia.cpp" />
+		<Unit filename="source/FileHelper.cpp" />
 		<Unit filename="source/Helper.cpp" />
-		<Unit filename="source/ListaAdjacenciaVet.cpp" />
-		<Unit filename="source/Node.cpp" />
+		<Unit filename="source/grafo/Adjacencia.cpp" />
+		<Unit filename="source/grafo/ListaAdjacenciaVet.cpp" />
+		<Unit filename="source/grafo/Vertice.cpp" />
+		<Unit filename="source/structure/list/NodeList.cpp" />
+		<Unit filename="source/structure/list/OrderedList.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
