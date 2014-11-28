@@ -1,6 +1,6 @@
 #include "../../../header/structure/list/OrderedList.h"
 
-OrderedList::OrderedList()
+template <class G> OrderedList<G>::OrderedList()
 {
     this->startNode = NULL;
     this->endNode = NULL;
@@ -10,11 +10,11 @@ OrderedList::OrderedList()
     this->length = 0;
 }
 
-OrderedList::~OrderedList()
+template <class G> OrderedList<G>::~OrderedList()
 {
     if(length != 0)
     {
-        NodeList *aux = startNode;
+        AbstractNodeList<G> *aux = startNode;
 
         while(aux != NULL)
         {
@@ -25,14 +25,14 @@ OrderedList::~OrderedList()
     }
 }
 
-void OrderedList::setOrder(bool isOrdered)
+template <class G> void OrderedList<G>::setOrder(bool isOrdered)
 {
     this->isOrdered = isOrdered;
 }
 
-void OrderedList::insert(Adjacencia *adj)
+template <class G> void OrderedList<G>::insert(int nodeId, int nodeValue, G *info)
 {
-    NodeList *node = new NodeList(adj);
+    AbstractNodeList<G> *node = new AbstractNodeList<G>(nodeId, nodeValue, info);
 
     if(length == 0) // A lista está vazia
     {
@@ -43,14 +43,14 @@ void OrderedList::insert(Adjacencia *adj)
     {
         if(isOrdered)
         {
-            this->searchByWeight(adj->getWeight()); // Coloca o ponteiro it em um nó maior que o novo nó
+            this->searchByValue(node->getNodeValue()); // Coloca o ponteiro it em um nó maior que o novo nó
         }
         else
         {
             this->start(); // Coloca o ponteiro it no início da lista
         }
 
-        if(it->getAdjacencia()->getIdVertice2() != adj->getIdVertice2()) // Verifica se a adjacência já existe na lista
+        if(it->getNodeId() != node->getNodeId()) // Verifica se a adjacência já existe na lista
         {
             if(it == endNode) // A adjacência tem peso maior que todas as outras da lista
             {
@@ -86,38 +86,38 @@ void OrderedList::insert(Adjacencia *adj)
     this->length++;
 }
 
-void OrderedList::searchById(int idVertice2)
+template <class G> void OrderedList<G>::searchById(int nodeId)
 {
     this->start();
 
-    while((it != NULL) && (it->getAdjacencia()->getIdVertice2() != idVertice2))
+    while((it != NULL) && (it->getNodeId() != nodeId))
     {
         this->next(); // Caminha na lista enquanto não chegar ao fim ou não encontrar o nó
     }
 }
 
-void OrderedList::searchByWeight(int weight)
+template <class G> void OrderedList<G>::searchByValue(int value)
 {
     this->start();
 
-    while((it != NULL) && (it->getAdjacencia()->getWeight() < weight))
+    while((it != NULL) && (it->getNodeValue() < value))
     {
-        if(it->getNext() != NULL)
-            this->next(); // Caminha na lista enquanto não chegar ao fim ou encontrar um nó maior que o procurado
-        else
+        if(it->getNext() == NULL)
             break;
+
+        this->next(); // Caminha na lista enquanto não chegar ao fim ou encontrar um nó maior que o procurado
     }
 }
 
-void OrderedList::remove(int idVertice2)
+template <class G> void OrderedList<G>::remove(int nodeId)
 {
     if(length != 0) // A lista não está vazia
     {
-        this->searchById(idVertice2); // Coloca it na posição do nó a ser removido
+        this->searchById(nodeId); // Coloca it na posição do nó a ser removido
 
         if(it == endNode) // A adjacência é a última da lista
         {
-            NodeList *aux = this->endNode;
+            AbstractNodeList<G> *aux = this->endNode;
 
             aux->getPrevious()->setNext(NULL);
             this->endNode = aux->getPrevious();
@@ -126,7 +126,7 @@ void OrderedList::remove(int idVertice2)
         }
         else if(it == startNode) // A adjacência é a primeira da lista
         {
-            NodeList *aux = this->startNode;
+            AbstractNodeList<G> *aux = this->startNode;
 
             aux->getNext()->setPrevious(NULL);
             this->startNode = aux->getNext();
@@ -135,7 +135,7 @@ void OrderedList::remove(int idVertice2)
         }
         else if(it != NULL) // A adjacência é intermediária na lista
         {
-            NodeList *aux = this->it;
+            AbstractNodeList<G> *aux = this->it;
 
             aux->getPrevious()->setNext(aux->getNext());
             aux->getNext()->setPrevious(aux->getPrevious());
@@ -155,17 +155,28 @@ void OrderedList::remove(int idVertice2)
     this->start();
 }
 
-void OrderedList::start()
+template <class G> void OrderedList<G>::print()
+{
+    this->start();
+
+    while(!isEnd())
+    {
+        cout << "ID [" << this->it->getNodeId() << "] | Value [" << this->it->getNodeValue() << "]" << endl;
+        this->next();
+    }
+}
+
+template <class G> void OrderedList<G>::start()
 {
     this->it = this->startNode;
 }
 
-void OrderedList::end()
+template <class G> void OrderedList<G>::end()
 {
     this->it = this->endNode;
 }
 
-void OrderedList::previous()
+template <class G> void OrderedList<G>::previous()
 {
     if(it != NULL)
     {
@@ -173,7 +184,7 @@ void OrderedList::previous()
     }
 }
 
-void OrderedList::next()
+template <class G> void OrderedList<G>::next()
 {
     if(it != NULL)
     {
@@ -181,30 +192,30 @@ void OrderedList::next()
     }
 }
 
-bool OrderedList::isEnd()
+template <class G> bool OrderedList<G>::isEnd()
 {
     return (it == NULL);
 }
 
-Adjacencia* OrderedList::getAdjacencia()
+template <class G> G* OrderedList<G>::getInfo()
 {
     if(it != NULL)
     {
-        return this->it->getAdjacencia();
+        return this->it->getInfo();
     }
 
     return NULL;
 }
 
-Adjacencia* OrderedList::getAdjacencia(int idVertice2)
+template <class G> G* OrderedList<G>::getInfo(int nodeId)
 {
     this->start();
 
     while(!isEnd())
     {
-        if(it->getAdjacencia()->getIdVertice2() == idVertice2)
+        if(it->getNodeId() == nodeId)
         {
-            return this->it->getAdjacencia();
+            return this->it->getInfo();
         }
 
         this->next();
@@ -213,7 +224,10 @@ Adjacencia* OrderedList::getAdjacencia(int idVertice2)
     return NULL;
 }
 
-int OrderedList::getLength()
+template <class G> int OrderedList<G>::getLength()
 {
     return this->length;
 }
+
+template class OrderedList<int>;
+template class OrderedList<Adjacencia>;

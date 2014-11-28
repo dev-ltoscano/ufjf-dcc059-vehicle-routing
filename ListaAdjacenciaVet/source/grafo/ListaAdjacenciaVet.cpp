@@ -1,20 +1,19 @@
 #include "../../header/grafo/ListaAdjacenciaVet.h"
 #include "../../header/Helper.h"
 
-ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected)
-{
-    this->verticeCount = verticeCount;
-    this->verticeList = new Vertice[verticeCount];
-
-    this->isDirected = isDirected;
-}
+ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected) : ListaAdjacenciaVet(verticeCount, isDirected, false) { }
 
 ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected, bool isOrderAdjList)
 {
     this->verticeCount = verticeCount;
+    this->isDirected = isDirected;
+
     this->verticeList = new Vertice[verticeCount];
 
-    this->isDirected = isDirected;
+    for(int i = 0; i < verticeCount; i++)
+    {
+        this->verticeList[i].setAdjOrderList(isOrderAdjList);
+    }
 }
 
 ListaAdjacenciaVet::~ListaAdjacenciaVet()
@@ -86,12 +85,12 @@ bool ListaAdjacenciaVet::depth(int s, int d)
         s = queue.front();
         queue.pop_front();
 
-        OrderedList *verticeAdjList = this->verticeList[s].getAdjacenciaList(); // Pega a lista de adjacência do nó
+        OrderedList<Adjacencia> *verticeAdjList = this->verticeList[s].getAdjacenciaList(); // Pega a lista de adjacência do nó
         verticeAdjList->start();
 
         while(!verticeAdjList->isEnd())
         {
-            Adjacencia *verticeAdj = verticeAdjList->getAdjacencia();
+            Adjacencia *verticeAdj = verticeAdjList->getInfo();
             verticeAdjList->next();
 
             if(verticeAdj->getIdVertice1() == d)
@@ -111,13 +110,13 @@ bool ListaAdjacenciaVet::depth(int s, int d)
 void ListaAdjacenciaVet::depth(int idNode, int *verticeList)
 {
     verticeList[idNode] = 1; // Marca o nó como visitado
-    OrderedList *verticeAdjList = this->verticeList[idNode].getAdjacenciaList(); // Pega a lista de adjacência do nó
+    OrderedList<Adjacencia> *verticeAdjList = this->verticeList[idNode].getAdjacenciaList(); // Pega a lista de adjacência do nó
 
     verticeAdjList->start();
 
     while(!verticeAdjList->isEnd())
     {
-        Adjacencia *verticeAdj = verticeAdjList->getAdjacencia();
+        Adjacencia *verticeAdj = verticeAdjList->getInfo();
         verticeAdjList->next();
 
         int idVertice2 = verticeAdj->getIdVertice2(); // Pega o id do nó adjacente
@@ -138,13 +137,13 @@ bool ListaAdjacenciaVet::depth(int startIdVertice, int *verticeList, int idVerti
     }
 
     verticeList[idVerticeCurrent] = 1; // Marca o nó como visitado
-    OrderedList *verticeAdjList = this->verticeList[idVerticeCurrent].getAdjacenciaList(); // Pega a lista de adjacência do nó
+    OrderedList<Adjacencia> *verticeAdjList = this->verticeList[idVerticeCurrent].getAdjacenciaList(); // Pega a lista de adjacência do nó
 
     verticeAdjList->start();
 
     while(!verticeAdjList->isEnd())
     {
-        Adjacencia *verticeAdj = verticeAdjList->getAdjacencia();
+        Adjacencia *verticeAdj = verticeAdjList->getInfo();
         verticeAdjList->next();
 
         int idVertice2 = verticeAdj->getIdVertice2(); // Pega o id do nó adjacente
@@ -260,10 +259,10 @@ int ListaAdjacenciaVet::compConexaCount()
 
 bool ListaAdjacenciaVet::containsCiclo(int startIdVertice)
 {
-    OrderedList *verticeAdjList = this->verticeList[startIdVertice].getAdjacenciaList();
+    OrderedList<Adjacencia> *verticeAdjList = this->verticeList[startIdVertice].getAdjacenciaList();
     verticeAdjList->start();
 
-    return this->depth(startIdVertice, new int[this->verticeCount], verticeAdjList->getAdjacencia()->getIdVertice2());
+    return this->depth(startIdVertice, new int[this->verticeCount], verticeAdjList->getInfo()->getIdVertice2());
 }
 
 bool ListaAdjacenciaVet::containsCaminho(int startIdVertice, int endIdVertice)

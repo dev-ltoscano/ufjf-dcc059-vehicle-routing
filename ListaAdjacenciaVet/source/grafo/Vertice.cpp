@@ -2,13 +2,8 @@
 
 Vertice::Vertice()
 {
-    this->adjacenciaList = new OrderedList();
-}
-
-Vertice::Vertice(bool isOrderAdjList)
-{
-    this->adjacenciaList = new OrderedList();
-    this->adjacenciaList->setOrder(isOrderAdjList);
+    this->adjacenciaList = new OrderedList<Adjacencia>();
+    this->adjacenciaList->setOrder(false);
 }
 
 Vertice::~Vertice()
@@ -16,9 +11,14 @@ Vertice::~Vertice()
     delete this->adjacenciaList;
 }
 
+void Vertice::setAdjOrderList(bool isOrderAdjList)
+{
+    this->adjacenciaList->setOrder(isOrderAdjList);
+}
+
 Adjacencia* Vertice::getAdjacencia(int idVertice2)
 {
-    return this->adjacenciaList->getAdjacencia(idVertice2);
+    return this->adjacenciaList->getInfo(idVertice2);
 }
 
 int Vertice::getWeight()
@@ -38,7 +38,7 @@ int Vertice::getGrau()
 
 void Vertice::addAdjacencia(int idVertice1, int idVertice2, int weight)
 {
-    this->adjacenciaList->insert(new Adjacencia(idVertice1, idVertice2, weight));
+    this->adjacenciaList->insert(idVertice2, weight, new Adjacencia(idVertice1, idVertice2, weight));
 }
 
 void Vertice::removeAdjacencia(int idVertice2)
@@ -51,7 +51,7 @@ bool Vertice::existsAdjacencia(int idVertice2)
     return (this->getAdjacencia(idVertice2) != NULL);
 }
 
-OrderedList* Vertice::getAdjacenciaList()
+OrderedList<Adjacencia>* Vertice::getAdjacenciaList()
 {
     return this->adjacenciaList;
 }

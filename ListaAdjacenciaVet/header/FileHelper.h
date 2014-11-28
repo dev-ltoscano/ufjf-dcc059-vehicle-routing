@@ -1,7 +1,7 @@
 #ifndef FILEHELPER_H_INCLUDED
 #define FILEHELPER_H_INCLUDED
 
-#include "Helper.h"
+#include "heuristic/FloydWarshall.h"
 #include "grafo/ListaAdjacenciaVet.h"
 
 #include <fstream>
@@ -13,7 +13,7 @@ class FileHelper : public Helper
     private:
 
     public:
-        static void writeGraphInfoFile(ListaAdjacenciaVet *grafo, FloydWarshall floyd);
+        static void writeGraphInfoFile(ListaAdjacenciaVet *grafo, Floyd floyd);
 };
 
 #endif // FILEHELPER_H_INCLUDED

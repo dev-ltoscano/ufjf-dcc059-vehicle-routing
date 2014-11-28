@@ -77,8 +77,9 @@
 1416074571 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\helper.h
 	"ListaAdjacenciaVet.h"
 
-1417051751 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\main.cpp
+1417123716 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\main.cpp
 	<iostream>
+	<string>
 	<stdlib.h>
 	<locale>
 	"header/grafo/ListaAdjacenciaVet.h"
@@ -103,14 +104,10 @@
 1416744380 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\adjacencia.cpp
 	"../header/Adjacencia.h"
 
-1417051689 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\helper.cpp
+1417115563 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\helper.cpp
 	"../header/Helper.h"
 
-1417041379 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\helper.h
-	"grafo/ListaAdjacenciaVet.h"
-	<climits>
-	<string>
-	<sstream>
+1417115679 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\helper.h
 
 1416933545 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\listaadjacenciavet.cpp
 	"../header/ListaAdjacenciaVet.h"
@@ -140,25 +137,25 @@
 1416766769 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\orderedlist.h
 	"NodeList.h"
 
-1417041401 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\filehelper.h
-	"Helper.h"
+1417115722 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\filehelper.h
+	"heuristic/FloydWarshall.h"
 	"grafo/ListaAdjacenciaVet.h"
 	<fstream>
 
-1417052096 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\filehelper.cpp
+1417115756 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\filehelper.cpp
 	"../header/FileHelper.h"
 
 1417041166 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\grafo\adjacencia.cpp
 	"../../header/grafo/Adjacencia.h"
 
-1416758505 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\grafo\adjacencia.h
+1417114140 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\grafo\adjacencia.h
 
 1417051935 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\grafo\listaadjacenciavet.h
 	"Vertice.h"
 	<iostream>
 	<list>
 
-1417047546 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\grafo\vertice.h
+1417118053 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\grafo\vertice.h
 	"Adjacencia.h"
 	"../structure/list/OrderedList.h"
 	<iostream>
@@ -170,11 +167,11 @@
 	"../grafo/Adjacencia.h"
 	<iostream>
 
-1417052036 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\grafo\listaadjacenciavet.cpp
+1417118080 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\grafo\listaadjacenciavet.cpp
 	"../../header/grafo/ListaAdjacenciaVet.h"
 	"../../header/Helper.h"
 
-1417050351 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\grafo\vertice.cpp
+1417118053 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\grafo\vertice.cpp
 	"../../header/grafo/Vertice.h"
 
 1417042113 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\nodelist.cpp
@@ -183,16 +180,48 @@
 1417043556 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\orderedlist.cpp
 	"../../header/structure/OrderedList.h"
 
-1417045177 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\nodelist.cpp
+1417108997 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\nodelist.cpp
 	"../../../header/structure/list/NodeList.h"
 
-1417045195 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\nodelist.h
+1417110084 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\nodelist.h
 	"../../grafo/Adjacencia.h"
 	<iostream>
 
-1417051796 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\orderedlist.cpp
+1417120113 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\orderedlist.cpp
 	"../../../header/structure/list/OrderedList.h"
 
-1417050324 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\orderedlist.h
-	"NodeList.h"
+1417114632 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\orderedlist.h
+	"AbstractNodeList.h"
+
+1417107086 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\searchadjweight.cpp
+	"../../../header/structure/list/SearchAdjWeight.h"
+
+1417107924 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\searchadjweight.h
+	"ISearchCriteria.h"
+
+1417106699 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\isearchcriteria.h
+
+1417116588 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\abstractnodelist.cpp
+	"../../../header/structure/list/AbstractNodeList.h"
+
+1417114892 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\abstractnodelist.h
+	"../../grafo/Adjacencia.h"
+	<iostream>
+
+1417114067 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\adjnodelist.cpp
+	"../../../header/structure/list/AdjNodeList.h"
+
+1417113579 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\adjnodelist.h
+	"../../grafo/Adjacencia.h"
+	"AbstractNodeList.h"
+
+1417115655 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\floydwarshall.h
+	"../grafo/ListaAdjacenciaVet.h"
+	"../Helper.h"
+	<climits>
+	<string>
+	<sstream>
+
+1417115655 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\floydwarshall.cpp
+	"../../header/heuristic/FloydWarshall.h"
 

@@ -1,29 +1,30 @@
 #ifndef ORDEREDLIST_H_INCLUDED
 #define ORDEREDLIST_H_INCLUDED
 
-#include "NodeList.h"
+#include "AbstractNodeList.h"
 
-class OrderedList
+template <class G> class OrderedList
 {
     private:
-        NodeList *startNode;
-        NodeList *endNode;
-        NodeList *it;
+        AbstractNodeList<G> *startNode;
+        AbstractNodeList<G> *endNode;
+        AbstractNodeList<G> *it;
 
         bool isOrdered;
         int length;
 
-        void searchByWeight(int weight);
-        void searchById(int idVertice2);
+        void searchById(int nodeId);
+        void searchByValue(int nodeValue);
     public:
         OrderedList();
         ~OrderedList();
 
         void setOrder(bool isOrdered);
 
-        void insert(Adjacencia *adj);
-        bool search(int idVertice2);
-        void remove(int idVertice2);
+        void insert(int nodeId, int nodeValue, G *info);
+        bool search(int nodeId);
+        void remove(int nodeId);
+        void print();
 
         void start();
         void end();
@@ -31,8 +32,8 @@ class OrderedList
         void next();
         bool isEnd();
 
-        Adjacencia* getAdjacencia();
-        Adjacencia* getAdjacencia(int idVertice2);
+        G* getInfo();
+        G* getInfo(int nodeId);
         int getLength();
 };
 

@@ -13,11 +13,12 @@ class Vertice
     private:
         int weight;
 
-        OrderedList *adjacenciaList;
+        OrderedList<Adjacencia> *adjacenciaList;
     public:
         Vertice();
-        Vertice(bool isOrderAdjList);
         ~Vertice();
+
+        void setAdjOrderList(bool isOrderAdjList);
 
         int getGrau();
         int getWeight();
@@ -27,7 +28,7 @@ class Vertice
         void removeAdjacencia(int idVertice2);
         bool existsAdjacencia(int idVertice2);
         Adjacencia* getAdjacencia(int idVertice2);
-        OrderedList *getAdjacenciaList();
+        OrderedList<Adjacencia> *getAdjacenciaList();
 };
 
 #endif // VERTICE_H_INCLUDED

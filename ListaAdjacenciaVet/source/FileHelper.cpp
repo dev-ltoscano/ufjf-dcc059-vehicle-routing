@@ -1,6 +1,6 @@
 #include "../header/FileHelper.h"
 
-void FileHelper::writeGraphInfoFile(ListaAdjacenciaVet *grafo, FloydWarshall floyd)
+void FileHelper::writeGraphInfoFile(ListaAdjacenciaVet *grafo, Floyd floyd)
 {
     ofstream weightFile;
     weightFile.open("weights.txt");
@@ -21,7 +21,7 @@ void FileHelper::writeGraphInfoFile(ListaAdjacenciaVet *grafo, FloydWarshall flo
                 weightFile << "============================" << endl;
                 weightFile << "i: " << i << " | Grau: " << grafo->getVerticeGrau(i) << endl;
                 weightFile << "j: " << j << " | Grau: " << grafo->getVerticeGrau(j) << endl;
-                weightFile << Helper::printShortestStringPath(floyd, i, j);
+                weightFile << FloydWarshall::getShortestStringPath(floyd, i, j);
                 weightFile << "Custo do caminho: " << floyd.dij[i][j] << endl;
                 weightFile << "============================" << endl << endl;
             }
