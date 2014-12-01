@@ -6,7 +6,6 @@ template <class G> OrderedList<G>::OrderedList()
     this->endNode = NULL;
     this->it = NULL;
 
-    this->isOrdered = true;
     this->length = 0;
 }
 
@@ -25,12 +24,22 @@ template <class G> OrderedList<G>::~OrderedList()
     }
 }
 
-template <class G> void OrderedList<G>::setOrder(bool isOrdered)
+template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue)
 {
-    this->isOrdered = isOrdered;
+    this->insert(nodeId, nodeValue, NULL, InsertOrdered);
 }
 
-template <class G> void OrderedList<G>::insert(int nodeId, int nodeValue, G *info)
+template <class G> void OrderedList<G>::insert(int nodeId, InsertType type)
+{
+    this->insert(nodeId, nodeId, NULL, type);
+}
+
+template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *info)
+{
+    this->insert(nodeId, nodeValue, info, InsertOrdered);
+}
+
+template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *info, InsertType type)
 {
     AbstractNodeList<G> *node = new AbstractNodeList<G>(nodeId, nodeValue, info);
 
@@ -38,52 +47,50 @@ template <class G> void OrderedList<G>::insert(int nodeId, int nodeValue, G *inf
     {
         this->startNode = node;
         this->endNode = node;
+        this->length++;
     }
     else
     {
-        if(isOrdered)
+        if(type == InsertOrdered)
         {
             this->searchByValue(node->getNodeValue()); // Coloca o ponteiro it em um nó maior que o novo nó
         }
-        else
+        else if(type == InsertStart)
         {
             this->start(); // Coloca o ponteiro it no início da lista
         }
-
-        if(it->getNodeId() != node->getNodeId()) // Verifica se a adjacência já existe na lista
+        else if(type == InsertEnd)
         {
-            if(it == endNode) // A adjacência tem peso maior que todas as outras da lista
-            {
-                node->setPrevious(it); // O anterior ao nó atual é o fim da lista
-                node->setNext(NULL); // Não existe nó após o novo nó
-
-                this->endNode->setNext(node); // O próximo nó do atual fim da lista passa a ser o novo nó
-                this->endNode = node; // O final da lista é o novo nó
-            }
-            else if(it == startNode) // A adjacência tem peso menor que todas as outras da lista
-            {
-                node->setPrevious(NULL); // Não há nó anterior ao novo nó
-                node->setNext(it); // O próximo nó é o nó de início da lista
-
-                this->startNode->setPrevious(node); // O anterior ao atual nó da lista é o novo nó
-                this->startNode = node; // O novo nó é o início da lista
-            }
-            else if(it != NULL) // A adjacência tem peso intermediário na lista
-            {
-                node->setPrevious(it->getPrevious()); // O anterior do novo nó é o anterior do nó da posição atual
-                node->setNext(it); // O próximo do novo nó é a posição atual
-
-                this->it->getPrevious()->setNext(node); // O próximo do anterior da posição atual é o novo nó
-                this->it->setPrevious(node); // O anterior do nó da posição atual é o novo nó
-            }
+            this->end();
         }
-        else
+
+        if(it == endNode) // A adjacência tem peso maior que todas as outras da lista
         {
-            cout << "[ Erro ]: Adjacência já existe!" << endl;
+            node->setPrevious(it); // O anterior ao nó atual é o fim da lista
+            node->setNext(NULL); // Não existe nó após o novo nó
+
+            this->endNode->setNext(node); // O próximo nó do atual fim da lista passa a ser o novo nó
+            this->endNode = node; // O final da lista é o novo nó
         }
+        else if(it == startNode) // A adjacência tem peso menor que todas as outras da lista
+        {
+            node->setPrevious(NULL); // Não há nó anterior ao novo nó
+            node->setNext(it); // O próximo nó é o nó de início da lista
+
+            this->startNode->setPrevious(node); // O anterior ao atual nó da lista é o novo nó
+            this->startNode = node; // O novo nó é o início da lista
+        }
+        else if(it != NULL) // A adjacência tem peso intermediário na lista
+        {
+            node->setPrevious(it->getPrevious()); // O anterior do novo nó é o anterior do nó da posição atual
+            node->setNext(it); // O próximo do novo nó é a posição atual
+
+            this->it->getPrevious()->setNext(node); // O próximo do anterior da posição atual é o novo nó
+            this->it->setPrevious(node); // O anterior do nó da posição atual é o novo nó
+        }
+
+        this->length++;
     }
-
-    this->length++;
 }
 
 template <class G> void OrderedList<G>::searchById(int nodeId)
@@ -96,7 +103,7 @@ template <class G> void OrderedList<G>::searchById(int nodeId)
     }
 }
 
-template <class G> void OrderedList<G>::searchByValue(int value)
+template <class G> void OrderedList<G>::searchByValue(float value)
 {
     this->start();
 
@@ -111,9 +118,39 @@ template <class G> void OrderedList<G>::searchByValue(int value)
 
 template <class G> void OrderedList<G>::remove(int nodeId)
 {
-    if(length != 0) // A lista não está vazia
+    this->remove(nodeId, InsertNone);
+}
+
+template <class G> void OrderedList<G>::remove(InsertType type)
+{
+    this->remove(-1, type);
+}
+
+template <class G> void OrderedList<G>::remove(int nodeId, InsertType type)
+{
+    if(length == 1)
     {
-        this->searchById(nodeId); // Coloca it na posição do nó a ser removido
+        delete this->startNode;
+
+        this->startNode = NULL;
+        this->endNode = NULL;
+
+        this->length--;
+    }
+    else if(length > 1) // A lista não está vazia
+    {
+        if(type == InsertNone)
+        {
+            this->searchById(nodeId); // Coloca it na posição do nó a ser removido
+        }
+        else if(type == InsertStart)
+        {
+            this->start();
+        }
+        else if(type == InsertEnd)
+        {
+            this->end();
+        }
 
         if(it == endNode) // A adjacência é a última da lista
         {
@@ -123,6 +160,7 @@ template <class G> void OrderedList<G>::remove(int nodeId)
             this->endNode = aux->getPrevious();
 
             delete aux;
+            this->length--;
         }
         else if(it == startNode) // A adjacência é a primeira da lista
         {
@@ -132,6 +170,7 @@ template <class G> void OrderedList<G>::remove(int nodeId)
             this->startNode = aux->getNext();
 
             delete aux;
+            this->length--;
         }
         else if(it != NULL) // A adjacência é intermediária na lista
         {
@@ -141,18 +180,19 @@ template <class G> void OrderedList<G>::remove(int nodeId)
             aux->getNext()->setPrevious(aux->getPrevious());
 
             delete aux;
+            this->length--;
         }
         else
         {
             cout << "[ Erro ]: Adjacência não existe!" << endl;
         }
+
+        this->start();
     }
     else
     {
         cout << "[ Erro ]: Lista de adjacência vazia!" << endl;
     }
-
-    this->start();
 }
 
 template <class G> void OrderedList<G>::print()
@@ -197,7 +237,78 @@ template <class G> bool OrderedList<G>::isEnd()
     return (it == NULL);
 }
 
-template <class G> G* OrderedList<G>::getInfo()
+template <class G> bool OrderedList<G>::isEmpty()
+{
+    return (length == 0);
+}
+
+template <class G> int OrderedList<G>::getStartId()
+{
+    this->start();
+
+    if(it != NULL)
+    {
+        return this->it->getNodeId();
+    }
+
+    return -1;
+}
+
+template <class G> int OrderedList<G>::getStartValue()
+{
+    this->start();
+
+    if(it != NULL)
+    {
+        return this->it->getNodeValue();
+    }
+
+    return -1;
+}
+
+template <class G> G* OrderedList<G>::getStartInfo()
+{
+    this->start();
+
+    if(it != NULL)
+    {
+        return this->it->getInfo();
+    }
+
+    return NULL;
+}
+
+template <class G> int OrderedList<G>::getCurrentId()
+{
+    if(it != NULL)
+    {
+        return this->it->getNodeId();
+    }
+
+    return -1;
+}
+
+template <class G> float OrderedList<G>::getCurrentValue()
+{
+    if(it != NULL)
+    {
+        return this->it->getNodeValue();
+    }
+}
+
+template <class G> float OrderedList<G>::getNodeValue(int nodeId)
+{
+    this->searchById(nodeId);
+
+    if(it != NULL)
+    {
+        return this->it->getNodeValue();
+    }
+
+    return -1;
+}
+
+template <class G> G* OrderedList<G>::getCurrentInfo()
 {
     if(it != NULL)
     {
@@ -207,7 +318,7 @@ template <class G> G* OrderedList<G>::getInfo()
     return NULL;
 }
 
-template <class G> G* OrderedList<G>::getInfo(int nodeId)
+template <class G> G* OrderedList<G>::getNodeInfo(int nodeId)
 {
     this->start();
 
@@ -230,4 +341,5 @@ template <class G> int OrderedList<G>::getLength()
 }
 
 template class OrderedList<int>;
+template class OrderedList<float>;
 template class OrderedList<Adjacencia>;

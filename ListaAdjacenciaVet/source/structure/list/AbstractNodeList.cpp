@@ -1,8 +1,8 @@
 #include "../../../header/structure/list/AbstractNodeList.h"
 
-template <class G> AbstractNodeList<G>::AbstractNodeList(int nodeId, int nodeValue, G *info) : AbstractNodeList(nodeId, nodeValue, info, NULL, NULL) { }
+template <class G> AbstractNodeList<G>::AbstractNodeList(int nodeId, float nodeValue, G *info) : AbstractNodeList(nodeId, nodeValue, info, NULL, NULL) { }
 
-template <class G> AbstractNodeList<G>::AbstractNodeList(int nodeId, int nodeValue, G *info, AbstractNodeList<G> *previous, AbstractNodeList<G> *next)
+template <class G> AbstractNodeList<G>::AbstractNodeList(int nodeId, float nodeValue, G *info, AbstractNodeList<G> *previous, AbstractNodeList<G> *next)
 {
     this->nodeId = nodeId;
     this->nodeValue = nodeValue;
@@ -31,7 +31,7 @@ template <class G> int AbstractNodeList<G>::getNodeId()
     return this->nodeId;
 }
 
-template <class G> int AbstractNodeList<G>::getNodeValue()
+template <class G> float AbstractNodeList<G>::getNodeValue()
 {
     return this->nodeValue;
 }
@@ -58,4 +58,5 @@ template <class G> void AbstractNodeList<G>::setNext(AbstractNodeList<G> *next)
 }
 
 template class AbstractNodeList<int>;
+template class AbstractNodeList<float>;
 template class AbstractNodeList<Adjacencia>;

@@ -17,20 +17,21 @@ class ListaAdjacenciaVet
 
         bool existsVertice(int idVertice);
 
-        void depth(int idVertice, int *verticeList); // Busca em profundidade completa
-        bool depth(int startIdVertice, int *verticeList, int idVerticeCurrent); // Busca em profundidade condicional
+        bool depth(bool *visited); // Busca em profundidade
         bool depth(int idVertice1, int idVertice2); // Busca em profundidade para verificar caminho entre dois nós
     public:
         ListaAdjacenciaVet(int verticeCount, bool isDirected);
-        ListaAdjacenciaVet(int verticeCount, bool isDirected, bool isOrderAdjList);
+        ListaAdjacenciaVet(int verticeCount, bool isDirected, InsertType type);
         ~ListaAdjacenciaVet();
 
+        Vertice* getVerticeList();
         int getVerticeCount();
         int getVerticeGrau(int idVertice);
-        int getVerticeWeight(int idVertice);
-        Vertice* getVerticeList();
+        float getVerticeWeight(int idVertice);
+        void setVerticeWeight(int idVertice, float weight);
 
-        void addAdjacencia(int idVertice1, int idVertice2, int weight);
+
+        void addAdjacencia(int idVertice1, int idVertice2, float weight);
         void removeAdjacencia(int idVertice1, int idVertice2);
         bool existsAdjacencia(int idVertice1, int idVertice2);
 //        Adjacencia* getAdjacencia(int idVertice1, int idVertice2);

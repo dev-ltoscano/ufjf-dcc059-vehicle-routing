@@ -11,20 +11,21 @@ using namespace std;
 class Vertice
 {
     private:
-        int weight;
+        float weight;
+        InsertType adjInsertType;
 
         OrderedList<Adjacencia> *adjacenciaList;
     public:
         Vertice();
         ~Vertice();
 
-        void setAdjOrderList(bool isOrderAdjList);
+        void setAdjInsertType(InsertType type);
 
         int getGrau();
-        int getWeight();
-        void setWeight(int weight);
+        float getWeight();
+        void setWeight(float weight);
 
-        void addAdjacencia(int idVertice1, int idVertice2, int weight);
+        void addAdjacencia(int idVertice1, int idVertice2, float weight);
         void removeAdjacencia(int idVertice2);
         bool existsAdjacencia(int idVertice2);
         Adjacencia* getAdjacencia(int idVertice2);

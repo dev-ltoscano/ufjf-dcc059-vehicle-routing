@@ -3,6 +3,11 @@
 
 #include "AbstractNodeList.h"
 
+enum InsertType
+{
+    InsertOrdered, InsertStart, InsertEnd, InsertNone
+};
+
 template <class G> class OrderedList
 {
     private:
@@ -10,20 +15,22 @@ template <class G> class OrderedList
         AbstractNodeList<G> *endNode;
         AbstractNodeList<G> *it;
 
-        bool isOrdered;
         int length;
 
         void searchById(int nodeId);
-        void searchByValue(int nodeValue);
+        void searchByValue(float nodeValue);
     public:
         OrderedList();
         ~OrderedList();
 
-        void setOrder(bool isOrdered);
-
-        void insert(int nodeId, int nodeValue, G *info);
+        void insert(int nodeId, float nodeValue);
+        void insert(int nodeId, InsertType type);
+        void insert(int nodeId, float nodeValue, G *info);
+        void insert(int nodeId, float nodeValue, G *info, InsertType type);
         bool search(int nodeId);
         void remove(int nodeId);
+        void remove(InsertType type);
+        void remove(int nodeId, InsertType type);
         void print();
 
         void start();
@@ -31,9 +38,17 @@ template <class G> class OrderedList
         void previous();
         void next();
         bool isEnd();
+        bool isEmpty();
 
-        G* getInfo();
-        G* getInfo(int nodeId);
+        int getStartId();
+        int getStartValue();
+        G* getStartInfo();
+        int getCurrentId();
+        float getCurrentValue();
+        G* getCurrentInfo();
+        float getNodeValue(int nodeId);
+        G* getNodeInfo(int nodeId);
+
         int getLength();
 };
 

@@ -1,6 +1,6 @@
 #include "../../header/grafo/Adjacencia.h"
 
-Adjacencia::Adjacencia(int idVertice1, int idVertice2, int weight)
+Adjacencia::Adjacencia(int idVertice1, int idVertice2, float weight)
 {
     this->idVertice1 = idVertice1;
     this->idVertice2 = idVertice2;
@@ -17,12 +17,12 @@ int Adjacencia::getIdVertice2()
     return this->idVertice2;
 }
 
-int Adjacencia::getWeight()
+float Adjacencia::getWeight()
 {
     return this->weight;
 }
 
-void Adjacencia::setWeight(int weight)
+void Adjacencia::setWeight(float weight)
 {
     this->weight = weight;
 }

@@ -11,18 +11,18 @@ template <class G> class AbstractNodeList
 {
     private:
         int nodeId;
-        int nodeValue;
+        float nodeValue;
         G *info;
 
         AbstractNodeList<G> *previous;
         AbstractNodeList<G> *next;
     public:
-        AbstractNodeList(int nodeId, int nodeValue, G *info);
-        AbstractNodeList(int nodeId, int nodeValue, G *info, AbstractNodeList<G> *previous, AbstractNodeList<G> *next);
+        AbstractNodeList(int nodeId, float nodeValue, G *info);
+        AbstractNodeList(int nodeId, float nodeValue, G *info, AbstractNodeList<G> *previous, AbstractNodeList<G> *next);
         ~AbstractNodeList();
 
         int getNodeId();
-        int getNodeValue();
+        float getNodeValue();
 
         G* getInfo();
         void setInfo(G *info);

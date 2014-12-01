@@ -39,6 +39,7 @@
 		<Unit filename="header/grafo/Vertice.h" />
 		<Unit filename="header/heuristic/FloydWarshall.h" />
 		<Unit filename="header/heuristic/HeuristicCVRP.h" />
+		<Unit filename="header/heuristic/Vehicle.h" />
 		<Unit filename="header/structure/list/AbstractNodeList.h" />
 		<Unit filename="header/structure/list/OrderedList.h" />
 		<Unit filename="main.cpp" />
@@ -48,6 +49,8 @@
 		<Unit filename="source/grafo/ListaAdjacenciaVet.cpp" />
 		<Unit filename="source/grafo/Vertice.cpp" />
 		<Unit filename="source/heuristic/FloydWarshall.cpp" />
+		<Unit filename="source/heuristic/HeuristicCVRP.cpp" />
+		<Unit filename="source/heuristic/Vehicle.cpp" />
 		<Unit filename="source/structure/list/AbstractNodeList.cpp" />
 		<Unit filename="source/structure/list/OrderedList.cpp" />
 		<Extensions>

@@ -14,15 +14,17 @@ using namespace std;
 
 typedef struct
 {
-    string** path;
+//    string** path;
     int** pij;
-    int** dij;
+    float** dij;
+//    float** vij;
 } Floyd;
 
 class FloydWarshall
 {
     private:
-        static int getAdjWeight(Vertice *verticeList, int idVertice1, int idVertice2);
+        static float getAdjWeight(Vertice *verticeList, int idVertice1, int idVertice2);
+//        static float getVerticeWeight(int idVertice1, int idVertice2);
         static void shortestPath(int **pij, int i, int j);
         static string shortestStringPath(int **pij, int i, int j);
     public:

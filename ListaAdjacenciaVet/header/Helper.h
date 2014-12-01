@@ -9,6 +9,7 @@ class Helper
 
     public:
         static int** initializeIntegerMatriz(int length);
+        static float** initializeFloatMatriz(int length);
 };
 
 #endif // HELPER_H_INCLUDED

@@ -11,3 +11,15 @@ int** Helper::initializeIntegerMatriz(int length)
 
     return dij;
 }
+
+float** Helper::initializeFloatMatriz(int length)
+{
+    float **dij = new float *[length];
+
+    for(int i = 0; i < length; i++)
+    {
+        dij[i] = new float[length];
+    }
+
+    return dij;
+}
