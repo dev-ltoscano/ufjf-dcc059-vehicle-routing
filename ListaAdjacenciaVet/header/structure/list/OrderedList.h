@@ -2,6 +2,7 @@
 #define ORDEREDLIST_H_INCLUDED
 
 #include "AbstractNodeList.h"
+#include "../../Helper.h"
 
 enum InsertType
 {

@@ -242,3 +242,100 @@
 	"../structure/list/OrderedList.h"
 	<cmath>
 
+1417560942 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\main.cpp
+	<iostream>
+	<string>
+	<stdlib.h>
+	<locale>
+	"header/grafo/ListaAdjacenciaVet.h"
+	"header/structure/list/OrderedList.h"
+	"header/Helper.h"
+	"header/FileHelper.h"
+	"header/heuristic/HeuristicCVRP.h"
+
+1417646548 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\grafo\listaadjacenciavet.h
+	"Vertice.h"
+	<iostream>
+	<list>
+
+1417560942 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\grafo\vertice.h
+	"Adjacencia.h"
+	"../structure/list/OrderedList.h"
+	<iostream>
+
+1417560942 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\grafo\adjacencia.h
+
+1417641875 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\orderedlist.h
+	"AbstractNodeList.h"
+	"../../Helper.h"
+
+1417647372 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\abstractnodelist.h
+	"../../grafo/Adjacencia.h"
+	"../../Helper.h"
+	<iostream>
+
+1417646579 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\helper.h
+	"grafo/Adjacencia.h"
+
+1417560942 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\filehelper.h
+	"heuristic/FloydWarshall.h"
+	"grafo/ListaAdjacenciaVet.h"
+	<fstream>
+
+1417560942 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\floydwarshall.h
+	"../grafo/ListaAdjacenciaVet.h"
+	"../Helper.h"
+	<climits>
+	<string>
+	<sstream>
+
+1417560942 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\heuristiccvrp.h
+	"../grafo/ListaAdjacenciaVet.h"
+	"FloydWarshall.h"
+	"Vehicle.h"
+	"../structure/list/OrderedList.h"
+	<cmath>
+
+1417560942 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\vehicle.h
+	<iostream>
+
+1417560942 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\filehelper.cpp
+	"../header/FileHelper.h"
+
+1417560942 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\grafo\adjacencia.cpp
+	"../../header/grafo/Adjacencia.h"
+
+1417560942 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\grafo\vertice.cpp
+	"../../header/grafo/Vertice.h"
+
+1417560942 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\helper.cpp
+	"../header/Helper.h"
+
+1417560942 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\floydwarshall.cpp
+	"../../header/heuristic/FloydWarshall.h"
+
+1417560942 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\heuristiccvrp.cpp
+	"../../header/heuristic/HeuristicCVRP.h"
+
+1417560942 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\vehicle.cpp
+	"../../header/heuristic/Vehicle.h"
+
+1417646552 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\grafo\listaadjacenciavet.cpp
+	"../../header/grafo/ListaAdjacenciaVet.h"
+	"../../header/Helper.h"
+
+1417647347 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\heuristicimp.cpp
+	"../../header/heuristic/HeuristicIMP.h"
+
+1417647423 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\heuristicimp.h
+	"../structure/list/OrderedList.h"
+	"../grafo/ListaAdjacenciaVet.h"
+	"Vehicle.h"
+	"../Helper.h"
+
+1417641792 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\abstractnodelist.cpp
+	"../../../header/structure/list/AbstractNodeList.h"
+
+1417641498 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\orderedlist.cpp
+	"../../../header/structure/list/OrderedList.h"
+

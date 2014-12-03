@@ -343,3 +343,4 @@ template <class G> int OrderedList<G>::getLength()
 template class OrderedList<int>;
 template class OrderedList<float>;
 template class OrderedList<Adjacencia>;
+template class OrderedList<InsertCalculation>;

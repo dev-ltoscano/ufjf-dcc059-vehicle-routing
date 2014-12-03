@@ -60,3 +60,4 @@ template <class G> void AbstractNodeList<G>::setNext(AbstractNodeList<G> *next)
 template class AbstractNodeList<int>;
 template class AbstractNodeList<float>;
 template class AbstractNodeList<Adjacencia>;
+template class AbstractNodeList<InsertCalculation>;

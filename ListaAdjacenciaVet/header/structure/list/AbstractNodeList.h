@@ -2,6 +2,7 @@
 #define ABSTRACTNODELIST_H_INCLUDED
 
 #include "../../grafo/Adjacencia.h"
+#include "../../Helper.h"
 
 #include <iostream>
 

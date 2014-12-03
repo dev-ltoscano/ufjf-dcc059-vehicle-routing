@@ -1,7 +1,15 @@
 #ifndef HELPER_H_INCLUDED
 #define HELPER_H_INCLUDED
 
+#include "grafo/Adjacencia.h"
+
 using namespace std;
+
+struct InsertCalculation {
+    int nodeId;
+    int difPath;
+    Adjacencia* adj;
+};
 
 class Helper
 {
