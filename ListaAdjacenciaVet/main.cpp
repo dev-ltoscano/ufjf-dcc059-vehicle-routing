@@ -8,6 +8,7 @@
 #include "header/Helper.h"
 #include "header/FileHelper.h"
 #include "header/heuristic/HeuristicCVRP.h"
+#include "header/heuristic/HeuristicIMP.h"
 
 using namespace std;
 
@@ -48,23 +49,26 @@ int main(int argc, char** argv)
 
 //    cout << argv[1] << endl;
 
-    ListaAdjacenciaVet *grafo = createGrafo(45, 45, false, InsertOrdered);
+//    ListaAdjacenciaVet *grafo = createGrafo(45, 45, false, InsertOrdered);
 
-//    ListaAdjacenciaVet *grafo = new ListaAdjacenciaVet(5, false, InsertOrdered);
-//
-//    grafo->addAdjacencia(0, 1, 1);
-//    grafo->addAdjacencia(0, 2, INFINITE);
-//    grafo->addAdjacencia(0, 3, INFINITE);
-//    grafo->addAdjacencia(1, 3, INFINITE);
-//    grafo->addAdjacencia(1, 2, 3);
-//    grafo->addAdjacencia(3, 2, 5);
-//    grafo->addAdjacencia(4, 2, 6);
-//
-//    grafo->setVerticeWeight(0, 0);
-//    grafo->setVerticeWeight(1, 25);
-//    grafo->setVerticeWeight(2, 25);
-//    grafo->setVerticeWeight(3, 25);
-//    grafo->setVerticeWeight(4, 25);
+    ListaAdjacenciaVet *grafo = new ListaAdjacenciaVet(5, false, InsertOrdered);
+
+    grafo->addAdjacencia(0, 1, 1);
+    grafo->addAdjacencia(0, 2, 10);
+    grafo->addAdjacencia(0, 3, 4);
+    grafo->addAdjacencia(1, 3, 8);
+    grafo->addAdjacencia(1, 2, 3);
+    grafo->addAdjacencia(3, 2, 5);
+    grafo->addAdjacencia(4, 2, 6);
+
+    grafo->setVerticeWeight(0, 0);
+    grafo->setVerticeWeight(1, 25);
+    grafo->setVerticeWeight(2, 25);
+    grafo->setVerticeWeight(3, 25);
+    grafo->setVerticeWeight(4, 25);
+
+    HeuristicIMP *heuristic = new HeuristicIMP(grafo, Gulosa, 0);
+    cout << "Custo: " << heuristic->run(0, 100);
 
 
 
@@ -101,8 +105,8 @@ int main(int argc, char** argv)
 //        }
 //    }
 
-    HeuristicCVRP *heuristic = new HeuristicCVRP(grafo, Gulosa, 0);
-    cout << "Min: " << heuristic->run(0, 100) << endl;
+//    HeuristicCVRP *heuristic = new HeuristicCVRP(grafo, Gulosa, 0);
+//    cout << "Min: " << heuristic->run(0, 100) << endl;
 //    heuristic->printNodeRateList();
 
 //    OrderedList<int> *lista = new OrderedList<int>();

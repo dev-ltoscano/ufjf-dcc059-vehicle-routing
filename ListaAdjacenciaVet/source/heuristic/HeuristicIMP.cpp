@@ -14,7 +14,7 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
     bool *visited = new bool[grafo->getVerticeCount() * grafo->getVerticeCount()];
     Vehicle *truck = new Vehicle(1, vehicleCapacity, nodeBase);
     Vertice base = grafo->getVertice(nodeBase);
-    OrderedList<Adjacencia>* adjBase = base.getAdjacenciaList();
+    OrderedList<Adjacencia> *adjBase = base.getAdjacenciaList();
 
     visited[nodeBase] = true;
 
@@ -53,6 +53,7 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                 //AS DUAS UÚLTIMAS ARESTAS ADICIONADAS (a1, a2)
                 Adjacencia* a1 = caminho->getNodeInfo(arestas - 2);
                 Adjacencia* a2 = caminho->getNodeInfo(arestas - 1);
+
                 //SOLUÇÃO A SER INSERIDA
                 InsertCalculation* solution;
                 //VERTICE DA SOLUÇÃO
@@ -82,7 +83,7 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                 }
 
                 //CÁLCULO DE a2
-                v1 = grafo->getVertice(a2->getIdVertice1());
+                v1 = grafo->getVertice(0);
                 adj = v1.getAdjacenciaList();
                 adj->start();
                 while(adj->getCurrentId() != -1){
