@@ -213,6 +213,26 @@ bool ListaAdjacenciaVet::existsAdjacencia(int idVertice1, int idVertice2)
     return false;
 }
 
+OrderedList<Adjacencia>* ListaAdjacenciaVet::getAdjacenciaList(int idVertice)
+{
+    if(existsVertice(idVertice))
+    {
+        return this->verticeList[idVertice].getAdjacenciaList();
+    }
+
+    return NULL;
+}
+
+Adjacencia* ListaAdjacenciaVet::getAdjacencia(int idVertice1, int idVertice2)
+{
+    if(existsVertice(idVertice1) && existsVertice(idVertice2) && existsAdjacencia(idVertice1, idVertice2))
+    {
+        return (this->verticeList[idVertice1].getAdjacencia(idVertice2));
+    }
+
+    return NULL;
+}
+
 int ListaAdjacenciaVet::getAdjacenciaCount()
 {
     int count = 0;

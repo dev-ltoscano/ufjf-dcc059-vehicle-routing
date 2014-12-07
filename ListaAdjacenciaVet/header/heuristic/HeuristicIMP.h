@@ -6,11 +6,6 @@
 #include "Vehicle.h"
 #include "../Helper.h"
 
-enum HeuristicType
-{
-    Gulosa, Randomizada, Reativa
-};
-
 class HeuristicIMP
 {
     public:

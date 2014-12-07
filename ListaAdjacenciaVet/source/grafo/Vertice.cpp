@@ -49,7 +49,7 @@ void Vertice::addAdjacencia(int idVertice1, int idVertice2, float weight)
 
 void Vertice::removeAdjacencia(int idVertice2)
 {
-    this->adjacenciaList->remove(idVertice2, this->adjInsertType);
+    this->adjacenciaList->remove(idVertice2);
 }
 
 bool Vertice::existsAdjacencia(int idVertice2)

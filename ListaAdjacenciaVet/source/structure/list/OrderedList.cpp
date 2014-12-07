@@ -5,11 +5,15 @@ template <class G> OrderedList<G>::OrderedList()
     this->startNode = NULL;
     this->endNode = NULL;
     this->it = NULL;
-
     this->length = 0;
 }
 
 template <class G> OrderedList<G>::~OrderedList()
+{
+    this->clear();
+}
+
+template <class G> void OrderedList<G>::clear()
 {
     if(length != 0)
     {
@@ -21,22 +25,27 @@ template <class G> OrderedList<G>::~OrderedList()
             delete aux;
             aux = startNode;
         }
+
+        this->startNode = NULL;
+        this->endNode = NULL;
+        this->it = NULL;
+        this->length = 0;
     }
 }
 
-template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue)
+template <class G> void OrderedList<G>::insert(float nodeValue, InsertType type)
 {
-    this->insert(nodeId, nodeValue, NULL, InsertOrdered);
+    this->insert(this->length, nodeValue, NULL, type);
 }
 
-template <class G> void OrderedList<G>::insert(int nodeId, InsertType type)
+template <class G> void OrderedList<G>::insert(G *info, InsertType type)
 {
-    this->insert(nodeId, nodeId, NULL, type);
+    this->insert(this->length, this->length, info, type);
 }
 
-template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *info)
+template <class G> void OrderedList<G>::insert(float nodeValue, G *info, InsertType type)
 {
-    this->insert(nodeId, nodeValue, info, InsertOrdered);
+    this->insert(this->length, nodeValue, info, type);
 }
 
 template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *info, InsertType type)
@@ -45,6 +54,9 @@ template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *i
 
     if(length == 0) // A lista está vazia
     {
+        node->setPrevious(NULL);
+        node->setNext(NULL);
+
         this->startNode = node;
         this->endNode = node;
         this->length++;
@@ -55,7 +67,7 @@ template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *i
         {
             this->searchByValue(node->getNodeValue()); // Coloca o ponteiro it em um nó maior que o novo nó
         }
-        else if(type == InsertStart)
+        else if((type == InsertStart) || (type == InsertNone))
         {
             this->start(); // Coloca o ponteiro it no início da lista
         }
@@ -80,7 +92,7 @@ template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *i
             this->startNode->setPrevious(node); // O anterior ao atual nó da lista é o novo nó
             this->startNode = node; // O novo nó é o início da lista
         }
-        else if(it != NULL) // A adjacência tem peso intermediário na lista
+        else // A adjacência tem peso intermediário na lista
         {
             node->setPrevious(it->getPrevious()); // O anterior do novo nó é o anterior do nó da posição atual
             node->setNext(it); // O próximo do novo nó é a posição atual
@@ -184,14 +196,14 @@ template <class G> void OrderedList<G>::remove(int nodeId, InsertType type)
         }
         else
         {
-            cout << "[ Erro ]: Adjacência não existe!" << endl;
+            cout << "[ Erro ]: Item não existe na lista!" << endl;
         }
 
         this->start();
     }
     else
     {
-        cout << "[ Erro ]: Lista de adjacência vazia!" << endl;
+        cout << "[ Erro ]: Lista vazia!" << endl;
     }
 }
 
@@ -294,6 +306,8 @@ template <class G> float OrderedList<G>::getCurrentValue()
     {
         return this->it->getNodeValue();
     }
+
+    return -1;
 }
 
 template <class G> float OrderedList<G>::getNodeValue(int nodeId)

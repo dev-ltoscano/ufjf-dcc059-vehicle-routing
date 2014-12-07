@@ -11,6 +11,11 @@ struct InsertCalculation {
     Adjacencia* adj;
 };
 
+enum HeuristicType
+{
+    Gulosa, Randomizada, Reativa
+};
+
 class Helper
 {
     private:

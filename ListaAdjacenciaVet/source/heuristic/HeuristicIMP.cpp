@@ -76,7 +76,7 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                         ic->adj = a1;
                         ic->nodeId = id;
                         ic->difPath = (adj->getCurrentInfo()->getWeight() + v.getAdjacencia(a1->getIdVertice2())->getWeight()) - a1->getWeight();
-                        calculo->insert(calculos,ic->difPath,ic);
+                        calculo->insert(calculos,ic->difPath,ic, InsertOrdered);
                         calculos ++;
                     }
                     adj->next();
@@ -88,13 +88,14 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                 adj->start();
                 while(adj->getCurrentId() != -1){
                     int id = adj->getCurrentInfo()->getIdVertice2();
+                    cout << "Id: " << id << endl;
                     Vertice v = grafo->getVertice(id);
                     if(v.existsAdjacencia(a2->getIdVertice2()) && (truck->getCapacity() - v.getWeight()) > 0){
                         InsertCalculation* ic = new InsertCalculation();
                         ic->adj = a2;
                         ic->nodeId = id;
                         ic->difPath = (adj->getCurrentInfo()->getWeight() + v.getAdjacencia(a2->getIdVertice2())->getWeight()) - a2->getWeight();
-                        calculo->insert(calculos,ic->difPath,ic);
+                        calculo->insert(calculos,ic->difPath,ic, InsertOrdered);
                         calculos ++;
                     }
                     adj->next();

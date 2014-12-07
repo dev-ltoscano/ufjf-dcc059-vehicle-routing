@@ -24,14 +24,15 @@ template <class G> class OrderedList
         OrderedList();
         ~OrderedList();
 
-        void insert(int nodeId, float nodeValue);
-        void insert(int nodeId, InsertType type);
-        void insert(int nodeId, float nodeValue, G *info);
+        void insert(float nodeValue, InsertType type);
+        void insert(G *info, InsertType type);
+        void insert(float nodeValue, G *info, InsertType type);
         void insert(int nodeId, float nodeValue, G *info, InsertType type);
         bool search(int nodeId);
         void remove(int nodeId);
         void remove(InsertType type);
         void remove(int nodeId, InsertType type);
+        void clear();
         void print();
 
         void start();

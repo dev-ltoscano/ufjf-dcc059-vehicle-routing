@@ -35,7 +35,8 @@ class ListaAdjacenciaVet
         void addAdjacencia(int idVertice1, int idVertice2, float weight);
         void removeAdjacencia(int idVertice1, int idVertice2);
         bool existsAdjacencia(int idVertice1, int idVertice2);
-//        Adjacencia* getAdjacencia(int idVertice1, int idVertice2);
+        OrderedList<Adjacencia>* getAdjacenciaList(int idVertice);
+        Adjacencia* getAdjacencia(int idVertice1, int idVertice2);
         int getAdjacenciaCount();
 
         bool isConexo(); // Verifica se o grafo é conexo
