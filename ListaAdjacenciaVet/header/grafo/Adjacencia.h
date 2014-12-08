@@ -19,6 +19,8 @@ class Adjacencia
 
         float getWeight();
         void setWeight(float weight);
+
+        bool equals(int idVertice1, int idVertice2);
 };
 
 #endif // ADJACENCIA_H_INCLUDED

@@ -146,9 +146,9 @@ int main(int argc, char** argv)
     grafo->addAdjacencia(3,2,1);
 
     grafo->setVerticeWeight(0,0);
-    grafo->setVerticeWeight(1,40);
-    grafo->setVerticeWeight(2,50);
-    grafo->setVerticeWeight(3,5);
+    grafo->setVerticeWeight(1,10);
+    grafo->setVerticeWeight(2,10);
+    grafo->setVerticeWeight(3,10);
 
 
 

@@ -16,6 +16,7 @@ template <class G> class OrderedList
         AbstractNodeList<G> *endNode;
         AbstractNodeList<G> *it;
 
+        int currId;
         int length;
 
         void searchById(int nodeId);

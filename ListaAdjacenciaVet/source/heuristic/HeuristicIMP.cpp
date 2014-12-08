@@ -81,7 +81,9 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                         cout << "VISITED" << endl;
                     if(grafo->existsAdjacencia(id,a1->getIdVertice2()) && (truck->getCapacity() - grafo->getVerticeWeight(id)) > 0 && !visited[id]){
                         InsertCalculation* ic = new InsertCalculation();
-                        ic->adj = a1;
+                        ic->idVertice1 = a1->getIdVertice1();
+                        ic->idVertice2 = a2->getIdVertice2();
+//                        ic->adj = a1;
                         ic->nodeId = id;
                         ic->difPath = (adj1->getCurrentInfo()->getWeight() + grafo->getAdjacencia(id,a1->getIdVertice2())->getWeight()) - a1->getWeight();
                         calculo->insert(ic->difPath,ic, InsertOrdered);
@@ -104,7 +106,9 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                         cout << "VISITED" << endl;
                     if(grafo->existsAdjacencia(id,a2->getIdVertice2()) && (truck->getCapacity() - grafo->getVerticeWeight(id)) > 0 && !visited[id]){
                         InsertCalculation* ic = new InsertCalculation();
-                        ic->adj = a2;
+                        ic->idVertice1 = a2->getIdVertice1();
+                        ic->idVertice2 = a2->getIdVertice2();
+//                        ic->adj = a2;
                         ic->nodeId = id;
                         ic->difPath = (adj2->getCurrentInfo()->getWeight() + grafo->getAdjacencia(id,a2->getIdVertice2())->getWeight()) - a2->getWeight();
                         calculo->insert(ic->difPath,ic, InsertOrdered);
@@ -117,7 +121,7 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                 calculo->start();
                 while(calculo->getCurrentId() != -1){
                     InsertCalculation* ic = calculo->getNodeInfo(calculo->getCurrentId());
-                    cout << ic->adj->getIdVertice1() << " -> " << ic->adj->getIdVertice2() << ": node= " << ic->nodeId << " deltaPath= " << ic->difPath << " visited[i] " << visited[ic->nodeId] << endl;
+                    cout << ic->idVertice1 << " -> " << ic->idVertice2 << ": node= " << ic->nodeId << " deltaPath= " << ic->difPath << " visited[i] " << visited[ic->nodeId] << endl;
                     calculo->next();
 
                 }
@@ -137,7 +141,7 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                 calculo->start();
                 solution = calculo->getCurrentInfo();
                 cout << "ADD NO: " << solution->nodeId << endl;
-                removed = solution->adj;
+                removed = grafo->getAdjacencia(solution->idVertice1, solution->idVertice2);
                 cout << "REMOVE PATH: " << removed->getIdVertice1() << " -> " << removed->getIdVertice2() << endl;
                 s1 = grafo->getAdjacencia(removed->getIdVertice1(),solution->nodeId);
                 s2 = grafo->getAdjacencia(solution->nodeId,removed->getIdVertice2());
@@ -153,8 +157,8 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                 calculo->start();
                 while(calculo->getCurrentId() != -1){
                     InsertCalculation* ic = calculo->getNodeInfo(calculo->getCurrentId());
-                    if(ic->adj == removed || (truck->getCapacity() - grafo->getVertice(ic->nodeId).getWeight() < 0) || visited[ic->nodeId]){
-                        cout << "TIREI " << ic->adj->getIdVertice1() << " -> " << ic->adj->getIdVertice2() << ": node= " << ic->nodeId << " deltaPath= " << ic->difPath << " visited[i] " << visited[ic->nodeId] << endl;
+                    if(removed->equals(ic->idVertice1, ic->idVertice2)|| (truck->getCapacity() - grafo->getVerticeWeight(ic->nodeId) < 0) || visited[ic->nodeId]){
+                        cout << "TIREI " << ic->idVertice1 << " -> " << ic->idVertice2 << ": node= " << ic->nodeId << " deltaPath= " << ic->difPath << " visited[i] " << visited[ic->nodeId] << endl;
                         calculo->remove(calculo->getCurrentId());
                     }
                     calculo->next();

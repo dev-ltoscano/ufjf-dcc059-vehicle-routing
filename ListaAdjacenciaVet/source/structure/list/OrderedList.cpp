@@ -5,6 +5,8 @@ template <class G> OrderedList<G>::OrderedList()
     this->startNode = NULL;
     this->endNode = NULL;
     this->it = NULL;
+
+    this->currId = 0;
     this->length = 0;
 }
 
@@ -29,23 +31,25 @@ template <class G> void OrderedList<G>::clear()
         this->startNode = NULL;
         this->endNode = NULL;
         this->it = NULL;
+
+        this->currId = 0;
         this->length = 0;
     }
 }
 
 template <class G> void OrderedList<G>::insert(float nodeValue, InsertType type)
 {
-    this->insert(this->length, nodeValue, NULL, type);
+    this->insert(this->currId, nodeValue, NULL, type);
 }
 
 template <class G> void OrderedList<G>::insert(G *info, InsertType type)
 {
-    this->insert(this->length, this->length, info, type);
+    this->insert(this->currId, this->currId, info, type);
 }
 
 template <class G> void OrderedList<G>::insert(float nodeValue, G *info, InsertType type)
 {
-    this->insert(this->length, nodeValue, info, type);
+    this->insert(this->currId, nodeValue, info, type);
 }
 
 template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *info, InsertType type)
@@ -59,6 +63,8 @@ template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *i
 
         this->startNode = node;
         this->endNode = node;
+
+        this->currId++;
         this->length++;
     }
     else
@@ -101,6 +107,7 @@ template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *i
             this->it->setPrevious(node); // O anterior do nó da posição atual é o novo nó
         }
 
+        this->currId++;
         this->length++;
     }
 }

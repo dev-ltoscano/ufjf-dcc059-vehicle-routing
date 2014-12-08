@@ -6,10 +6,13 @@
 using namespace std;
 
 //TODO
-struct InsertCalculation {
+struct InsertCalculation
+{
     int nodeId;
     int difPath;
-    Adjacencia* adj;
+//    Adjacencia* adj;
+    int idVertice1;
+    int idVertice2;
 };
 
 enum HeuristicType

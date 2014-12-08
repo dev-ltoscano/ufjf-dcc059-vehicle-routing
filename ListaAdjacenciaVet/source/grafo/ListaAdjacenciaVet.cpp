@@ -107,11 +107,11 @@ Vertice* ListaAdjacenciaVet::getVerticeList()
 {
     return this->verticeList;
 }
-
-Vertice ListaAdjacenciaVet::getVertice(int idVertice)
-{
-    return this->verticeList[idVertice];
-}
+//
+//Vertice ListaAdjacenciaVet::getVertice(int idVertice)
+//{
+//    return this->verticeList[idVertice];
+//}
 
 int ListaAdjacenciaVet::getVerticeCount()
 {

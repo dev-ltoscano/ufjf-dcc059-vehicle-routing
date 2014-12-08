@@ -25,7 +25,7 @@ class ListaAdjacenciaVet
         ~ListaAdjacenciaVet();
 
         Vertice* getVerticeList();
-        Vertice getVertice(int idVertice);
+//        Vertice getVertice(int idVertice);
         int getVerticeCount();
         int getVerticeGrau(int idVertice);
         float getVerticeWeight(int idVertice);

@@ -27,7 +27,18 @@ void Adjacencia::setWeight(float weight)
     this->weight = weight;
 }
 
-Adjacencia::~Adjacencia(){
+bool Adjacencia::equals(int idVertice1, int idVertice2)
+{
+    if((this->getIdVertice1() == idVertice1) && (this->getIdVertice2() == idVertice2))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+Adjacencia::~Adjacencia()
+{
     printf("%d -> %d ",this->idVertice1, this->getIdVertice2());
     printf("TIREI ADJ\n");
 }
