@@ -5,6 +5,7 @@
 #include "../grafo/ListaAdjacenciaVet.h"
 #include "Vehicle.h"
 #include "../Helper.h"
+#include <stdio.h>
 
 class HeuristicIMP
 {

@@ -1,6 +1,8 @@
 #ifndef ADJACENCIA_H_INCLUDED
 #define ADJACENCIA_H_INCLUDED
 
+#include <stdio.h>
+
 class Adjacencia
 {
     private:
@@ -10,6 +12,7 @@ class Adjacencia
         float weight; // Peso da aresta
     public:
         Adjacencia(int idVertice1, int idVertice2, float weight);
+        ~Adjacencia();
 
         int getIdVertice1();
         int getIdVertice2();

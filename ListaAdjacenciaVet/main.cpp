@@ -76,7 +76,7 @@ int main(int argc, char** argv)
 
 //    ListaAdjacenciaVet *grafo = createGrafo(5, InsertEnd);
 
-    ListaAdjacenciaVet *grafo = new ListaAdjacenciaVet(6, true, InsertEnd);
+    ListaAdjacenciaVet *grafo = new ListaAdjacenciaVet(4, true, InsertOrdered);
 
 //    grafo->addAdjacencia(0, 1, 5);
 //    grafo->addAdjacencia(0, 2, 5);
@@ -103,33 +103,52 @@ int main(int argc, char** argv)
 
 
 
-    grafo->addAdjacencia(0, 1, 20);
-    grafo->addAdjacencia(1, 0, 20);
-    grafo->addAdjacencia(1, 3, 5);
-    grafo->addAdjacencia(0, 4, 10);
-    grafo->addAdjacencia(5, 4, 15);
+//    grafo->addAdjacencia(0, 1, 20);
+//    grafo->addAdjacencia(1, 0, 20);
+//    grafo->addAdjacencia(1, 3, 5);
+//    grafo->addAdjacencia(0, 4, 10);
+//    grafo->addAdjacencia(5, 4, 15);
+//
+//    grafo->addAdjacencia(0, 2, 10);
+//    grafo->addAdjacencia(2, 1, 5);
+//
+//    grafo->addAdjacencia(0, 3, 5);
+//    grafo->addAdjacencia(3, 2, 2);
+//    grafo->addAdjacencia(3, 0, 5);
+//
+//    grafo->addAdjacencia(1, 4, 5);
+//    grafo->addAdjacencia(4, 5, 5);
+//    grafo->addAdjacencia(4, 0, 15);
+//    grafo->addAdjacencia(4, 3, 15);
+//    grafo->addAdjacencia(5, 3, 10);
+//
+//    grafo->setVerticeWeight(0, 0);
+//    grafo->setVerticeWeight(1, 20);
+//    grafo->setVerticeWeight(2, 15);
+//    grafo->setVerticeWeight(3, 10);
+//    grafo->setVerticeWeight(4, 5);
+//    grafo->setVerticeWeight(5, 15);
 
-    grafo->addAdjacencia(0, 2, 10);
-    grafo->addAdjacencia(2, 1, 5);
+    grafo->addAdjacencia(0,1,1);
+    grafo->addAdjacencia(0,2,1);
+    grafo->addAdjacencia(0,3,1);
 
-    grafo->addAdjacencia(0, 3, 5);
-    grafo->addAdjacencia(3, 2, 2);
-    grafo->addAdjacencia(3, 0, 5);
+    grafo->addAdjacencia(1,0,1);
+    grafo->addAdjacencia(1,2,1);
+    grafo->addAdjacencia(1,3,1);
 
-    grafo->addAdjacencia(1, 4, 5);
-    grafo->addAdjacencia(4, 5, 5);
-    grafo->addAdjacencia(4, 0, 15);
-    grafo->addAdjacencia(4, 3, 15);
-    grafo->addAdjacencia(5, 3, 10);
+    grafo->addAdjacencia(2,0,1);
+    grafo->addAdjacencia(2,1,1);
+    grafo->addAdjacencia(2,3,1);
 
-    grafo->setVerticeWeight(0, 0);
-    grafo->setVerticeWeight(1, 20);
-    grafo->setVerticeWeight(2, 15);
-    grafo->setVerticeWeight(3, 10);
-    grafo->setVerticeWeight(4, 5);
-    grafo->setVerticeWeight(5, 15);
+    grafo->addAdjacencia(3,0,1);
+    grafo->addAdjacencia(3,1,1);
+    grafo->addAdjacencia(3,2,1);
 
-
+    grafo->setVerticeWeight(0,0);
+    grafo->setVerticeWeight(1,40);
+    grafo->setVerticeWeight(2,50);
+    grafo->setVerticeWeight(3,5);
 
 
 
@@ -165,14 +184,14 @@ int main(int argc, char** argv)
 //    grafo->setVerticeWeight(4, 25);
 
 
-    HeuristicCVRP *h = new HeuristicCVRP(grafo, Gulosa, 0);
-    int dij = h->run(0, 100);
+//    HeuristicCVRP *h = new HeuristicCVRP(grafo, Gulosa, 0);
+//    int dij = h->run(0, 100);
+//
+//    cout << "Custo da solução: " << dij << endl;
 
-    cout << "Custo da solução: " << dij << endl;
 
-
-//    HeuristicIMP *heuristic = new HeuristicIMP(grafo, Gulosa, 0);
-//    cout << "Custo: " << heuristic->run(0, 100);
+    HeuristicIMP *heuristic = new HeuristicIMP(grafo, Gulosa, 0);
+    cout << "Custo: " << heuristic->run(0, 100);
 
 
 

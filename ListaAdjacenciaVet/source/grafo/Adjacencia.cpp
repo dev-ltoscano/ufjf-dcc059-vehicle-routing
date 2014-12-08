@@ -26,3 +26,8 @@ void Adjacencia::setWeight(float weight)
 {
     this->weight = weight;
 }
+
+Adjacencia::~Adjacencia(){
+    printf("%d -> %d ",this->idVertice1, this->getIdVertice2());
+    printf("TIREI ADJ\n");
+}
