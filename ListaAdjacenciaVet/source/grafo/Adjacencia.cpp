@@ -37,8 +37,12 @@ bool Adjacencia::equals(int idVertice1, int idVertice2)
     return false;
 }
 
+bool Adjacencia::equals(Adjacencia* adj)
+{
+    return this->equals(adj->getIdVertice1(),adj->getIdVertice2());
+}
+
 Adjacencia::~Adjacencia()
 {
-    printf("%d -> %d ",this->idVertice1, this->getIdVertice2());
-    printf("TIREI ADJ\n");
+    //dtor
 }

@@ -194,6 +194,7 @@ template <class G> void OrderedList<G>::remove(int nodeId, InsertType type)
         else if(it != NULL) // A adjacência é intermediária na lista
         {
             AbstractNodeList<G> *aux = this->it;
+            it = it->getNext();
 
             aux->getPrevious()->setNext(aux->getNext());
             aux->getNext()->setPrevious(aux->getPrevious());

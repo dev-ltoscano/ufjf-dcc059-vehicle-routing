@@ -12,7 +12,6 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
     int iteration = 0;
     int path = 0;
     bool *visited = new bool[grafo->getVerticeCount()];
-    Vehicle *truck = new Vehicle(1, vehicleCapacity, nodeBase);
     OrderedList<Adjacencia> *adjBase = grafo->getAdjacenciaList(nodeBase);
 
     for(int i = 0; i < grafo->getVerticeCount(); i ++){
@@ -21,13 +20,15 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
     visited[nodeBase] = true;
 
     while(iteration < itCount){
-        while(visitedLength < grafo->getAdjacenciaCount()){
+        while(visitedLength < grafo->getVerticeCount()){
+            Vehicle *truck = new Vehicle(1, vehicleCapacity, nodeBase);
             OrderedList<Adjacencia>* caminho = new OrderedList<Adjacencia>();
             OrderedList<InsertCalculation>* calculo = new OrderedList<InsertCalculation>();
+            bool found = false;
 
             //ADICIONA AS DUAS PRIMEIRAS ARESTAS A SOLUÇÃO
             adjBase->start();
-            while(adjBase->getCurrentId() != -1){
+            while(adjBase->getCurrentId() != -1 && !found){
                 int id = adjBase->getCurrentInfo()->getIdVertice2();
                 if(!visited[id]){
                     truck->removeCapacity(grafo->getVerticeWeight(id));
@@ -44,7 +45,7 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                     for(int i = 0; i < grafo->getVerticeCount(); i ++)
                         cout << i << ": visited = " << visited[i] << endl;
 
-                    break;
+                    found = true;
                 }
                 adjBase->next();
             }
@@ -72,22 +73,13 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                 adj1->start();
                 while(adj1->getCurrentId() != -1){
                     int id = adj1->getCurrentInfo()->getIdVertice2();
-                    cout << " --- ID " << id << " --- " << endl;
-                    if(!grafo->existsAdjacencia(id,a1->getIdVertice2()))
-                        cout << id << " -> " << a1->getIdVertice2() << "/E" << endl;
-                    if(!(truck->getCapacity() - grafo->getVerticeWeight(id)) > 0)
-                        cout << "CAPACITY OVERFLOW" << endl;
-                    if(visited[id])
-                        cout << "VISITED" << endl;
                     if(grafo->existsAdjacencia(id,a1->getIdVertice2()) && (truck->getCapacity() - grafo->getVerticeWeight(id)) > 0 && !visited[id]){
                         InsertCalculation* ic = new InsertCalculation();
                         ic->idVertice1 = a1->getIdVertice1();
-                        ic->idVertice2 = a2->getIdVertice2();
-//                        ic->adj = a1;
+                        ic->idVertice2 = a1->getIdVertice2();
                         ic->nodeId = id;
                         ic->difPath = (adj1->getCurrentInfo()->getWeight() + grafo->getAdjacencia(id,a1->getIdVertice2())->getWeight()) - a1->getWeight();
                         calculo->insert(ic->difPath,ic, InsertOrdered);
-                        cout << "ADDED" << endl;
                     }
                     adj1->next();
                 }
@@ -97,22 +89,13 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                 adj2->start();
                 while(adj2->getCurrentId() != -1){
                     int id = adj2->getCurrentInfo()->getIdVertice2();
-                    cout << " --- ID " << id << " --- " << endl;
-                    if(!grafo->existsAdjacencia(id,a1->getIdVertice2()))
-                        cout << id << " -> " << a1->getIdVertice2() << "/E" << endl;
-                    if(!(truck->getCapacity() - grafo->getVerticeWeight(id)) > 0)
-                        cout << "CAPACITY OVERFLOW" << endl;
-                    if(visited[id])
-                        cout << "VISITED" << endl;
                     if(grafo->existsAdjacencia(id,a2->getIdVertice2()) && (truck->getCapacity() - grafo->getVerticeWeight(id)) > 0 && !visited[id]){
                         InsertCalculation* ic = new InsertCalculation();
                         ic->idVertice1 = a2->getIdVertice1();
                         ic->idVertice2 = a2->getIdVertice2();
-//                        ic->adj = a2;
                         ic->nodeId = id;
                         ic->difPath = (adj2->getCurrentInfo()->getWeight() + grafo->getAdjacencia(id,a2->getIdVertice2())->getWeight()) - a2->getWeight();
                         calculo->insert(ic->difPath,ic, InsertOrdered);
-                        cout << "ADDED" << endl << endl;
                     }
                     adj2->next();
                 }
@@ -125,14 +108,18 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                     calculo->next();
 
                 }
+                cout << endl << endl;
 
                 //SE A LISTA DE CÁLCULOS ESTIVER VAZIA NÃO HÁ MAIS NÓS QUE SEJA POSSÍVEL INSERIR NO CAMINHO
                 if(calculo->isEmpty()){
                     caminho->start();
+                    cout << " --- CAMINHO FINAL --- " << endl;
                     while(caminho->getCurrentId() != -1){
                         path += caminho->getCurrentInfo()->getWeight();
+                        cout << caminho->getCurrentInfo()->getIdVertice1() << " -> " << caminho->getCurrentInfo()->getIdVertice2() << endl;
                         caminho->next();
                     }
+                    cout << endl << endl;
                     break;
                 }
 
@@ -150,18 +137,37 @@ int HeuristicIMP::run(int nodeBase, float vehicleCapacity){
                 truck->removeCapacity(grafo->getVerticeWeight(solution->nodeId));
                 visitedLength ++;
                 visited[solution->nodeId] = true;
+
                 for(int i = 0; i < grafo->getVerticeCount(); i ++)
                     cout << i << ": visited = " << visited[i] << endl;
 
                 //ATUALIZA OS CÁLCULOS
                 calculo->start();
-                while(calculo->getCurrentId() != -1){
-                    InsertCalculation* ic = calculo->getNodeInfo(calculo->getCurrentId());
+                cout << "CALC TAM -> " << calculo->getLength() << endl;
+                while(!calculo->isEnd() && !calculo->isEmpty()){
+                    InsertCalculation* ic = calculo->getCurrentInfo();
+                    cout << "REMOVED (" << removed->getIdVertice1() << " -> " << removed->getIdVertice2();
+                    cout << ") == (" << ic->idVertice1 << " -> " << ic->idVertice2 << ")" << endl;
                     if(removed->equals(ic->idVertice1, ic->idVertice2)|| (truck->getCapacity() - grafo->getVerticeWeight(ic->nodeId) < 0) || visited[ic->nodeId]){
                         cout << "TIREI " << ic->idVertice1 << " -> " << ic->idVertice2 << ": node= " << ic->nodeId << " deltaPath= " << ic->difPath << " visited[i] " << visited[ic->nodeId] << endl;
                         calculo->remove(calculo->getCurrentId());
+                    } else {
+                        calculo->next();
                     }
-                    calculo->next();
+                }
+
+                //REMOVE DO CAMINHO A ARESTA QUE FOI SUBSTITUÍDA
+                caminho->start();
+                while(!caminho->isEnd() && !caminho->isEmpty()){
+                    cout << " --- REMOVE ARESTA --- " << endl;
+                    cout << caminho->getCurrentInfo()->getIdVertice1() << " - > " << caminho->getCurrentInfo()->getIdVertice2();
+                    cout << " == " <<removed->getIdVertice1() << " -> " << removed->getIdVertice2() << endl;
+                    if(removed->equals(caminho->getCurrentInfo())){
+                        caminho->remove(caminho->getCurrentId());
+                        break;
+                    } else {
+                        caminho->next();
+                    }
                 }
             }
         }
