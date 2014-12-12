@@ -2,15 +2,29 @@
 
 Vertice::Vertice()
 {
+    this->weight = 0;
+    this->coord = NULL;
     this->adjacenciaList = new OrderedList<Adjacencia>();
+    this->adjInsertType = ListUnordered;
 }
 
 Vertice::~Vertice()
 {
+    delete this->coord;
     delete this->adjacenciaList;
 }
 
-void Vertice::setAdjInsertType(InsertType type)
+Point* Vertice::getCoord()
+{
+    return this->coord;
+}
+
+void Vertice::setCoord(Point *coord)
+{
+    this->coord = coord;
+}
+
+void Vertice::setAdjListType(OperationType type)
 {
     this->adjInsertType = type;
 }

@@ -1,11 +1,10 @@
 #include "../../header/heuristic/Vehicle.h"
 
-Vehicle::Vehicle(int id, float initialCapacity, int currentPosition)
+Vehicle::Vehicle(int id, float initialCapacity)
 {
     this->id = id;
     this->initialCapacity = initialCapacity;
     this->capacity = initialCapacity;
-    this->currentPosition = currentPosition;
 }
 
 int Vehicle::getId()
@@ -50,14 +49,4 @@ void Vehicle::removeCapacity(float decrease)
 void Vehicle::resetCapacity()
 {
     this->capacity = this->initialCapacity;
-}
-
-int Vehicle::getCurrentPosition()
-{
-    return this->currentPosition;
-}
-
-void Vehicle::setCurrentPosition(int currentPosition)
-{
-    this->currentPosition = currentPosition;
 }

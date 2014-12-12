@@ -5,19 +5,26 @@
 #include "../grafo/ListaAdjacenciaVet.h"
 #include "Vehicle.h"
 #include "../Helper.h"
-#include <stdio.h>
+#include "CVRPInstance.h"
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
 
 class HeuristicIMP
 {
-    public:
-        HeuristicIMP(ListaAdjacenciaVet *grafo, HeuristicType heuristic, int itCount);
-        int run(int nodeBase, float vehicleCapacity);
-        virtual ~HeuristicIMP();
-    protected:
     private:
-        ListaAdjacenciaVet *grafo;
         HeuristicType heuristic;
-        int itCount;
+        float alfa;
+    public:
+        HeuristicIMP(HeuristicType heuristic, float alfa);
+
+        void setAlfa(float alfa);
+
+        int run(ListaAdjacenciaVet *grafo, int nodeBase, float vehicleCapacity);
+        int run(CVRPInstance *instance);
 };
 
 #endif // HEURISTICIMP_H

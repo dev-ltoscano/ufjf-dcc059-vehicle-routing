@@ -3,6 +3,10 @@
 
 #include "grafo/Adjacencia.h"
 
+#include <climits>
+
+#define INFINITE        INT_MAX
+
 using namespace std;
 
 //TODO

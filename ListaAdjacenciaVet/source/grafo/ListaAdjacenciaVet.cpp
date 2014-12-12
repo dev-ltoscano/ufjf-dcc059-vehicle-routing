@@ -1,9 +1,9 @@
 #include "../../header/grafo/ListaAdjacenciaVet.h"
 #include "../../header/Helper.h"
 
-ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected) : ListaAdjacenciaVet(verticeCount, isDirected, InsertNone) { }
+ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected) : ListaAdjacenciaVet(verticeCount, isDirected, ListUnordered) { }
 
-ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected, InsertType type)
+ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected, OperationType type)
 {
     this->verticeCount = verticeCount;
     this->isDirected = isDirected;
@@ -12,7 +12,7 @@ ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected, Insert
 
     for(int i = 0; i < verticeCount; i++)
     {
-        this->verticeList[i].setAdjInsertType(type);
+        this->verticeList[i].setAdjListType(type);
     }
 }
 
@@ -74,12 +74,12 @@ bool ListaAdjacenciaVet::depth(int s, int d)
 
     visited[s] = true;
     OrderedList<int> queue1;
-    queue1.insert(s, InsertEnd);
+    queue1.insert(s, ListEnd);
 
     while(!queue1.isEmpty())
     {
         s = queue1.getStartId();
-        queue1.remove(InsertStart);
+        queue1.remove(ListStart);
 
         OrderedList<Adjacencia> *verticeAdjList = this->verticeList[s].getAdjacenciaList(); // Pega a lista de adjacência do nó
         verticeAdjList->start();
@@ -95,7 +95,7 @@ bool ListaAdjacenciaVet::depth(int s, int d)
             if(!visited[verticeAdj->getIdVertice2()])
             {
                 visited[verticeAdj->getIdVertice1()] = true;
-                queue1.insert(verticeAdj->getIdVertice2(), InsertEnd);
+                queue1.insert(verticeAdj->getIdVertice2(), ListEnd);
             }
         }
     }
@@ -107,11 +107,6 @@ Vertice* ListaAdjacenciaVet::getVerticeList()
 {
     return this->verticeList;
 }
-//
-//Vertice ListaAdjacenciaVet::getVertice(int idVertice)
-//{
-//    return this->verticeList[idVertice];
-//}
 
 int ListaAdjacenciaVet::getVerticeCount()
 {
@@ -132,7 +127,6 @@ int ListaAdjacenciaVet::getVerticeGrau(int idVertice)
     return -1;
 }
 
-
 float ListaAdjacenciaVet::getVerticeWeight(int idVertice)
 {
     if(existsVertice(idVertice))
@@ -145,6 +139,32 @@ float ListaAdjacenciaVet::getVerticeWeight(int idVertice)
     }
 
     return 0;
+}
+
+Point* ListaAdjacenciaVet::getVerticePoint(int idVertice)
+{
+    if(existsVertice(idVertice))
+    {
+        return this->verticeList[idVertice].getCoord();
+    }
+    else
+    {
+        cout << "[ Erro ]: Nó não existente no grafo!" << endl;
+    }
+
+    return NULL;
+}
+
+void ListaAdjacenciaVet::setVerticePoint(int idVertice, Point *coord)
+{
+    if(existsVertice(idVertice))
+    {
+        this->verticeList[idVertice].setCoord(coord);
+    }
+    else
+    {
+        cout << "[ Erro ]: Nó não existente no grafo!" << endl;
+    }
 }
 
 void ListaAdjacenciaVet::setVerticeWeight(int idVertice, float weight)

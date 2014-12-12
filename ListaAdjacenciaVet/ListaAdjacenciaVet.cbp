@@ -29,6 +29,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
@@ -37,10 +38,12 @@
 		<Unit filename="header/grafo/Adjacencia.h" />
 		<Unit filename="header/grafo/ListaAdjacenciaVet.h" />
 		<Unit filename="header/grafo/Vertice.h" />
+		<Unit filename="header/heuristic/CVRPInstance.h" />
 		<Unit filename="header/heuristic/FloydWarshall.h" />
 		<Unit filename="header/heuristic/HeuristicCVRP.h" />
 		<Unit filename="header/heuristic/HeuristicIMP.h" />
 		<Unit filename="header/heuristic/Vehicle.h" />
+		<Unit filename="header/structure/Point.h" />
 		<Unit filename="header/structure/list/AbstractNodeList.h" />
 		<Unit filename="header/structure/list/OrderedList.h" />
 		<Unit filename="main.cpp" />
@@ -49,10 +52,12 @@
 		<Unit filename="source/grafo/Adjacencia.cpp" />
 		<Unit filename="source/grafo/ListaAdjacenciaVet.cpp" />
 		<Unit filename="source/grafo/Vertice.cpp" />
+		<Unit filename="source/heuristic/CVRPInstance.cpp" />
 		<Unit filename="source/heuristic/FloydWarshall.cpp" />
 		<Unit filename="source/heuristic/HeuristicCVRP.cpp" />
 		<Unit filename="source/heuristic/HeuristicIMP.cpp" />
 		<Unit filename="source/heuristic/Vehicle.cpp" />
+		<Unit filename="source/structure/Point.cpp" />
 		<Unit filename="source/structure/list/AbstractNodeList.cpp" />
 		<Unit filename="source/structure/list/OrderedList.cpp" />
 		<Extensions>

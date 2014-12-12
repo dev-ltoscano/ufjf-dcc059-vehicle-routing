@@ -5,21 +5,29 @@
 #include "../structure/list/OrderedList.h"
 
 #include <iostream>
+#include "../structure/Point.h"
 
 using namespace std;
 
+/**
+*   Classe que representa um vértice do grafo
+**/
 class Vertice
 {
     private:
-        float weight;
-        InsertType adjInsertType;
+        float weight; // Peso do vértice
+        Point *coord; // Coordenada do vértice
+        OperationType adjInsertType; // Tipo de operação de inserção e remoção da lista de adjacências
 
-        OrderedList<Adjacencia> *adjacenciaList;
+        OrderedList<Adjacencia> *adjacenciaList; // Lista de adjacências do vértice
     public:
         Vertice();
         ~Vertice();
 
-        void setAdjInsertType(InsertType type);
+        Point* getCoord();
+        void setCoord(Point *coord);
+
+        void setAdjListType(OperationType type);
 
         int getGrau();
         float getWeight();

@@ -2,38 +2,50 @@
 #define ORDEREDLIST_H_INCLUDED
 
 #include "AbstractNodeList.h"
-#include "../../Helper.h"
 
-enum InsertType
+// Tipos de inserção e remoção da lista
+enum OperationType
 {
-    InsertOrdered, InsertStart, InsertEnd, InsertNone
+    ListOrdered, // Inserção ordenada de forma crescente pelo valor do nó
+    ListStart, // Inserção ou remoção da primeira posição
+    ListEnd, // Inserção ou remoção da última posição
+    ListUnordered // Inserções e remoções por padrão no início da lista
 };
 
+/**
+*   Classe que implementa uma lista duplamente encadeada
+*   com a possibilidade de inserções ordenadas
+**/
 template <class G> class OrderedList
 {
     private:
-        AbstractNodeList<G> *startNode;
-        AbstractNodeList<G> *endNode;
-        AbstractNodeList<G> *it;
+        AbstractNodeList<G> *startNode; // Nó inicial da lista
+        AbstractNodeList<G> *endNode; // Nó final da lista
+        AbstractNodeList<G> *it; // Nó atual da iteração
 
-        int currId;
-        int length;
+        AbstractNodeList<G> *delayedRemoveList; // Remoção atrasada devido a informação guardada em um nó ser um ponteiro de um objeto
 
-        void searchById(int nodeId);
-        void searchByValue(float nodeValue);
+        int currId; // Ids automáticos
+        int length; // Tamanho da lista
+
+        void searchById(int nodeId); // Auxilia na remoção de um nó colocando o iterador na posição correta
+        void searchByValue(float nodeValue); // Auxilia na inserção ordenada colocando o iterador na posição correta
+
+        void clear(); // Limpa a lista
     public:
         OrderedList();
         ~OrderedList();
 
-        void insert(float nodeValue, InsertType type);
-        void insert(G *info, InsertType type);
-        void insert(float nodeValue, G *info, InsertType type);
-        void insert(int nodeId, float nodeValue, G *info, InsertType type);
-        bool search(int nodeId);
+        void insert(float nodeValue, OperationType type);
+        void insert(G *info, OperationType type);
+        void insert(float nodeValue, G *info, OperationType type);
+        void insert(int nodeId, float nodeValue, G *info, OperationType type);
+
         void remove(int nodeId);
-        void remove(InsertType type);
-        void remove(int nodeId, InsertType type);
-        void clear();
+        void remove(OperationType type);
+        void remove(int nodeId, OperationType type);
+
+        bool search(int nodeId);
         void print();
 
         void start();
@@ -42,17 +54,20 @@ template <class G> class OrderedList
         void next();
         bool isEnd();
         bool isEmpty();
-
-        int getStartId();
-        int getStartValue();
-        G* getStartInfo();
-        int getCurrentId();
-        float getCurrentValue();
-        G* getCurrentInfo();
-        float getNodeValue(int nodeId);
-        G* getNodeInfo(int nodeId);
-
         int getLength();
+
+        int getStartId(); // Retorna o id do nó inicial
+        int getStartValue(); // Retorna o valor do nó inicial
+        G* getStartInfo(); // Retorna o objeto guardado pelo nó inicial
+
+        int getCurrentId(); // Retorna o id da posição atual do iterador
+        float getCurrentValue(); // Retorna o valor da posição atual do iterador
+        G* getCurrentInfo(); // Retorna o objeto guardado pela posição atual do iterador
+
+        float getNodeValue(int nodeId); // Busca pelo id do nó e retorna seu valor
+        G* getNodeInfo(int nodeId); // Busca pelo id do nó e retorna seu objeto guardado
+
+        G* get(int position); // Retorna o objeto guardado na posição
 };
 
 #endif // ORDEREDLIST_H_INCLUDED

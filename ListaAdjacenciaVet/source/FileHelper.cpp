@@ -1,5 +1,103 @@
 #include "../header/FileHelper.h"
 
+CVRPInstance* FileHelper::readInstance(string fileName)
+{
+    ifstream streamFile;
+    streamFile.open(fileName.c_str());
+
+    if (!streamFile.is_open())
+    {
+        cout << endl << "[ Erro ]: Não foi possível abrir o arquivo da instância" << endl;
+    }
+    else
+    {
+        cout << "===== Lendo instância do CVRP =====" << endl << endl;
+
+        CVRPInstance *instance = new CVRPInstance();
+
+        string txtLine;
+        while (getline(streamFile, txtLine))
+        {
+            if(txtLine == "NODE_COUNT_SECTION")
+            {
+                cout << "Section: " << txtLine << endl;
+                int nodeCount;
+                streamFile >> nodeCount;
+                instance->setVerticeCount(nodeCount);
+                cout << "Quantidade de vértices: " << nodeCount << endl << endl;
+            }
+            else if(txtLine == "VEHICLE_CAP_SECTION")
+            {
+                cout << "Section: " << txtLine << endl;
+                float vehicleCapacity;
+                streamFile >> vehicleCapacity;
+                instance->setVehicleCapacity(vehicleCapacity);
+
+                cout << "Capacidade do veículo: " << vehicleCapacity << endl << endl;
+            }
+            else if(txtLine == "NODE_COORD_SECTION")
+            {
+                cout << "Section: " << txtLine << endl << endl;
+
+                int nodeId;
+                float nodeCoordX;
+                float nodeCoordY;
+
+                while(getline(streamFile, txtLine) && (txtLine != "END_SECTION"))
+                {
+                    stringstream streamLine(txtLine);
+
+                    while(streamLine >> nodeId >> nodeCoordX >> nodeCoordY)
+                    {
+                        cout << "Id: " << nodeId << " -- X: " << nodeCoordX << " -- Y: " << nodeCoordY << endl;
+                        instance->addVerticePoint(nodeId, new Point(nodeCoordX, nodeCoordY));
+                    }
+                }
+
+                cout << endl;
+            }
+            else if(txtLine == "NODE_DEMAND_SECTION")
+            {
+                cout << "Section: " << txtLine << endl << endl;
+
+                int nodeId;
+                float nodeWeight;
+
+                while(getline(streamFile, txtLine) && (txtLine != "END_SECTION"))
+                {
+                    stringstream streamLine(txtLine);
+
+                    while(streamLine >> nodeId >> nodeWeight)
+                    {
+                        cout << "Id: " << nodeId << " -- Demanda: " << nodeWeight << endl;
+                        instance->addVerticeDemand(nodeId, nodeWeight);
+                    }
+                }
+
+                cout << endl;
+            }
+            else if(txtLine == "NODE_BASE_SECTION")
+            {
+                cout << "Section: " << txtLine << endl;
+                int base;
+                streamFile >> base;
+                instance->setVerticeBase(base);
+                cout << "Base: " << base << endl << endl;
+            }
+        }
+
+        cout << "===== END FILE =====" << endl << endl;
+
+        return instance;
+    }
+
+    return NULL;
+}
+
+
+
+
+
 void FileHelper::writeGraphInfoFile(ListaAdjacenciaVet *grafo, Floyd floyd)
 {
     ofstream weightFile;

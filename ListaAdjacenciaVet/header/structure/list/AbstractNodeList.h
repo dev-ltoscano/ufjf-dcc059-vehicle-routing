@@ -8,15 +8,18 @@
 
 using namespace std;
 
+/*
+*   Classe que define um nó da lista ordenada
+*/
 template <class G> class AbstractNodeList
 {
     private:
-        int nodeId;
-        float nodeValue;
-        G *info;
+        int nodeId; // Id do nó
+        float nodeValue; // Valor do nó
+        G *info; // Informação que o nó guarda
 
-        AbstractNodeList<G> *previous;
-        AbstractNodeList<G> *next;
+        AbstractNodeList<G> *previous; // Anterior ao nó
+        AbstractNodeList<G> *next; // Sucessor ao nó
     public:
         AbstractNodeList(int nodeId, float nodeValue, G *info);
         AbstractNodeList(int nodeId, float nodeValue, G *info, AbstractNodeList<G> *previous, AbstractNodeList<G> *next);

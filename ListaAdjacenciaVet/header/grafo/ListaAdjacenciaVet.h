@@ -2,48 +2,50 @@
 #define LISTAADJACENCIAVET_H_INCLUDED
 
 #include "Vertice.h"
+#include "../structure/Point.h"
 
 #include <iostream>
-#include <list>
 
 using namespace std;
 
+/**
+*   Classe que representa um grafo
+**/
 class ListaAdjacenciaVet
 {
     private:
-        int verticeCount;
-        Vertice *verticeList;
-        bool isDirected;
-
-        bool existsVertice(int idVertice);
+        int verticeCount; // Quantidade de vértices
+        Vertice *verticeList; // Vetor de vértices
+        bool isDirected; // Define se o grafo é direcionado ou não
 
         bool depth(bool *visited); // Busca em profundidade
         bool depth(int idVertice1, int idVertice2); // Busca em profundidade para verificar caminho entre dois nós
     public:
         ListaAdjacenciaVet(int verticeCount, bool isDirected);
-        ListaAdjacenciaVet(int verticeCount, bool isDirected, InsertType type);
+        // Construtor que define como as adjacências serão inseridas nas listas de adjacências dos vértices
+        ListaAdjacenciaVet(int verticeCount, bool isDirected, OperationType type);
         ~ListaAdjacenciaVet();
 
-        Vertice* getVerticeList();
-//        Vertice getVertice(int idVertice);
-        int getVerticeCount();
-        int getVerticeGrau(int idVertice);
-        float getVerticeWeight(int idVertice);
-        void setVerticeWeight(int idVertice, float weight);
+        Vertice* getVerticeList(); // Retorna a lista de vértices
+        int getVerticeCount(); // Retorna a quantidade de vértices
+        int getVerticeGrau(int idVertice); // Retorna o grau de um vértice
+        float getVerticeWeight(int idVertice); // Retorna o peso de um vértice
+        void setVerticeWeight(int idVertice, float weight); // Define o peso de um vértice
+        Point* getVerticePoint(int idVertice); // Retorna a coordenada do vértice
+        void setVerticePoint(int idVertice, Point *p); // Define a coordenada do vértice
+        bool existsVertice(int idVertice); // Verifica se um vértice existe no grafo
 
-
-        void addAdjacencia(int idVertice1, int idVertice2, float weight);
-        void removeAdjacencia(int idVertice1, int idVertice2);
-        bool existsAdjacencia(int idVertice1, int idVertice2);
-        OrderedList<Adjacencia>* getAdjacenciaList(int idVertice);
-        Adjacencia* getAdjacencia(int idVertice1, int idVertice2);
-        int getAdjacenciaCount();
+        void addAdjacencia(int idVertice1, int idVertice2, float weight); // Adiciona um adjacência
+        void removeAdjacencia(int idVertice1, int idVertice2); // Remove uma adjacência
+        bool existsAdjacencia(int idVertice1, int idVertice2); // Veritica se existe um adjacência
+        OrderedList<Adjacencia>* getAdjacenciaList(int idVertice); // Retorna a lista de adjacência de um vértice
+        Adjacencia* getAdjacencia(int idVertice1, int idVertice2); // Retorna uma adjacência de um vértice
+        int getAdjacenciaCount(); // Retorna a quantidade de adjacências do grafo
 
         bool isConexo(); // Verifica se o grafo é conexo
         int compConexaCount(); // Verifica quantas componentes conexas o grafo possui
         bool containsCiclo(int startIdVertice); // Verifica se o grafo possui ciclos
         bool containsCaminho(int startIdVertice, int endIdVertice); // Verifica se existe caminho entre dois nós
-//        void minCaminho(int startIdVertice); // Caminho mínimo a partir do nó inicial (Dijkstra)
 };
 
 #endif // LISTAADJACENCIAVET_H_INCLUDED
