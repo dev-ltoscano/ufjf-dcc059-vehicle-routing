@@ -1,6 +1,6 @@
 #include "../header/FileHelper.h"
 
-CVRPInstance* FileHelper::readInstance(string fileName)
+shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
 {
     ifstream streamFile;
     streamFile.open(fileName.c_str());
@@ -11,22 +11,31 @@ CVRPInstance* FileHelper::readInstance(string fileName)
     }
     else
     {
+        int sectionRead = 0;
+
         cout << "===== Lendo instância do CVRP =====" << endl << endl;
 
-        CVRPInstance *instance = new CVRPInstance();
+        shared_ptr<CVRPInstance> instance = make_shared<CVRPInstance>();
 
         string txtLine;
+
         while (getline(streamFile, txtLine))
         {
-            if(txtLine == "NODE_COUNT_SECTION")
+//            cout << "Line: " << (txtLine.c_str() == string("NODE_COUNT_SECTION\r")) << endl;
+
+//            cout << "Equals: " << strcmp(txtLine.c_str(), string("NODE_COORD_SECTION").c_str()) << endl;
+
+            if(strcmp(txtLine.c_str(), string(NODE_COUNT_SECTION).c_str()) == 0)
             {
                 cout << "Section: " << txtLine << endl;
                 int nodeCount;
                 streamFile >> nodeCount;
                 instance->setVerticeCount(nodeCount);
                 cout << "Quantidade de vértices: " << nodeCount << endl << endl;
+
+                sectionRead++;
             }
-            else if(txtLine == "VEHICLE_CAP_SECTION")
+            else if(strcmp(txtLine.c_str(), string(VEHICLE_CAP_SECTION).c_str()) == 0)
             {
                 cout << "Section: " << txtLine << endl;
                 float vehicleCapacity;
@@ -34,8 +43,10 @@ CVRPInstance* FileHelper::readInstance(string fileName)
                 instance->setVehicleCapacity(vehicleCapacity);
 
                 cout << "Capacidade do veículo: " << vehicleCapacity << endl << endl;
+
+                sectionRead++;
             }
-            else if(txtLine == "NODE_COORD_SECTION")
+            else if(strcmp(txtLine.c_str(), string(NODE_COORD_SECTION).c_str()) == 0)
             {
                 cout << "Section: " << txtLine << endl << endl;
 
@@ -43,27 +54,29 @@ CVRPInstance* FileHelper::readInstance(string fileName)
                 float nodeCoordX;
                 float nodeCoordY;
 
-                while(getline(streamFile, txtLine) && (txtLine != "END_SECTION"))
+                while(getline(streamFile, txtLine) && (strcmp(txtLine.c_str(), string(END_SECTION).c_str())) != 0)
                 {
                     stringstream streamLine(txtLine);
 
                     while(streamLine >> nodeId >> nodeCoordX >> nodeCoordY)
                     {
                         cout << "Id: " << nodeId << " -- X: " << nodeCoordX << " -- Y: " << nodeCoordY << endl;
-                        instance->addVerticePoint(nodeId, new Point(nodeCoordX, nodeCoordY));
+                        instance->addVerticePoint(nodeId, make_shared<Point>(nodeCoordX, nodeCoordY));
                     }
                 }
 
                 cout << endl;
+
+                sectionRead++;
             }
-            else if(txtLine == "NODE_DEMAND_SECTION")
+            else if(strcmp(txtLine.c_str(), string(NODE_DEMAND_SECTION).c_str()) == 0)
             {
                 cout << "Section: " << txtLine << endl << endl;
 
                 int nodeId;
                 float nodeWeight;
 
-                while(getline(streamFile, txtLine) && (txtLine != "END_SECTION"))
+                while(getline(streamFile, txtLine) && (strcmp(txtLine.c_str(), string(END_SECTION).c_str())) != 0)
                 {
                     stringstream streamLine(txtLine);
 
@@ -75,15 +88,25 @@ CVRPInstance* FileHelper::readInstance(string fileName)
                 }
 
                 cout << endl;
+
+                sectionRead++;
             }
-            else if(txtLine == "NODE_BASE_SECTION")
+            else if(strcmp(txtLine.c_str(), string(NODE_BASE_SECTION).c_str()) == 0)
             {
                 cout << "Section: " << txtLine << endl;
                 int base;
                 streamFile >> base;
                 instance->setVerticeBase(base);
                 cout << "Base: " << base << endl << endl;
+
+                sectionRead++;
             }
+        }
+
+        if(sectionRead < 5)
+        {
+            instance = NULL;
+            cout << "[ Erro ]: Não foi possível ler todas as seções da instância!" << endl << endl;
         }
 
         cout << "===== END FILE =====" << endl << endl;
@@ -92,44 +115,4 @@ CVRPInstance* FileHelper::readInstance(string fileName)
     }
 
     return NULL;
-}
-
-
-
-
-
-void FileHelper::writeGraphInfoFile(ListaAdjacenciaVet *grafo, Floyd floyd)
-{
-    ofstream weightFile;
-    weightFile.open("weights.txt");
-
-    if(weightFile.is_open())
-    {
-        weightFile << "=== Informações do Grafo ===" << endl;
-        weightFile << "Quantidade de vértices: " << grafo->getVerticeCount() << endl;
-        weightFile << "Quantidade de adjacências: " << grafo->getAdjacenciaCount() << endl;
-        weightFile << "Conexo: " << grafo->isConexo() << endl;
-        weightFile << "Componentes: " << grafo->compConexaCount() << endl;
-        weightFile << "============================" << endl << endl;
-
-        for(int i = 0; i < grafo->getVerticeCount(); i++)
-        {
-            for(int j = 0; j < grafo->getVerticeCount(); j++)
-            {
-                weightFile << "============================" << endl;
-                weightFile << "i: " << i << " | Grau: " << grafo->getVerticeGrau(i) << endl;
-                weightFile << "j: " << j << " | Grau: " << grafo->getVerticeGrau(j) << endl;
-                weightFile << FloydWarshall::getShortestStringPath(floyd, i, j);
-                weightFile << "Custo do caminho: " << floyd.dij[i][j] << endl;
-                weightFile << "============================" << endl << endl;
-            }
-        }
-
-        weightFile.close();
-        cout << "Arquivo com a matriz de custos do grafo foi salvo!" << endl;
-    }
-    else
-    {
-        cout << "[ ERRO ]: Não foi possível criar o arquivo da matriz de custos do grafo" << endl;
-    }
 }

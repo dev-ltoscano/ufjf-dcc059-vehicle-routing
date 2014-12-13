@@ -5,36 +5,36 @@
 #include "../../Helper.h"
 
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
-/*
-*   Classe que define um nó da lista ordenada
-*/
+/**
+*   Nó da lista ordenada
+**/
 template <class G> class AbstractNodeList
 {
     private:
         int nodeId; // Id do nó
         float nodeValue; // Valor do nó
-        G *info; // Informação que o nó guarda
+        shared_ptr<G> info; // Informação que o nó guarda
 
-        AbstractNodeList<G> *previous; // Anterior ao nó
-        AbstractNodeList<G> *next; // Sucessor ao nó
+        shared_ptr<AbstractNodeList<G>> previous; // Anterior ao nó
+        shared_ptr<AbstractNodeList<G>> next; // Sucessor ao nó
     public:
-        AbstractNodeList(int nodeId, float nodeValue, G *info);
-        AbstractNodeList(int nodeId, float nodeValue, G *info, AbstractNodeList<G> *previous, AbstractNodeList<G> *next);
-        ~AbstractNodeList();
+        AbstractNodeList(int nodeId, float nodeValue, shared_ptr<G> info);
+        AbstractNodeList(int nodeId, float nodeValue, shared_ptr<G> info, shared_ptr<AbstractNodeList<G>> previous, shared_ptr<AbstractNodeList<G>> next);
 
         int getNodeId();
         float getNodeValue();
 
-        G* getInfo();
-        void setInfo(G *info);
+        shared_ptr<G> getInfo();
+        void setInfo(shared_ptr<G> info);
 
-        AbstractNodeList<G>* getPrevious();
-        AbstractNodeList<G>* getNext();
-        void setPrevious(AbstractNodeList<G> *previous);
-        void setNext(AbstractNodeList<G> *next);
+        shared_ptr<AbstractNodeList<G>> getPrevious();
+        shared_ptr<AbstractNodeList<G>> getNext();
+        void setPrevious(shared_ptr<AbstractNodeList<G>> previous);
+        void setNext(shared_ptr<AbstractNodeList<G>> next);
 };
 
 #endif // ABSTRACTNODELIST_H_INCLUDED

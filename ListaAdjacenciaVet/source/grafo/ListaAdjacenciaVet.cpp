@@ -8,17 +8,10 @@ ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected, Operat
     this->verticeCount = verticeCount;
     this->isDirected = isDirected;
 
-    this->verticeList = new Vertice[verticeCount];
-
     for(int i = 0; i < verticeCount; i++)
     {
-        this->verticeList[i].setAdjListType(type);
+        this->verticeList.push_back(make_shared<Vertice>());
     }
-}
-
-ListaAdjacenciaVet::~ListaAdjacenciaVet()
-{
-    delete this->verticeList;
 }
 
 bool ListaAdjacenciaVet::existsVertice(int idVertice)
@@ -37,12 +30,12 @@ bool ListaAdjacenciaVet::depth(bool *visited)
 
         for(int i = 0; i < this->verticeCount; i++)
         {
-            OrderedList<Adjacencia> *verticeAdjList = this->verticeList[i].getAdjacenciaList(); // Pega a lista de adjacência do nó
+            shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[i]).getAdjacenciaList(); // Pega a lista de adjacência do nó
             verticeAdjList->start();
 
             while(!verticeAdjList->isEnd())
             {
-                Adjacencia *verticeAdj = verticeAdjList->getCurrentInfo();
+                shared_ptr<Adjacencia> verticeAdj = verticeAdjList->getCurrentInfo();
                 verticeAdjList->next();
                 visited[verticeAdj->getIdVertice1()] = true;
             }
@@ -81,12 +74,12 @@ bool ListaAdjacenciaVet::depth(int s, int d)
         s = queue1.getStartId();
         queue1.remove(ListStart);
 
-        OrderedList<Adjacencia> *verticeAdjList = this->verticeList[s].getAdjacenciaList(); // Pega a lista de adjacência do nó
+        shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[s]).getAdjacenciaList(); // Pega a lista de adjacência do nó
         verticeAdjList->start();
 
         while(!verticeAdjList->isEnd())
         {
-            Adjacencia *verticeAdj = verticeAdjList->getCurrentInfo();
+            shared_ptr<Adjacencia> verticeAdj = verticeAdjList->getCurrentInfo();
             verticeAdjList->next();
 
             if(verticeAdj->getIdVertice1() == d)
@@ -100,12 +93,8 @@ bool ListaAdjacenciaVet::depth(int s, int d)
         }
     }
 
+    delete visited;
     return false;
-}
-
-Vertice* ListaAdjacenciaVet::getVerticeList()
-{
-    return this->verticeList;
 }
 
 int ListaAdjacenciaVet::getVerticeCount()
@@ -117,7 +106,7 @@ int ListaAdjacenciaVet::getVerticeGrau(int idVertice)
 {
     if(existsVertice(idVertice))
     {
-        return this->verticeList[idVertice].getGrau();
+        return (*this->verticeList[idVertice]).getGrau();
     }
     else
     {
@@ -131,7 +120,7 @@ float ListaAdjacenciaVet::getVerticeWeight(int idVertice)
 {
     if(existsVertice(idVertice))
     {
-        return this->verticeList[idVertice].getWeight();
+        return (*this->verticeList[idVertice]).getWeight();
     }
     else
     {
@@ -141,11 +130,11 @@ float ListaAdjacenciaVet::getVerticeWeight(int idVertice)
     return 0;
 }
 
-Point* ListaAdjacenciaVet::getVerticePoint(int idVertice)
+shared_ptr<Point> ListaAdjacenciaVet::getVerticePoint(int idVertice)
 {
     if(existsVertice(idVertice))
     {
-        return this->verticeList[idVertice].getCoord();
+        return (*this->verticeList[idVertice]).getCoord();
     }
     else
     {
@@ -155,11 +144,11 @@ Point* ListaAdjacenciaVet::getVerticePoint(int idVertice)
     return NULL;
 }
 
-void ListaAdjacenciaVet::setVerticePoint(int idVertice, Point *coord)
+void ListaAdjacenciaVet::setVerticePoint(int idVertice, shared_ptr<Point> coord)
 {
     if(existsVertice(idVertice))
     {
-        this->verticeList[idVertice].setCoord(coord);
+        (*this->verticeList[idVertice]).setCoord(coord);
     }
     else
     {
@@ -171,7 +160,7 @@ void ListaAdjacenciaVet::setVerticeWeight(int idVertice, float weight)
 {
     if(existsVertice(idVertice))
     {
-        this->verticeList[idVertice].setWeight(weight);
+        (*this->verticeList[idVertice]).setWeight(weight);
     }
     else
     {
@@ -185,12 +174,12 @@ void ListaAdjacenciaVet::addAdjacencia(int idVertice1, int idVertice2, float wei
     {
         if(isDirected)
         {
-            (this->verticeList[idVertice1]).addAdjacencia(idVertice1, idVertice2, weight);
+            (*this->verticeList[idVertice1]).addAdjacencia(idVertice1, idVertice2, weight);
         }
         else
         {
-            (this->verticeList[idVertice1]).addAdjacencia(idVertice1, idVertice2, weight);
-            (this->verticeList[idVertice2]).addAdjacencia(idVertice2, idVertice1, weight);
+            (*this->verticeList[idVertice1]).addAdjacencia(idVertice1, idVertice2, weight);
+            (*this->verticeList[idVertice2]).addAdjacencia(idVertice2, idVertice1, weight);
         }
     }
     else
@@ -205,12 +194,12 @@ void ListaAdjacenciaVet::removeAdjacencia(int idVertice1, int idVertice2)
     {
         if(isDirected)
         {
-            (this->verticeList[idVertice1]).removeAdjacencia(idVertice2);
+            (*this->verticeList[idVertice1]).removeAdjacencia(idVertice2);
         }
         else
         {
-            (this->verticeList[idVertice1]).removeAdjacencia(idVertice2);
-            (this->verticeList[idVertice2]).removeAdjacencia(idVertice1);
+            (*this->verticeList[idVertice1]).removeAdjacencia(idVertice2);
+            (*this->verticeList[idVertice2]).removeAdjacencia(idVertice1);
         }
     }
     else
@@ -223,7 +212,7 @@ bool ListaAdjacenciaVet::existsAdjacencia(int idVertice1, int idVertice2)
 {
     if(existsVertice(idVertice1) && existsVertice(idVertice2))
     {
-        return (this->verticeList[idVertice1]).existsAdjacencia(idVertice2);
+        return (*this->verticeList[idVertice1]).existsAdjacencia(idVertice2);
     }
     else
     {
@@ -233,21 +222,21 @@ bool ListaAdjacenciaVet::existsAdjacencia(int idVertice1, int idVertice2)
     return false;
 }
 
-OrderedList<Adjacencia>* ListaAdjacenciaVet::getAdjacenciaList(int idVertice)
+shared_ptr<OrderedList<Adjacencia>> ListaAdjacenciaVet::getAdjacenciaList(int idVertice)
 {
     if(existsVertice(idVertice))
     {
-        return this->verticeList[idVertice].getAdjacenciaList();
+        return (*this->verticeList[idVertice]).getAdjacenciaList();
     }
 
     return NULL;
 }
 
-Adjacencia* ListaAdjacenciaVet::getAdjacencia(int idVertice1, int idVertice2)
+shared_ptr<Adjacencia> ListaAdjacenciaVet::getAdjacencia(int idVertice1, int idVertice2)
 {
     if(existsVertice(idVertice1) && existsVertice(idVertice2) && existsAdjacencia(idVertice1, idVertice2))
     {
-        return (this->verticeList[idVertice1].getAdjacencia(idVertice2));
+        return ((*this->verticeList[idVertice1]).getAdjacencia(idVertice2));
     }
 
     return NULL;
@@ -259,7 +248,7 @@ int ListaAdjacenciaVet::getAdjacenciaCount()
 
     for(int i = 0; i < this->verticeCount; i++)
     {
-        count += this->verticeList[i].getAdjacenciaList()->getLength();
+        count += (*this->verticeList[i]).getAdjacenciaList()->getLength();
     }
 
     return count;
@@ -268,9 +257,10 @@ int ListaAdjacenciaVet::getAdjacenciaCount()
 bool ListaAdjacenciaVet::isConexo()
 {
     bool *visited = new bool[this->verticeCount];
-    bool conexo = this->depth(visited);
-    delete visited;
 
+    bool conexo = this->depth(visited);
+
+    delete visited;
     return conexo;
 }
 
@@ -295,7 +285,7 @@ int ListaAdjacenciaVet::compConexaCount()
 
 bool ListaAdjacenciaVet::containsCiclo(int startIdVertice)
 {
-    OrderedList<Adjacencia> *verticeAdjList = this->verticeList[startIdVertice].getAdjacenciaList();
+    shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[startIdVertice]).getAdjacenciaList();
     verticeAdjList->start();
 
     if(verticeAdjList->getCurrentInfo() != NULL)

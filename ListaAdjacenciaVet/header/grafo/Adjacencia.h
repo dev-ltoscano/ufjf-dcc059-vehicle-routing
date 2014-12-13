@@ -2,6 +2,7 @@
 #define ADJACENCIA_H_INCLUDED
 
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -19,7 +20,6 @@ class Adjacencia
         float weight; // Peso da adjacência
     public:
         Adjacencia(int idVertice1, int idVertice2, float weight);
-        ~Adjacencia();
 
         int getIdVertice1();
         int getIdVertice2();
@@ -28,7 +28,7 @@ class Adjacencia
         void setWeight(float weight);
 
         bool equals(int idVertice1, int idVertice2);
-        bool equals(Adjacencia* adj);
+        bool equals(shared_ptr<Adjacencia> adj);
 };
 
 #endif // ADJACENCIA_H_INCLUDED

@@ -1,14 +1,13 @@
 #include <iostream>
 #include <string>
-#include <stdlib.h> // rand();
-#include <locale> // setlocale();
+#include <cstdlib>
+#include <locale>
 #include <chrono>
 
-#include "header/grafo/ListaAdjacenciaVet.h"
-#include "header/structure/list/OrderedList.h"
-#include "header/Helper.h"
+//#include "header/grafo/ListaAdjacenciaVet.h"
+//#include "header/structure/list/OrderedList.h"
+//#include "header/Helper.h"
 #include "header/FileHelper.h"
-#include "header/heuristic/HeuristicCVRP.h"
 #include "header/heuristic/HeuristicIMP.h"
 
 using namespace std;
@@ -39,10 +38,10 @@ ListaAdjacenciaVet* createGrafo(int maxNodes, OperationType type)
     return grafo;
 }
 
-void parseVrpToCustomFile(string fileName, string instanceName)
+void parseVrpToCustomFile(string inputFile, string outputFile)
 {
     ifstream streamFile;
-    streamFile.open(fileName.c_str());
+    streamFile.open(inputFile.c_str());
 
     if (!streamFile.is_open())
     {
@@ -51,8 +50,7 @@ void parseVrpToCustomFile(string fileName, string instanceName)
     else
     {
         ofstream instance;
-        string filePath = "Instance/" + instanceName;
-        instance.open(filePath.c_str());
+        instance.open(outputFile.c_str());
 
         if(!instance.is_open())
             cout << endl << "[ Erro ]: Não foi possível criar o arquivo da instância" << endl;
@@ -139,146 +137,93 @@ void parseVrpToCustomFile(string fileName, string instanceName)
     }
 }
 
-int main(int argc, char** argv)
+int main(int argc, char *argv[])
 {
+    // Tempo inicial da execução
+    high_resolution_clock::time_point t1 = high_resolution_clock::now();
+
+    // Corrige acentuação do console
     setlocale(LC_ALL, "Portuguese");
-    srand(time(NULL)); // Seed the time
 
-    if((argv[1] != NULL) && (string(argv[1]) == "parse") && (argv[2] != NULL) && (argv[3] != NULL))
+    // Semeia o gerador rand()
+    srand(time(NULL));
+
+    switch(argc)
     {
-        parseVrpToCustomFile("Parse/" + string(argv[2]), string(argv[3]));
-    }
-    else if((argv[1] != NULL) && (string(argv[1]) == "gulosa") && (argv[2] != NULL))
-    {
-        CVRPInstance *instance = FileHelper::readInstance("Instance/" + string(argv[2]));
-        HeuristicIMP *h = new HeuristicIMP(Gulosa, 0);
-        cout << "Custo: " << h->run(instance) << endl;
-    }
-    else if((argv[1] != NULL) && (string(argv[1]) == "rand") && (argv[2] != NULL) && (argv[3] != NULL) && (argv[4] != NULL))
-    {
-        CVRPInstance *instance = FileHelper::readInstance("Instance/" + string(argv[2]));
-        ListaAdjacenciaVet *grafo = instance->createInstance();
-
-        float alfa = atof(argv[3]);
-        HeuristicIMP *h = new HeuristicIMP(Randomizada, alfa);
-
-        int minPath = INFINITE;
-        int media = 0;
-
-        int iteration = atof(argv[4]);
-
-        for(int j = 0; j < iteration; j++)
+        case 3:
         {
-            int path = h->run(instance);
-
-            if(path < minPath)
+            cout << (argv[1] == string("gulosa")) << endl;
+            if((argv[1] != NULL) && (argv[1] == string("gulosa")) && (argv[2] != NULL))
             {
-                minPath = path;
+                shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>(string(argv[2]));
+                cout << "Custo mínimo: " << h->runGulosa() << endl;
+            }
+            else
+            {
+                cout << "[ Erro ] Parâmetros inválidos!" << endl;
             }
 
-            media += path;
-            cout << "Custo (" << alfa << "): " << path << endl << endl;
+            break;
         }
+        case 4:
+        {
+            if((argv[1] != NULL) && (argv[1] == string("parser")) && (argv[2] != NULL) && (argv[3] != NULL))
+            {
+                parseVrpToCustomFile(string(argv[2]), string(argv[3]));
+            }
+            else
+            {
+                cout << "[ Erro ] Parâmetros inválidos!" << endl;
+            }
 
-        cout << "Custo mínimo (" << alfa << "): " << minPath << endl;
-        cout << "Custo médio (" << alfa << "): " << (media/iteration) << endl;
+            break;
+        }
+        case 5:
+        {
+            if((argv[1] != NULL) && (argv[1] == string("rand")))
+            {
+                if((argv[2] != NULL) && (argv[3] != NULL) && (argv[4] != NULL))
+                {
+                    shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>(string(argv[2]));
+
+                    float alfa = atof(argv[3]);
+                    int maxIteration = atoi(argv[4]);
+                    cout << "Custo mínimo: " << h->runRandom(alfa, maxIteration) << endl;
+                }
+                else
+                {
+                    cout << "[ Erro ] Parâmetros inválidos!" << endl;
+                }
+            }
+            else if((argv[1] != NULL) && (argv[1] == string("reat")))
+            {
+                if((argv[2] != NULL) && (argv[3] != NULL) && (argv[4] != NULL))
+                {
+                    shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>(string(argv[2]));
+
+                    float alfa = atol(argv[3]);
+                    int maxIteration = atol(argv[4]);
+
+                    cout << "Custo mínimo: " << h->runReativa(alfa, maxIteration) << endl;
+                }
+                else
+                {
+                    cout << "[ Erro ] Parâmetros inválidos!" << endl;
+                }
+            }
+
+            break;
+        }
+        default:
+        {
+                shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>("Instance/instance20.txt");
+                cout << "Custo: " << h->runReativa(50, 2500) << endl;
+        }
     }
-    else
-    {
-//        CVRPInstance *instance = FileHelper::readInstance("Instance/instance20.txt");
-//        ListaAdjacenciaVet *grafo = instance->createInstance();
-//
-//        HeuristicIMP *h = new HeuristicIMP(Randomizada, 0);
-//        cout << "Custo: " << h->run(grafo, instance->getVerticeBase(), instance->getVehicleCapacity()) << endl;
 
+    // Tempo final da execução
+    high_resolution_clock::time_point t2 = high_resolution_clock::now();
+    cout << "Tempo de execução (Segundos): " << ((float)chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() / SCALERATIO) << endl;
 
-        CVRPInstance *instance = FileHelper::readInstance("Instance/instance20.txt");
-        ListaAdjacenciaVet *grafo = instance->createInstance();
-
-        HeuristicIMP *h = new HeuristicIMP(Randomizada, 0);
-
-        cout << "Custo: " << h->run(instance) << endl;
-        h->setAlfa(0.1);
-        cout << "Custo: " <<  h->run(instance) << endl;
-        h->setAlfa(0.2);
-        cout << "Custo: " << h->run(instance) << endl;
-        h->setAlfa(0.3);
-        cout << "Custo: " <<h->run(instance) << endl;
-        h->setAlfa(0.4);
-        cout << "Custo: " << h->run(instance) << endl;
-        h->setAlfa(0.5);
-        cout << "Custo: " << h->run(instance) << endl;
-        h->setAlfa(0.6);
-        cout << "Custo: " << h->run(instance) << endl;
-
-//        int minPath = INFINITE;
-//        int media = 0;
-//
-//        int iteration = 10;
-//
-//        for(int j = 0; j < iteration; j++)
-//        {
-//            int path = h->run(instance);
-//
-//            if(path < minPath)
-//            {
-//                minPath = path;
-//            }
-//
-//            media += path;
-//            cout << "Custo (" << alfa << "): " << path << endl << endl;
-//        }
-//
-//        cout << "Custo mínimo (" << alfa << "): " << minPath << endl;
-//        cout << "Custo médio (" << alfa << "): " << (media/iteration) << endl;
-    }
-
-//    ListaAdjacenciaVet *grafo = createGrafo(15, 15, true, InsertEnd);
-//    high_resolution_clock::time_point t1 = high_resolution_clock::now();
-//    ListaAdjacenciaVet *grafo = createGrafo(300, ListOrdered);
-//    HeuristicIMP *heuristic = new HeuristicIMP(Gulosa, 1, 0);
-//    cout << "Custo: " << heuristic->run(grafo, 0, 100) << endl;
-
-//    ListaAdjacenciaVet *grafo = new ListaAdjacenciaVet(5, true, InsertOrdered);
-//
-//    grafo->addAdjacencia(0,1,1);
-//    grafo->addAdjacencia(0,2,1);
-//    grafo->addAdjacencia(0,3,1);
-//    grafo->addAdjacencia(0,4,1);
-//
-//    grafo->addAdjacencia(1,0,1);
-//    grafo->addAdjacencia(1,2,1);
-//    grafo->addAdjacencia(1,3,1);
-//    grafo->addAdjacencia(1,4,1);
-//
-//    grafo->addAdjacencia(2,0,1);
-//    grafo->addAdjacencia(2,1,1);
-//    grafo->addAdjacencia(2,3,1);
-//    grafo->addAdjacencia(2,4,1);
-//
-//    grafo->addAdjacencia(3,0,1);
-//    grafo->addAdjacencia(3,1,1);
-//    grafo->addAdjacencia(3,2,1);
-//    grafo->addAdjacencia(3,4,1);
-//
-//    grafo->addAdjacencia(4,0,1);
-//    grafo->addAdjacencia(4,1,1);
-//    grafo->addAdjacencia(4,2,1);
-//    grafo->addAdjacencia(4,3,1);
-//
-//    grafo->setVerticeWeight(0,0);
-//    grafo->setVerticeWeight(1,50);
-//    grafo->setVerticeWeight(2,40);
-//    grafo->setVerticeWeight(3,20);
-//    grafo->setVerticeWeight(4,90);
-
-//
-//    high_resolution_clock::time_point t2 = high_resolution_clock::now();
-//    int duration = chrono::duration_cast<chrono::seconds>(t2 - t1).count();
-//    cout << duration;
-
-    system("PAUSE");
-
-//    delete grafo;
     return 0;
 }

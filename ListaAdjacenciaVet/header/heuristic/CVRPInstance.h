@@ -14,9 +14,7 @@ class CVRPInstance
         int vehicleCapacity;
         int verticeBase;
 
-        ListaAdjacenciaVet *grafo;
-
-        void calcAdjacenciaWeights();
+        shared_ptr<ListaAdjacenciaVet> grafo;
     public:
         CVRPInstance();
 
@@ -29,10 +27,10 @@ class CVRPInstance
         int getVerticeBase();
         void setVerticeBase(int nodeId);
 
-        void addVerticePoint(int idVertice, Point *verticePoint);
+        void addVerticePoint(int idVertice, shared_ptr<Point> verticePoint);
         void addVerticeDemand(int idVertice, float demand);
 
-        ListaAdjacenciaVet* createInstance();
+        shared_ptr<ListaAdjacenciaVet> getInstance();
 };
 
 #endif // CVRPINSTANCE_H_INCLUDED

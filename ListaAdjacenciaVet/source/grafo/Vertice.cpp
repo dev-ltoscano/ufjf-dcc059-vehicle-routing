@@ -4,22 +4,16 @@ Vertice::Vertice()
 {
     this->weight = 0;
     this->coord = NULL;
-    this->adjacenciaList = new OrderedList<Adjacencia>();
-    this->adjInsertType = ListUnordered;
+    this->adjacenciaList = make_shared<OrderedList<Adjacencia>>();
+    this->adjInsertType = ListOrdered;
 }
 
-Vertice::~Vertice()
-{
-    delete this->coord;
-    delete this->adjacenciaList;
-}
-
-Point* Vertice::getCoord()
+shared_ptr<Point> Vertice::getCoord()
 {
     return this->coord;
 }
 
-void Vertice::setCoord(Point *coord)
+void Vertice::setCoord(shared_ptr<Point> coord)
 {
     this->coord = coord;
 }
@@ -29,7 +23,7 @@ void Vertice::setAdjListType(OperationType type)
     this->adjInsertType = type;
 }
 
-Adjacencia* Vertice::getAdjacencia(int idVertice2)
+shared_ptr<Adjacencia> Vertice::getAdjacencia(int idVertice2)
 {
     return this->adjacenciaList->getNodeInfo(idVertice2);
 }
@@ -53,7 +47,7 @@ void Vertice::addAdjacencia(int idVertice1, int idVertice2, float weight)
 {
     if(!existsAdjacencia(idVertice2))
     {
-        this->adjacenciaList->insert(idVertice2, weight, new Adjacencia(idVertice1, idVertice2, weight), this->adjInsertType);
+        this->adjacenciaList->insert(idVertice2, weight, make_shared<Adjacencia>(idVertice1, idVertice2, weight), this->adjInsertType);
     }
     else
     {
@@ -71,7 +65,7 @@ bool Vertice::existsAdjacencia(int idVertice2)
     return (this->getAdjacencia(idVertice2) != NULL);
 }
 
-OrderedList<Adjacencia>* Vertice::getAdjacenciaList()
+shared_ptr<OrderedList<Adjacencia>> Vertice::getAdjacenciaList()
 {
     return this->adjacenciaList;
 }

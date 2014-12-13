@@ -21,16 +21,19 @@ class Vehicle
 
         int getId();
 
+        // Retorna a capacidade máxima
         float getInitialCapacity();
+
+        // Retorna a capacidade atual
         float getCapacity();
 
-        // Aumenta a capacidade do veículo, caso o problema seja de coleta (Limitado à capacidade inicial)
+        // Aumenta a capacidade do veículo, caso o problema seja de coleta (Limitado à capacidade máxima)
         void addCapacity(float increase);
 
         // Diminui a capacidade do veículo, caso o problema seja de entrega
         void removeCapacity(float decrease);
 
-        // Restaura a capacidade do veículo para a capacidade inicial
+        // Restaura a capacidade do veículo para a capacidade máxima
         void resetCapacity();
 };
 

@@ -6,45 +6,6 @@ template <class G> OrderedList<G>::OrderedList()
     this->endNode = NULL;
     this->it = NULL;
 
-    this->delayedRemoveList = NULL;
-
-    this->currId = 0;
-    this->length = 0;
-}
-
-template <class G> OrderedList<G>::~OrderedList()
-{
-    this->clear();
-}
-
-template <class G> void OrderedList<G>::clear()
-{
-    // Destruindo objetos atuais
-    AbstractNodeList<G> *aux = startNode;
-
-    while(aux != NULL)
-    {
-        startNode = startNode->getNext();
-        delete aux;
-        aux = startNode;
-    }
-
-    // Destruindo objetos atrasados
-    aux = delayedRemoveList;
-
-    while(aux != NULL)
-    {
-        delayedRemoveList = delayedRemoveList->getNext();
-        delete aux;
-        aux = delayedRemoveList;
-    }
-
-    this->startNode = NULL;
-    this->endNode = NULL;
-    this->it = NULL;
-
-    this->delayedRemoveList = NULL;
-
     this->currId = 0;
     this->length = 0;
 }
@@ -79,19 +40,19 @@ template <class G> void OrderedList<G>::insert(float nodeValue, OperationType ty
     this->insert(this->currId, nodeValue, NULL, type);
 }
 
-template <class G> void OrderedList<G>::insert(G *info, OperationType type)
+template <class G> void OrderedList<G>::insert(shared_ptr<G> info, OperationType type)
 {
     this->insert(this->currId, this->currId, info, type);
 }
 
-template <class G> void OrderedList<G>::insert(float nodeValue, G *info, OperationType type)
+template <class G> void OrderedList<G>::insert(float nodeValue, shared_ptr<G> info, OperationType type)
 {
     this->insert(this->currId, nodeValue, info, type);
 }
 
-template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, G *info, OperationType type)
+template <class G> void OrderedList<G>::insert(int nodeId, float nodeValue, shared_ptr<G> info, OperationType type)
 {
-    AbstractNodeList<G> *node = new AbstractNodeList<G>(nodeId, nodeValue, info);
+    shared_ptr<AbstractNodeList<G>> node = make_shared<AbstractNodeList<G>>(nodeId, nodeValue, info);
 
     if(length == 0) // A lista está vazia
     {
@@ -188,38 +149,29 @@ template <class G> void OrderedList<G>::remove(int nodeId, OperationType type)
 
         if(it == endNode) // A adjacência é a última da lista
         {
-            AbstractNodeList<G> *aux = this->endNode;
+            shared_ptr<AbstractNodeList<G>> aux = this->endNode;
 
             aux->getPrevious()->setNext(NULL);
             this->endNode = aux->getPrevious();
-
-            aux->setNext(delayedRemoveList);
-            this->delayedRemoveList = aux;
 
             this->length--;
         }
         else if(it == startNode) // A adjacência é a primeira da lista
         {
-            AbstractNodeList<G> *aux = this->startNode;
+            shared_ptr<AbstractNodeList<G>> aux = this->startNode;
 
             aux->getNext()->setPrevious(NULL);
             this->startNode = aux->getNext();
-
-            aux->setNext(delayedRemoveList);
-            this->delayedRemoveList = aux;
 
             this->length--;
         }
         else if(it != NULL) // A adjacência é intermediária na lista
         {
-            AbstractNodeList<G> *aux = this->it;
+            shared_ptr<AbstractNodeList<G>> aux = this->it;
             it = it->getNext();
 
             aux->getPrevious()->setNext(aux->getNext());
             aux->getNext()->setPrevious(aux->getPrevious());
-
-            aux->setNext(delayedRemoveList);
-            this->delayedRemoveList = aux;
 
             this->length--;
         }
@@ -322,7 +274,7 @@ template <class G> int OrderedList<G>::getStartValue()
     return -1;
 }
 
-template <class G> G* OrderedList<G>::getStartInfo()
+template <class G> shared_ptr<G> OrderedList<G>::getStartInfo()
 {
     this->start();
 
@@ -354,7 +306,7 @@ template <class G> float OrderedList<G>::getCurrentValue()
     return -1;
 }
 
-template <class G> G* OrderedList<G>::getCurrentInfo()
+template <class G> shared_ptr<G> OrderedList<G>::getCurrentInfo()
 {
     if(it != NULL)
     {
@@ -376,7 +328,7 @@ template <class G> float OrderedList<G>::getNodeValue(int nodeId)
     return -1;
 }
 
-template <class G> G* OrderedList<G>::getNodeInfo(int nodeId)
+template <class G> shared_ptr<G> OrderedList<G>::getNodeInfo(int nodeId)
 {
     this->start();
 
@@ -393,7 +345,7 @@ template <class G> G* OrderedList<G>::getNodeInfo(int nodeId)
     return NULL;
 }
 
-template <class G> G* OrderedList<G>::get(int position)
+template <class G> shared_ptr<G> OrderedList<G>::get(int position)
 {
     int count = 0;
     this->start();
@@ -405,12 +357,7 @@ template <class G> G* OrderedList<G>::get(int position)
         this->next();
     }
 
-    if(it != NULL)
-    {
-        return it->getInfo();
-    }
-
-    return NULL;
+    return it->getInfo();
 }
 
 template class OrderedList<int>;

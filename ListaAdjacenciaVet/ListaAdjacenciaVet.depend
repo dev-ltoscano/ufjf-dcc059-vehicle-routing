@@ -4,14 +4,20 @@
 	<stdlib.h>
 	"header/ListaAdjacenciaVet.h"
 
+1414094506 staAdjacenciaVet.h"
+
 1416439505 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\listaadjacenciavet.cpp
 	"../header/ListaAdjacenciaVet.h"
 	"../header/Helper.h"
 	<algorithm>
 
+1416439505 >
+
 1416437818 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\listaadjacenciavet.h
 	<iostream>
 	"Node.h"
+
+1418258170 
 
 1416438118 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\node.h
 	<iostream>
@@ -19,13 +25,19 @@
 	"NodeInfo.h"
 	"Adjacencia.h"
 
+1416743230 a.h"
+
 1416438041 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\adjacencia.cpp
 	"../header/Adjacencia.h"
+
+1416744380 /Adjacencia.h"
 
 1416438050 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\adjacencia.h
 
 1416438309 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\node.cpp
 	"../header/Node.h"
+
+1416744477 /Node.h"
 
 1414014577 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\nodeinfo.h
 
@@ -34,8 +46,12 @@
 1414014484 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\adjacenciainfo.cpp
 	"../header/AdjacenciaInfo.h"
 
+1414014484 /AdjacenciaInfo.h"
+
 1414014605 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\nodeinfo.cpp
 	"../header/NodeInfo.h"
+
+1414014605 /NodeInfo.h"
 
 1414094506 source:c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\main.cpp
 	<iostream>
@@ -57,6 +73,8 @@
 1414012502 c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\header\adjacencia.h
 	"AdjacenciaInfo.h"
 
+1414012502 aInfo.h"
+
 1414014531 c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\header\adjacenciainfo.h
 
 1414012493 source:c:\users\usuario\dropbox\grafos\cpp\listaadjacenciavet\source\adjacencia.cpp
@@ -74,10 +92,14 @@
 1416437023 source:c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\source\helper.cpp
 	"../header/Helper.h"
 
+1417351152 /Helper.h"
+
 1416074571 c:\users\luis augusto\dropbox\grafos\cpp\listaadjacenciavet\header\helper.h
 	"ListaAdjacenciaVet.h"
 
-1418339043 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\main.cpp
+1416074571 cenciaVet.h"
+
+1418382006 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\main.cpp
 	<iostream>
 	<string>
 	<stdlib.h>
@@ -89,6 +111,8 @@
 	"header/FileHelper.h"
 	"header/heuristic/HeuristicCVRP.h"
 	"header/heuristic/HeuristicIMP.h"
+
+1418386035 uristic/HeuristicIMP.h"
 
 1416932783 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\listaadjacenciavet.h
 	"Vertice.h"
@@ -124,6 +148,8 @@
 1416767694 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\vertice.cpp
 	"../header/Vertice.h"
 
+1416767694 /Vertice.h"
+
 1416767805 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\vertice.h
 	"Adjacencia.h"
 	"OrderedList.h"
@@ -132,6 +158,8 @@
 1416756703 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\nodelist.cpp
 	"../header/NodeList.h"
 
+1416756703 /NodeList.h"
+
 1416756686 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\nodelist.h
 	"Adjacencia.h"
 	<iostream>
@@ -139,8 +167,12 @@
 1416769713 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\orderedlist.cpp
 	"../header/OrderedList.h"
 
+1416769713 /OrderedList.h"
+
 1416766769 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\orderedlist.h
 	"NodeList.h"
+
+1416766769 h"
 
 1418312185 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\filehelper.h
 	"heuristic/FloydWarshall.h"
@@ -154,8 +186,12 @@
 1418324141 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\filehelper.cpp
 	"../header/FileHelper.h"
 
+1418385724 /FileHelper.h"
+
 1418333380 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\grafo\adjacencia.cpp
 	"../../header/grafo/Adjacencia.h"
+
+1418384819 der/grafo/Adjacencia.h"
 
 1418257618 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\grafo\adjacencia.h
 	<iostream>
@@ -171,6 +207,8 @@
 	<iostream>
 	"../structure/Point.h"
 
+1418385475 ure/Point.h"
+
 1416766769 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\orderedlist.h
 	"NodeList.h"
 
@@ -178,42 +216,62 @@
 	"../grafo/Adjacencia.h"
 	<iostream>
 
-1418338901 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\grafo\listaadjacenciavet.cpp
+1418348381 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\grafo\listaadjacenciavet.cpp
 	"../../header/grafo/ListaAdjacenciaVet.h"
 	"../../header/Helper.h"
+
+1418385634 der/Helper.h"
 
 1418313536 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\grafo\vertice.cpp
 	"../../header/grafo/Vertice.h"
 
+1418385648 der/grafo/Vertice.h"
+
 1417042113 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\nodelist.cpp
 	"../../header/structure/NodeList.h"
+
+1417042113 der/structure/NodeList.h"
 
 1417043556 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\orderedlist.cpp
 	"../../header/structure/OrderedList.h"
 
+1417043556 der/structure/OrderedList.h"
+
 1417108997 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\nodelist.cpp
 	"../../../header/structure/list/NodeList.h"
+
+1417108997 header/structure/list/NodeList.h"
 
 1417110084 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\nodelist.h
 	"../../grafo/Adjacencia.h"
 	<iostream>
 
-1418333363 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\orderedlist.cpp
+1418381520 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\orderedlist.cpp
 	"../../../header/structure/list/OrderedList.h"
+
+1418384923 header/structure/list/OrderedList.h"
 
 1418324642 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\orderedlist.h
 	"AbstractNodeList.h"
 
+1418385165 odeList.h"
+
 1417107086 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\searchadjweight.cpp
 	"../../../header/structure/list/SearchAdjWeight.h"
 
+1417107086 header/structure/list/SearchAdjWeight.h"
+
 1417107924 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\searchadjweight.h
 	"ISearchCriteria.h"
+
+1417107924 iteria.h"
 
 1417106699 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\isearchcriteria.h
 
 1417687469 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\abstractnodelist.cpp
 	"../../../header/structure/list/AbstractNodeList.h"
+
+1418384360 header/structure/list/AbstractNodeList.h"
 
 1418257081 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\abstractnodelist.h
 	"../../grafo/Adjacencia.h"
@@ -222,6 +280,8 @@
 
 1417114067 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\adjnodelist.cpp
 	"../../../header/structure/list/AdjNodeList.h"
+
+1417114067 header/structure/list/AdjNodeList.h"
 
 1417113579 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\adjnodelist.h
 	"../../grafo/Adjacencia.h"
@@ -237,8 +297,12 @@
 1417460834 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\floydwarshall.cpp
 	"../../header/heuristic/FloydWarshall.h"
 
+1418059870 der/heuristic/FloydWarshall.h"
+
 1418257961 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\vehicle.cpp
 	"../../header/heuristic/Vehicle.h"
+
+1418257961 der/heuristic/Vehicle.h"
 
 1418258170 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\vehicle.h
 	<iostream>
@@ -276,6 +340,8 @@
 	"AbstractNodeList.h"
 	"../../Helper.h"
 
+1418059869 per.h"
+
 1417647372 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\abstractnodelist.h
 	"../../grafo/Adjacencia.h"
 	"../../Helper.h"
@@ -283,6 +349,8 @@
 
 1418144702 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\helper.h
 	"grafo/Adjacencia.h"
+
+1418059868 acencia.h"
 
 1417560942 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\filehelper.h
 	"heuristic/FloydWarshall.h"
@@ -302,6 +370,8 @@
 	"Vehicle.h"
 	"../structure/list/OrderedList.h"
 	<cmath>
+
+1418059868 ure/list/OrderedList.h"
 
 1417560942 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\vehicle.h
 	<iostream>
@@ -324,6 +394,8 @@
 1418144702 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\heuristiccvrp.cpp
 	"../../header/heuristic/HeuristicCVRP.h"
 
+1418059870 der/heuristic/HeuristicCVRP.h"
+
 1417560942 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\vehicle.cpp
 	"../../header/heuristic/Vehicle.h"
 
@@ -333,6 +405,8 @@
 
 1418152251 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\heuristicimp.cpp
 	"../../header/heuristic/HeuristicIMP.h"
+
+1418386100 der/heuristic/HeuristicIMP.h"
 
 1418144702 c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\heuristicimp.h
 	"../structure/list/OrderedList.h"
@@ -347,10 +421,10 @@
 1418147553 source:c:\users\usuario\documents\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\orderedlist.cpp
 	"../../../header/structure/list/OrderedList.h"
 
-1418339019 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\heuristicimp.cpp
+1418381895 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\heuristicimp.cpp
 	"../../header/heuristic/HeuristicIMP.h"
 
-1418332656 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\heuristicimp.h
+1418382699 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\heuristicimp.h
 	"../structure/list/OrderedList.h"
 	"../grafo/ListaAdjacenciaVet.h"
 	"Vehicle.h"
@@ -463,6 +537,8 @@
 1418323051 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\structure\point.cpp
 	"../../header/structure/Point.h"
 
+1418385780 der/structure/Point.h"
+
 1418323067 c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\header\structure\point.h
 	<iostream>
 	<cmath>
@@ -473,4 +549,363 @@
 
 1418338138 source:c:\users\luis augusto\dropbox\grafos\git\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\cvrpinstance.cpp
 	"../../header/heuristic/CVRPInstance.h"
+
+1418385922 der/heuristic/CVRPInstance.h"
+
+1418386035 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\main.cpp
+	<iostream>
+	<string>
+	<stdlib.h>
+	<locale>
+	<chrono>
+	"header/grafo/ListaAdjacenciaVet.h"
+	"header/structure/list/OrderedList.h"
+	"header/Helper.h"
+	"header/FileHelper.h"
+	"header/heuristic/HeuristicCVRP.h"
+	"header/heuristic/HeuristicIMP.h"
+
+1418385625 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\grafo\listaadjacenciavet.h
+	"Vertice.h"
+	"../structure/Point.h"
+	<iostream>
+
+1418385475 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\grafo\vertice.h
+	"Adjacencia.h"
+	"../structure/list/OrderedList.h"
+	<iostream>
+	"../structure/Point.h"
+
+1418384809 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\grafo\adjacencia.h
+	<iostream>
+	<memory>
+
+1418385165 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\orderedlist.h
+	"AbstractNodeList.h"
+
+1418384366 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\structure\list\abstractnodelist.h
+	"../../grafo/Adjacencia.h"
+	"../../Helper.h"
+	<iostream>
+	<memory>
+
+1418325845 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\helper.h
+	"grafo/Adjacencia.h"
+	<climits>
+
+1418385750 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\structure\point.h
+	<iostream>
+	<memory>
+	<cmath>
+
+1418385314 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\filehelper.h
+	"heuristic/FloydWarshall.h"
+	"heuristic/CVRPInstance.h"
+	"grafo/ListaAdjacenciaVet.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+
+1417460814 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\floydwarshall.h
+	"../grafo/ListaAdjacenciaVet.h"
+	"../Helper.h"
+	<climits>
+	<string>
+	<sstream>
+
+1418385903 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\cvrpinstance.h
+	"../grafo/ListaAdjacenciaVet.h"
+	<iostream>
+
+1418252786 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\heuristiccvrp.h
+
+1418385861 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\heuristicimp.h
+	"../structure/list/OrderedList.h"
+	"../grafo/ListaAdjacenciaVet.h"
+	"Vehicle.h"
+	"../Helper.h"
+	"CVRPInstance.h"
+	<iostream>
+	<cstdlib>
+	<ctime>
+
+1418258170 c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\header\heuristic\vehicle.h
+	<iostream>
+
+1418385724 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\filehelper.cpp
+	"../header/FileHelper.h"
+
+1418384819 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\grafo\adjacencia.cpp
+	"../../header/grafo/Adjacencia.h"
+
+1418385634 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\grafo\listaadjacenciavet.cpp
+	"../../header/grafo/ListaAdjacenciaVet.h"
+	"../../header/Helper.h"
+
+1418385648 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\grafo\vertice.cpp
+	"../../header/grafo/Vertice.h"
+
+1417351152 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\helper.cpp
+	"../header/Helper.h"
+
+1418385922 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\cvrpinstance.cpp
+	"../../header/heuristic/CVRPInstance.h"
+
+1418384603 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\floydwarshall.cpp
+
+1418252774 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\heuristiccvrp.cpp
+
+1418386100 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\heuristicimp.cpp
+	"../../header/heuristic/HeuristicIMP.h"
+
+1418257961 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\heuristic\vehicle.cpp
+	"../../header/heuristic/Vehicle.h"
+
+1418384360 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\abstractnodelist.cpp
+	"../../../header/structure/list/AbstractNodeList.h"
+
+1418384923 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\structure\list\orderedlist.cpp
+	"../../../header/structure/list/OrderedList.h"
+
+1418385780 source:c:\users\luis augusto\desktop\grafotest\grafoslistaadjacencia\listaadjacenciavet\source\structure\point.cpp
+	"../../header/structure/Point.h"
+
+1418424288 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/main.cpp
+	<iostream>
+	<string>
+	<stdlib.h>
+	<locale>
+	<chrono>
+	<vector>
+	"header/grafo/ListaAdjacenciaVet.h"
+	"header/structure/list/OrderedList.h"
+	"header/Helper.h"
+	"header/FileHelper.h"
+	"header/heuristic/HeuristicCVRP.h"
+	"header/heuristic/HeuristicIMP.h"
+
+1418423903 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/grafo/ListaAdjacenciaVet.h
+	"Vertice.h"
+	"../structure/Point.h"
+	<iostream>
+	<vector>
+
+1418422943 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/grafo/Vertice.h
+	"Adjacencia.h"
+	"../structure/list/OrderedList.h"
+	<iostream>
+	"../structure/Point.h"
+
+1418384809 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/grafo/Adjacencia.h
+	<iostream>
+	<memory>
+
+1418418477 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/structure/list/OrderedList.h
+	"AbstractNodeList.h"
+
+1418394788 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/structure/list/AbstractNodeList.h
+	"../../grafo/Adjacencia.h"
+	"../../Helper.h"
+	<iostream>
+	<memory>
+
+1418419109 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/Helper.h
+	<climits>
+
+1418385750 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/structure/Point.h
+	<iostream>
+	<memory>
+	<cmath>
+
+1418417421 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/FileHelper.h
+	"heuristic/FloydWarshall.h"
+	"heuristic/CVRPInstance.h"
+	"grafo/ListaAdjacenciaVet.h"
+	<iostream>
+	<fstream>
+	<string>
+
+1417460814 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/heuristic/FloydWarshall.h
+	"../grafo/ListaAdjacenciaVet.h"
+	"../Helper.h"
+	<climits>
+	<string>
+	<sstream>
+
+1418419850 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/heuristic/CVRPInstance.h
+	"../grafo/ListaAdjacenciaVet.h"
+	<iostream>
+
+1418252786 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/heuristic/HeuristicCVRP.h
+
+1418424561 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/heuristic/HeuristicIMP.h
+	"../structure/list/OrderedList.h"
+	"../grafo/ListaAdjacenciaVet.h"
+	"Vehicle.h"
+	"../Helper.h"
+	"CVRPInstance.h"
+	"../FileHelper.h"
+	<iostream>
+	<string>
+	<cstdlib>
+	<ctime>
+	<vector>
+
+1418258170 /home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/header/heuristic/Vehicle.h
+	<iostream>
+
+1418418971 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/FileHelper.cpp
+	"../header/FileHelper.h"
+
+1418387832 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/grafo/Adjacencia.cpp
+	"../../header/grafo/Adjacencia.h"
+
+1418423911 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/grafo/ListaAdjacenciaVet.cpp
+	"../../header/grafo/ListaAdjacenciaVet.h"
+	"../../header/Helper.h"
+
+1418423002 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/grafo/Vertice.cpp
+	"../../header/grafo/Vertice.h"
+
+1417351152 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/Helper.cpp
+	"../header/Helper.h"
+
+1418419809 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/heuristic/CVRPInstance.cpp
+	"../../header/heuristic/CVRPInstance.h"
+
+1418384603 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/heuristic/FloydWarshall.cpp
+
+1418252774 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/heuristic/HeuristicCVRP.cpp
+
+1418424593 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/heuristic/HeuristicIMP.cpp
+	"../../header/heuristic/HeuristicIMP.h"
+
+1418257961 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/heuristic/Vehicle.cpp
+	"../../header/heuristic/Vehicle.h"
+
+1418394842 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/structure/list/AbstractNodeList.cpp
+	"../../../header/structure/list/AbstractNodeList.h"
+
+1418419637 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/structure/list/OrderedList.cpp
+	"../../../header/structure/list/OrderedList.h"
+
+1418419168 source:/home/ubuntu/Área de Trabalho/ListaAdjacenciaVet/source/structure/Point.cpp
+	"../../header/structure/Point.h"
+
+1418511771 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\main.cpp
+	<iostream>
+	<string>
+	<cstdlib>
+	<locale>
+	<chrono>
+	"header/FileHelper.h"
+	"header/heuristic/HeuristicIMP.h"
+
+1418509683 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\grafo\listaadjacenciavet.h
+	"Vertice.h"
+	"../structure/Point.h"
+	<iostream>
+	<vector>
+
+1418422943 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\grafo\vertice.h
+	"Adjacencia.h"
+	"../structure/list/OrderedList.h"
+	<iostream>
+	"../structure/Point.h"
+
+1418504301 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\grafo\adjacencia.h
+	<iostream>
+	<memory>
+
+1418432970 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\structure\list\orderedlist.h
+	"AbstractNodeList.h"
+
+1418432988 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\structure\list\abstractnodelist.h
+	"../../grafo/Adjacencia.h"
+	"../../Helper.h"
+	<iostream>
+	<memory>
+
+1418512031 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\helper.h
+	<iostream>
+	<climits>
+
+1418469076 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\structure\point.h
+	"../Helper.h"
+	<iostream>
+	<memory>
+	<cmath>
+
+1418432665 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\filehelper.h
+	"heuristic/CVRPInstance.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<cstring>
+
+1418509470 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\heuristic\floydwarshall.h
+	"../grafo/ListaAdjacenciaVet.h"
+	"../Helper.h"
+	<climits>
+	<string>
+	<sstream>
+	<memory>
+
+1418419850 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\heuristic\cvrpinstance.h
+	"../grafo/ListaAdjacenciaVet.h"
+	<iostream>
+
+1418252786 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\heuristic\heuristiccvrp.h
+
+1418478803 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\heuristic\heuristicimp.h
+	"../Helper.h"
+	"../FileHelper.h"
+	"../structure/list/OrderedList.h"
+	"Vehicle.h"
+	"CVRPInstance.h"
+	"../grafo/ListaAdjacenciaVet.h"
+	<iostream>
+	<cstdlib>
+	<vector>
+
+1418433055 c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\header\heuristic\vehicle.h
+	<iostream>
+
+1418437179 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\filehelper.cpp
+	"../header/FileHelper.h"
+
+1418504020 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\grafo\adjacencia.cpp
+	"../../header/grafo/Adjacencia.h"
+
+1418509925 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\grafo\listaadjacenciavet.cpp
+	"../../header/grafo/ListaAdjacenciaVet.h"
+	"../../header/Helper.h"
+
+1418474925 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\grafo\vertice.cpp
+	"../../header/grafo/Vertice.h"
+
+1417351152 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\helper.cpp
+	"../header/Helper.h"
+
+1418419809 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\heuristic\cvrpinstance.cpp
+	"../../header/heuristic/CVRPInstance.h"
+
+1418473427 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\heuristic\floydwarshall.cpp
+	"../../header/heuristic/FloydWarshall.h"
+
+1418509590 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\heuristic\heuristicimp.cpp
+	"../../header/heuristic/HeuristicIMP.h"
+
+1418472882 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\heuristic\vehicle.cpp
+	"../../header/heuristic/Vehicle.h"
+
+1418394842 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\structure\list\abstractnodelist.cpp
+	"../../../header/structure/list/AbstractNodeList.h"
+
+1418471643 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\structure\list\orderedlist.cpp
+	"../../../header/structure/list/OrderedList.h"
+
+1418469061 source:c:\users\luis augusto\desktop\ufjf\grafotest\listaadjacenciavet\source\structure\point.cpp
+	"../../header/structure/Point.h"
 

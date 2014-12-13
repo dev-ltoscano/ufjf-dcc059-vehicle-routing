@@ -16,7 +16,7 @@ float Point::getCoordY()
     return this->y;
 }
 
-float Point::getDistance(Point *p2)
+float Point::getDistance(shared_ptr<Point> p2)
 {
     if(p2 != NULL)
     {
@@ -24,15 +24,19 @@ float Point::getDistance(Point *p2)
         return sqrt(pow((p2->getCoordX() - this->x), 2) + pow((p2->getCoordY() - this->y), 2));
     }
 
-    return 0;
+    cout << "[ Erro ]: Não foi possível encontrar a distância entre dois pontos" << endl;
+
+    return INFINITE;
 }
 
-bool Point::equals(Point *p2)
+bool Point::equals(shared_ptr<Point> p2)
 {
     if(p2 != NULL)
     {
         return ((p2->getCoordX() == this->x) && (p2->getCoordY() == this->y));
     }
+
+    cout << "[ Erro ]: Não foi possível verificar se dois pontos são iguais" << endl;
 
     return false;
 }

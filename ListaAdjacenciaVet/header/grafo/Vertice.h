@@ -16,16 +16,16 @@ class Vertice
 {
     private:
         float weight; // Peso do vértice
-        Point *coord; // Coordenada do vértice
+        shared_ptr<Point> coord; // Coordenada do vértice
         OperationType adjInsertType; // Tipo de operação de inserção e remoção da lista de adjacências
 
-        OrderedList<Adjacencia> *adjacenciaList; // Lista de adjacências do vértice
+        shared_ptr<OrderedList<Adjacencia>> adjacenciaList; // Lista de adjacências do vértice
     public:
         Vertice();
-        ~Vertice();
+//        ~Vertice();
 
-        Point* getCoord();
-        void setCoord(Point *coord);
+        shared_ptr<Point> getCoord();
+        void setCoord(shared_ptr<Point> coord);
 
         void setAdjListType(OperationType type);
 
@@ -36,8 +36,8 @@ class Vertice
         void addAdjacencia(int idVertice1, int idVertice2, float weight);
         void removeAdjacencia(int idVertice2);
         bool existsAdjacencia(int idVertice2);
-        Adjacencia* getAdjacencia(int idVertice2);
-        OrderedList<Adjacencia> *getAdjacenciaList();
+        shared_ptr<Adjacencia> getAdjacencia(int idVertice2);
+        shared_ptr<OrderedList<Adjacencia>> getAdjacenciaList();
 };
 
 #endif // VERTICE_H_INCLUDED

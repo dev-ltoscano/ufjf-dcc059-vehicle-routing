@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -40,7 +41,6 @@
 		<Unit filename="header/grafo/Vertice.h" />
 		<Unit filename="header/heuristic/CVRPInstance.h" />
 		<Unit filename="header/heuristic/FloydWarshall.h" />
-		<Unit filename="header/heuristic/HeuristicCVRP.h" />
 		<Unit filename="header/heuristic/HeuristicIMP.h" />
 		<Unit filename="header/heuristic/Vehicle.h" />
 		<Unit filename="header/structure/Point.h" />
@@ -54,7 +54,6 @@
 		<Unit filename="source/grafo/Vertice.cpp" />
 		<Unit filename="source/heuristic/CVRPInstance.cpp" />
 		<Unit filename="source/heuristic/FloydWarshall.cpp" />
-		<Unit filename="source/heuristic/HeuristicCVRP.cpp" />
 		<Unit filename="source/heuristic/HeuristicIMP.cpp" />
 		<Unit filename="source/heuristic/Vehicle.cpp" />
 		<Unit filename="source/structure/Point.cpp" />

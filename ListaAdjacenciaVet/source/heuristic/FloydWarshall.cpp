@@ -1,6 +1,6 @@
 #include "../../header/heuristic/FloydWarshall.h"
 
-float FloydWarshall::getAdjWeight(Vertice *verticeList, int idVertice1, int idVertice2)
+float FloydWarshall::getAdjacenciaWeight(shared_ptr<ListaAdjacenciaVet> grafo, int idVertice1, int idVertice2)
 {
     if(idVertice1 == idVertice2)
     {
@@ -8,8 +8,12 @@ float FloydWarshall::getAdjWeight(Vertice *verticeList, int idVertice1, int idVe
     }
     else
     {
-        Adjacencia *verticeAdj = verticeList[idVertice1].getAdjacencia(idVertice2);
-        return (verticeAdj != NULL) ? verticeAdj->getWeight() : INFINITE;
+        if(grafo->existsAdjacencia(idVertice1, idVertice2))
+        {
+            return grafo->getAdjacencia(idVertice1, idVertice2)->getWeight();
+        }
+
+        return INFINITE;
     }
 }
 
@@ -86,20 +90,18 @@ void FloydWarshall::printShortestPath(Floyd floyd, int i, int j)
     }
 }
 
-Floyd FloydWarshall::get(ListaAdjacenciaVet *grafo)
+Floyd FloydWarshall::get(shared_ptr<ListaAdjacenciaVet> grafo)
 {
     Floyd floyd;
     int **pij = Helper::initializeIntegerMatriz(grafo->getVerticeCount());
     float **dij = Helper::initializeFloatMatriz(grafo->getVerticeCount());
-//    float **vij = Helper::initializeFloatMatriz(grafo->getVerticeCount());
 
     for(int i = 0; i < grafo->getVerticeCount(); i++)
     {
         for(int j = 0; j < grafo->getVerticeCount(); j++)
         {
             pij[i][j] = -1;
-            dij[i][j] = getAdjWeight(grafo->getVerticeList(), i, j);
-//            vij[i][j] = grafo->getVerticeWeight(j);
+            dij[i][j] = getAdjacenciaWeight(grafo, i, j);
         }
     }
 
@@ -120,7 +122,6 @@ Floyd FloydWarshall::get(ListaAdjacenciaVet *grafo)
                 if(dij[i][j] > dikj)
                 {
                     pij[i][j] = k;
-//                    vij[i][j] = vij[i][k] + vij[k][j];
                     dij[i][j] = dikj;
                 }
             }
@@ -129,7 +130,6 @@ Floyd FloydWarshall::get(ListaAdjacenciaVet *grafo)
 
     floyd.pij = pij;
     floyd.dij = dij;
-//    floyd.vij = vij;
 
     return floyd;
 }

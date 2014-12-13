@@ -13,33 +13,27 @@ enum OperationType
 };
 
 /**
-*   Classe que implementa uma lista duplamente encadeada
-*   com a possibilidade de inserções ordenadas
+*   Lista duplamente encadeada com a possibilidade de inserções ordenadas
 **/
 template <class G> class OrderedList
 {
     private:
-        AbstractNodeList<G> *startNode; // Nó inicial da lista
-        AbstractNodeList<G> *endNode; // Nó final da lista
-        AbstractNodeList<G> *it; // Nó atual da iteração
-
-        AbstractNodeList<G> *delayedRemoveList; // Remoção atrasada devido a informação guardada em um nó ser um ponteiro de um objeto
+        shared_ptr<AbstractNodeList<G>> startNode; // Nó inicial da lista
+        shared_ptr<AbstractNodeList<G>> endNode; // Nó final da lista
+        shared_ptr<AbstractNodeList<G>> it; // Nó atual da iteração
 
         int currId; // Ids automáticos
         int length; // Tamanho da lista
 
         void searchById(int nodeId); // Auxilia na remoção de um nó colocando o iterador na posição correta
         void searchByValue(float nodeValue); // Auxilia na inserção ordenada colocando o iterador na posição correta
-
-        void clear(); // Limpa a lista
     public:
         OrderedList();
-        ~OrderedList();
 
         void insert(float nodeValue, OperationType type);
-        void insert(G *info, OperationType type);
-        void insert(float nodeValue, G *info, OperationType type);
-        void insert(int nodeId, float nodeValue, G *info, OperationType type);
+        void insert(shared_ptr<G> info, OperationType type);
+        void insert(float nodeValue, shared_ptr<G> info, OperationType type);
+        void insert(int nodeId, float nodeValue, shared_ptr<G> info, OperationType type);
 
         void remove(int nodeId);
         void remove(OperationType type);
@@ -58,16 +52,16 @@ template <class G> class OrderedList
 
         int getStartId(); // Retorna o id do nó inicial
         int getStartValue(); // Retorna o valor do nó inicial
-        G* getStartInfo(); // Retorna o objeto guardado pelo nó inicial
+        shared_ptr<G> getStartInfo(); // Retorna o objeto guardado pelo nó inicial
 
         int getCurrentId(); // Retorna o id da posição atual do iterador
         float getCurrentValue(); // Retorna o valor da posição atual do iterador
-        G* getCurrentInfo(); // Retorna o objeto guardado pela posição atual do iterador
+        shared_ptr<G> getCurrentInfo(); // Retorna o objeto guardado pela posição atual do iterador
 
         float getNodeValue(int nodeId); // Busca pelo id do nó e retorna seu valor
-        G* getNodeInfo(int nodeId); // Busca pelo id do nó e retorna seu objeto guardado
+        shared_ptr<G> getNodeInfo(int nodeId); // Busca pelo id do nó e retorna seu objeto guardado
 
-        G* get(int position); // Retorna o objeto guardado na posição
+        shared_ptr<G> get(int position); // Retorna o objeto guardado na posição
 };
 
 #endif // ORDEREDLIST_H_INCLUDED
