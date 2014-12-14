@@ -94,6 +94,9 @@ float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
 
     vector<float> alfaProbList;
     alfaProbList.assign(10, 0.1);
+
+    vector<float> sumCount;
+    sumCount.assign(10,0);
 //
 //
 //    int iteration = 0;
@@ -193,6 +196,7 @@ float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
         for(int i = 0; i < 10; i++)
         {
             sumCost += alfaSumCostList[i];
+            sumCount[pos] += alfaSumCostList[i];
         }
 
         // Nova média do alfa
@@ -250,6 +254,24 @@ float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
     cout << "Melhor alfa: " << alfaList[pos] << endl;
     cout << "Custo mínimo para o alfa: " << alfaSumCostList[pos] << endl;
     cout << "Menor custo: " << alfaList[minPos] << endl;
+
+    cout << "Parte Genial do IGOR" << endl;
+    float sum = 0;
+    float sum2 = 0;
+    for(int i = 0; i < 10; i++)
+    {
+        alfaAverageList[i] = (sumCount[i] / alfaCountList[i]);
+    }
+    for(int i = 0; i < 10; i++){
+        sum += alfaAverageList[i];
+    }
+    for(int i = 0; i < 10; i ++){
+        alfaProbList[i] = (alfaAverageList[i] / sum);
+        sum2 += alfaProbList[i];
+        cout << alfaProbList[i] << endl;
+    }
+    cout << "SUM2: " << sum2 << endl;
+
     return alfaSumCostList[minPos];
 }
 

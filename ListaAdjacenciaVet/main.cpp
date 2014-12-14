@@ -216,7 +216,7 @@ int main(int argc, char *argv[])
         }
         default:
         {
-                shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>("Instance/instance20.txt");
+                shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>("Instance/instance101.txt");
                 cout << "Custo: " << h->runReativa(50, 2500) << endl;
         }
     }
