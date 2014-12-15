@@ -27,6 +27,7 @@ class Adjacencia
         float getWeight();
         void setWeight(float weight);
 
+        // Verifica se duas adjacências são iguais
         bool equals(int idVertice1, int idVertice2);
         bool equals(shared_ptr<Adjacencia> adj);
 };

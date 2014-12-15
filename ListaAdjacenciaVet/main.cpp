@@ -4,45 +4,24 @@
 #include <locale>
 #include <chrono>
 
-//#include "header/grafo/ListaAdjacenciaVet.h"
-//#include "header/structure/list/OrderedList.h"
-//#include "header/Helper.h"
 #include "header/FileHelper.h"
 #include "header/heuristic/HeuristicIMP.h"
 
 using namespace std;
 using namespace std::chrono;
 
-ListaAdjacenciaVet* createGrafo(int maxNodes, OperationType type)
-{
-    ListaAdjacenciaVet *grafo = new ListaAdjacenciaVet(maxNodes, true, type);
-
-    for(int i = 0; i < maxNodes; i++)
-    {
-        for(int j = 0; j < maxNodes; j++)
-        {
-            if(i != j)
-            {
-                grafo->addAdjacencia(i, j, rand() % 100);
-            }
-        }
-    }
-
-    for(int i = 1; i < maxNodes; i++)
-    {
-        grafo->setVerticeWeight(i, rand() % 100);
-    }
-
-    grafo->setVerticeWeight(0, 0);
-
-    return grafo;
-}
-
+/**
+*   Converte o padrão de arquivos das instâncias (*.vrp) para um padrão próprio em (*.txt)
+*
+*   @param inputFile - Arquivo de entrada *.vrp
+*   @param outputFile - Arquivo de saída *.txt
+**/
 void parseVrpToCustomFile(string inputFile, string outputFile)
 {
     ifstream streamFile;
     streamFile.open(inputFile.c_str());
 
+    // Verifica se o arquivo de entrada foi aberto
     if (!streamFile.is_open())
     {
         cout << endl << "[ Erro ]: Não foi possível abrir o arquivo" << endl;
@@ -52,6 +31,7 @@ void parseVrpToCustomFile(string inputFile, string outputFile)
         ofstream instance;
         instance.open(outputFile.c_str());
 
+        // Verifica se o arquivo de saída foi criado
         if(!instance.is_open())
             cout << endl << "[ Erro ]: Não foi possível criar o arquivo da instância" << endl;
         else
@@ -64,8 +44,11 @@ void parseVrpToCustomFile(string inputFile, string outputFile)
             instance << "END_SECTION" << endl;
 
             string txtLine;
+
+            // Lê linha a linha o arquivo de entrada
             while (getline(streamFile, txtLine))
             {
+                // Escreve no arquivo de saída as seções correspondentes
                 if(txtLine == "NODE_COORD_SECTION")
                 {
                     instance << "NODE_COORD_SECTION" << endl;
@@ -134,7 +117,12 @@ void parseVrpToCustomFile(string inputFile, string outputFile)
             instance << "END_FILE" << endl;
             cout << "===== END PARSING =====" << endl << endl;
         }
+
+        instance.flush();
+        instance.close();
     }
+
+    streamFile.close();
 }
 
 int main(int argc, char *argv[])
@@ -148,8 +136,10 @@ int main(int argc, char *argv[])
     // Semeia o gerador rand()
     srand(time(NULL));
 
+    // Verifica os parâmetros de entrada do console
     switch(argc)
     {
+        // Gerar solução gulosa
         case 3:
         {
             cout << (argv[1] == string("gulosa")) << endl;
@@ -165,6 +155,7 @@ int main(int argc, char *argv[])
 
             break;
         }
+        // Fazer parser de um arquivo *.vrp para padrão próprio
         case 4:
         {
             if((argv[1] != NULL) && (argv[1] == string("parser")) && (argv[2] != NULL) && (argv[3] != NULL))
@@ -178,8 +169,10 @@ int main(int argc, char *argv[])
 
             break;
         }
+        // Gerar solução randomizada ou reativa
         case 5:
         {
+            // Solução randomizada
             if((argv[1] != NULL) && (argv[1] == string("rand")))
             {
                 if((argv[2] != NULL) && (argv[3] != NULL) && (argv[4] != NULL))
@@ -195,6 +188,7 @@ int main(int argc, char *argv[])
                     cout << "[ Erro ] Parâmetros inválidos!" << endl;
                 }
             }
+            //Solução reativa
             else if((argv[1] != NULL) && (argv[1] == string("reat")))
             {
                 if((argv[2] != NULL) && (argv[3] != NULL) && (argv[4] != NULL))
@@ -204,7 +198,7 @@ int main(int argc, char *argv[])
                     float alfa = atol(argv[3]);
                     int maxIteration = atol(argv[4]);
 
-                    cout << "Custo mínimo: " << h->runReativa(alfa, maxIteration) << endl;
+                    cout << "Custo mínimo: " << h->runReativa("Results/" + string(argv[2]), alfa, maxIteration) << endl;
                 }
                 else
                 {
@@ -216,8 +210,7 @@ int main(int argc, char *argv[])
         }
         default:
         {
-                shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>("Instance/instance101.txt");
-                cout << "Custo: " << h->runReativa(50, 2500) << endl;
+            cout << "[ Erro ]: Nenhum comando válido!" << endl;
         }
     }
 

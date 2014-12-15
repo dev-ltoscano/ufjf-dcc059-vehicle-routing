@@ -33,6 +33,7 @@ bool Point::equals(shared_ptr<Point> p2)
 {
     if(p2 != NULL)
     {
+        // Compara as coordenadas dos pontos
         return ((p2->getCoordX() == this->x) && (p2->getCoordY() == this->y));
     }
 

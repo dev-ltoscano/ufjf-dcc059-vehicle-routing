@@ -8,6 +8,7 @@ ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected, Operat
     this->verticeCount = verticeCount;
     this->isDirected = isDirected;
 
+    // Inicializa o vetor de vértices
     for(int i = 0; i < verticeCount; i++)
     {
         this->verticeList.push_back(make_shared<Vertice>());
@@ -23,24 +24,30 @@ bool ListaAdjacenciaVet::depth(bool *visited)
 {
     if((this->verticeCount > 0) && (visited != NULL))
     {
+        // Marca todos como não visitado
         for(int i = 0; i < this->verticeCount; i++)
         {
             visited[i] = false;
         }
 
+        // Para cada vértice do grafo
         for(int i = 0; i < this->verticeCount; i++)
         {
-            shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[i]).getAdjacenciaList(); // Pega a lista de adjacência do nó
-            verticeAdjList->start();
+            // Pega a lista de adjacência do nó
+            shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[i]).getAdjacenciaList();
 
+            verticeAdjList->start();
             while(!verticeAdjList->isEnd())
             {
                 shared_ptr<Adjacencia> verticeAdj = verticeAdjList->getCurrentInfo();
                 verticeAdjList->next();
+
+                // Marca como visitado
                 visited[verticeAdj->getIdVertice1()] = true;
             }
         }
 
+        // Verifica se todos os nós foram visitados
         for(int i = 0; i < this->verticeCount; i++)
         {
             if(!visited[i])
@@ -60,12 +67,15 @@ bool ListaAdjacenciaVet::depth(int s, int d)
 
     bool *visited = new bool[this->verticeCount];
 
+    // Marca todos como não visitado
     for(int i = 0; i < this->verticeCount; i++)
     {
         visited[i] = false;
     }
 
     visited[s] = true;
+
+    // Usando a lista como uma fila
     OrderedList<int> queue1;
     queue1.insert(s, ListEnd);
 
@@ -74,7 +84,8 @@ bool ListaAdjacenciaVet::depth(int s, int d)
         s = queue1.getStartId();
         queue1.remove(ListStart);
 
-        shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[s]).getAdjacenciaList(); // Pega a lista de adjacência do nó
+        // Pega a lista de adjacência do nó
+        shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[s]).getAdjacenciaList();
         verticeAdjList->start();
 
         while(!verticeAdjList->isEnd())
@@ -87,7 +98,10 @@ bool ListaAdjacenciaVet::depth(int s, int d)
 
             if(!visited[verticeAdj->getIdVertice2()])
             {
+                // Marca o nó atual como visitado
                 visited[verticeAdj->getIdVertice1()] = true;
+
+                // Insere na fila o adjacente
                 queue1.insert(verticeAdj->getIdVertice2(), ListEnd);
             }
         }
@@ -172,12 +186,15 @@ void ListaAdjacenciaVet::addAdjacencia(int idVertice1, int idVertice2, float wei
 {
     if(existsVertice(idVertice1) && existsVertice(idVertice2))
     {
+        // Se o grafo é direcionado
         if(isDirected)
         {
+            // Insere apenas o arco (id1, id2)
             (*this->verticeList[idVertice1]).addAdjacencia(idVertice1, idVertice2, weight);
         }
         else
         {
+            // Caso contrário, arco de ida e volta
             (*this->verticeList[idVertice1]).addAdjacencia(idVertice1, idVertice2, weight);
             (*this->verticeList[idVertice2]).addAdjacencia(idVertice2, idVertice1, weight);
         }
@@ -192,12 +209,15 @@ void ListaAdjacenciaVet::removeAdjacencia(int idVertice1, int idVertice2)
 {
     if(existsVertice(idVertice1) && existsVertice(idVertice2))
     {
+        // Se o grafo é direcionado
         if(isDirected)
         {
+            // Remover o arco (id1, id2)
             (*this->verticeList[idVertice1]).removeAdjacencia(idVertice2);
         }
         else
         {
+            // Caso contrário remover ida e volta
             (*this->verticeList[idVertice1]).removeAdjacencia(idVertice2);
             (*this->verticeList[idVertice2]).removeAdjacencia(idVertice1);
         }

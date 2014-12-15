@@ -7,14 +7,17 @@
 
 using namespace std;
 
+/**
+*   Classe que representa uma instância do problema CVRP
+**/
 class CVRPInstance
 {
     private:
-        int verticeCount;
-        int vehicleCapacity;
-        int verticeBase;
+        int verticeCount; // Quantidade de vértices da instância
+        int vehicleCapacity; // Capacidade do veículo utilizado
+        int verticeBase; // Id do vértice da base
 
-        shared_ptr<ListaAdjacenciaVet> grafo;
+        shared_ptr<ListaAdjacenciaVet> grafo; // Grafo do problema
     public:
         CVRPInstance();
 
@@ -27,10 +30,10 @@ class CVRPInstance
         int getVerticeBase();
         void setVerticeBase(int nodeId);
 
-        void addVerticePoint(int idVertice, shared_ptr<Point> verticePoint);
-        void addVerticeDemand(int idVertice, float demand);
+        void addVerticePoint(int idVertice, shared_ptr<Point> verticePoint); // Define as coordenadas do vértice
+        void addVerticeDemand(int idVertice, float demand); // Define a demanda do vértice
 
-        shared_ptr<ListaAdjacenciaVet> getInstance();
+        shared_ptr<ListaAdjacenciaVet> getInstance(); // Cria um grafo completo para o problema
 };
 
 #endif // CVRPINSTANCE_H_INCLUDED

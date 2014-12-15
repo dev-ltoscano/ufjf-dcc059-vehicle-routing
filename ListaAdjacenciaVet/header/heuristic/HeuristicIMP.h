@@ -10,10 +10,14 @@
 #include "../grafo/ListaAdjacenciaVet.h"
 
 #include <iostream>
+#include <string>
+#include <fstream>
 #include <cstdlib>
 #include <vector>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 /**
 *   Heurística para o problema de roteamento de veículos capacitados
@@ -35,7 +39,7 @@ class HeuristicIMP
 
         float runGulosa();
         float runRandom(float alfa, int maxIteration);
-        float runReativa(int alfaUpdate, int maxIteration);
+        float runReativa(string outputFile, int alfaUpdate, int maxIteration);
 };
 
 #endif // HEURISTICIMP_H

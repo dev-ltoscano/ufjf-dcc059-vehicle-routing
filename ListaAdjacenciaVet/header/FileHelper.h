@@ -9,7 +9,6 @@
 #include <cstring>
 
 // Constantes para a leitura das seções do arquivo da instância. Windows e Linux
-
 #ifdef _WIN32
 
 #define NODE_COUNT_SECTION          "NODE_COUNT_SECTION"

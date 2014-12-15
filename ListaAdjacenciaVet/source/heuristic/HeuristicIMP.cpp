@@ -26,17 +26,19 @@ bool HeuristicIMP::isReady()
 
 float HeuristicIMP::runGulosa()
 {
+    // Se a instância não foi carregada corretamente, retorna
     if(!ready)
     {
         return -1;
     }
 
     cout << "Gerando solução gulosa..." << endl;
-    return this->heuristic(0);
+    return this->heuristic(0); // Gera uma solução gulosa
 }
 
 float HeuristicIMP::runRandom(float alfa, int maxIteration)
 {
+    // Se a instância não foi carregada corretamente, retorna
     if(!ready)
     {
         return -1;
@@ -44,22 +46,24 @@ float HeuristicIMP::runRandom(float alfa, int maxIteration)
 
     cout << "Gerando solução randomizada [ Alfa = " << alfa << " | maxIteration = " << maxIteration << "]"<< endl;
 
-    float minCost = INFINITE;
-    float sum = 0;
-    float cost = 0;
+    float minCost = INFINITE; // Custo mínimo
+    float sum = 0; // Somatório dos custos
+    float cost = 0; // Custo atual
 
     cout << "Iteração: " << endl;
 
+    // Gera até maxIteration de soluções
     for(int i = 0; i < maxIteration; i++)
     {
         cost = this->heuristic(alfa);
 
+        // Atualiza custo mínimo
         if(cost < minCost)
         {
             minCost = cost;
         }
 
-        sum += cost;
+        sum += cost; // Atualiza a soma do custo das soluções
         cout << i << " ";
     }
 
@@ -67,212 +71,155 @@ float HeuristicIMP::runRandom(float alfa, int maxIteration)
     return minCost;
 }
 
-float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
+float HeuristicIMP::runReativa(string outputFile, int alfaUpdate, int maxIteration)
 {
+    // Se a instância não foi carregada corretamente, retorna
     if(!ready)
     {
         return -1;
     }
 
-    vector<float> alfaList;
+    // Quantidade de alfas
+    float alfaLength = 10;
+
+    // Alfa atual
     float alfa = 0.1;
 
-    for(int i = 0; i < 10; i++)
+    // Vetor de alfas
+    vector<float> alfaList;
+
+    for(int i = 0; i < alfaLength; i++)
     {
         alfaList.push_back(alfa);
         alfa += 0.1;
     }
 
-    vector<int> alfaCountList;
-    alfaCountList.assign(10, 0);
+    // Vetor que guarda quantas vezes um alfa foi utilizado
+    vector<int> alfaCount;
+    alfaCount.assign(alfaLength, 0);
 
-    vector<float> alfaSumCostList;
-    alfaSumCostList.assign(10, 0);
+    // Vetor com o somatório das soluções geradas pelo alfa
+    vector<float> alfaSum;
+    alfaSum.assign(alfaLength, 0);
 
-    vector<float> alfaAverageList;
-    alfaAverageList.assign(10, 0);
+    // Vetor que guarda a média dos resultados de cada alfa
+    vector<float> alfaAvg;
+    alfaAvg.assign(alfaLength, 0);
 
-    vector<float> alfaProbList;
-    alfaProbList.assign(10, 0.1);
+    // Vetor que guarda as probabilidades de cada alfa
+    vector<float> alfaProb;
+    alfaProb.assign(alfaLength, 0.1);
 
-    vector<float> sumCount;
-    sumCount.assign(10,0);
-//
-//
-//    int iteration = 0;
-//    float minCost = INFINITE;
-//    int alfaUpdCount = 0;
-//    int pos = 0;
-//
-//    while(iteration < maxIteration)
-//    {
-//        alfa = alfaList[pos];
-//        float cost = INFINITE;
-//
-//        cost = this->heuristic(alfa);
-//
-//        if(minCost > cost)
-//        {
-//            minCost = cost;
-//        }
-//
-//        alfaCountList[pos] = alfaUpdCount;
-//        alfaSumCostList[pos] += cost;
-//        alfaUpdCount++;
-//
-//        float sumAvg = 0;
-//
-//        for(int i = 0; i < 10; i++)
-//        {
-//            sumAvg += alfaAverageList[i];
-//        }
-//
-////        cout << "Média: " << (alfaSumCostList[pos] / alfaCountList[pos]) << endl;
-//        alfaAverageList[pos] = (alfaSumCostList[pos] / alfaCountList[pos]);
-//        alfaProbList[pos] = (alfaAverageList[pos] / sumAvg);
-//
-////        if(alfaUpdCount == alfaUpdate)
-////        {
-////            pos = (pos < 9) ? pos += 1 : 0;
-////            cout << pos << endl;
-////        }
-//
-//        pos = (pos < 9) ? pos += 1 : 0;
-//        iteration++;
-//    }
-//
-//    pos = 0;
-//
-//    for(int i = 0; i < 10; i++)
-//    {
-//        if(alfaProbList[pos] < alfaProbList[i])
-//        {
-//            pos = i;
-//        }
-//
-//        cout << "Prob[" << i << "]: " << alfaProbList[pos] << endl;
-//    }
-//
-//    cout << "Melhor alfa: " << alfaList[pos] << endl;
-//    cout << "Custo mínimo para o alfa: " << minCost << endl;
-//    return alfaAverageList[pos] * alfaCountList[pos];
+    // Melhor solução gerada
+    float minSolution = INFINITE;
 
+    // Custo gerado pelo alfa atual
+    float alfaCost = INFINITE;
 
-
-
-
+    // Iteração atual
     int iteration = 0;
-    int updAlfaCount = 0;
-    int pos = 0;
 
-    float minCost = INFINITE;
-    int minPos = 0;
+    // Posição do alfa atual
+    int alfaPos = 0;
 
-    cout << endl << "Gerando solução [ Alfa = " << alfaList[pos] << "] | Iteration: " << iteration << endl;
+    // Gerando soluções iniciais para cada alfa
+    for(int i = 0; i < alfaLength; i++)
+    {
+        alfa = alfaList[i];
 
-    // 2500 it
+        // Gera um custo usando o alfa atual
+        alfaCost = this->heuristic(alfa);
+
+        // Atualiza a melhor solução gerada
+        if(alfaCost < minSolution)
+        {
+            minSolution = alfaCost;
+        }
+
+        // Atualiza quantas vezes o alfa foi usado
+        alfaCount[i] += 1;
+
+        // Atualiza o somatório de soluções geradas para o alfa
+        alfaSum[i] += alfaCost;
+
+        // Atualizando a média de soluções do alfa
+        alfaAvg[i] = (alfaSum[i] / alfaCount[i]);
+    }
+
+    cout << "Iteração: " << endl;
+
+    // Executa o processo até o máximo de iterações
     while(iteration < maxIteration)
     {
-//        cout << "pos: " << pos << endl;
-//        cout << iteration << " ";
-        alfa = alfaList[pos];
-        alfaCountList[pos] += 1;
+        cout << iteration << " ";
 
-        // Processo para um alfa
-//        cout << "Gerando solução [ Alfa = " << alfa << " | Iteration = " << iteration << "]"<< endl;
+        alfaPos = 0;
 
-        alfaSumCostList[pos] = this->heuristic(alfa);
-        updAlfaCount++;
+        // Somatório da qualidade dos alfas
+        float qSum = 0;
 
-        if(alfaSumCostList[pos] < minCost)
+        for(int i = 0; i < alfaLength; i++)
         {
-            minCost = alfaSumCostList[pos];
-            minPos = pos;
+            qSum += (minSolution / alfaAvg[i]);
         }
 
-        // Atualizando a média do alfa;
-        float sumCost = 0;
-
-        for(int i = 0; i < 10; i++)
+        // Atualiza vetor de probabilidades
+        for(int i = 0; i < alfaLength; i++)
         {
-            sumCost += alfaSumCostList[i];
-            sumCount[pos] += alfaSumCostList[i];
-        }
+            // Qualidade do alfa sobre o somatório da qualidade dos alfas
+            alfaProb[i] = ((minSolution / alfaAvg[i]) / qSum);
 
-        // Nova média do alfa
-//        cout << "Média: " << (sumCost / alfaCountList[pos]) << endl;
-        alfaAverageList[pos] = (sumCost / alfaCountList[pos]);
-
-        // Atualizando probabilidade do alfa;
-        float sumAvg = 0;
-
-        for(int i = 0; i < 10; i++)
-        {
-            sumAvg += alfaAverageList[i];
-        }
-
-//        cout << "Probabilidade: " << (alfaAverageList[pos] / sumAvg) << endl;
-        alfaProbList[pos] = (alfaAverageList[pos] / sumAvg);
-
-        if(updAlfaCount == alfaUpdate)
-        {
-            if(pos < 9)
+            // Escolhendo alfa com maior probabilidade para a próxima iteração
+            if(alfaProb[alfaPos] < alfaProb[i])
             {
-                pos++;
+                alfaPos = i;
             }
-            else
+        }
+
+        int alfaUpdCount = 0;
+
+        // Gera soluções com um determinado alfa até chegar no momento da troca de alfas
+        while(alfaUpdCount < alfaUpdate)
+        {
+            alfa = alfaList[alfaPos];
+            alfaCost = this->heuristic(alfa);
+
+            // Atualiza a melhor solução gerada
+            if(alfaCost < minSolution)
             {
-                pos = 0;
+                minSolution = alfaCost;
             }
 
-            cout << endl << endl << "Gerando solução [ Alfa = " << alfaList[pos] << "] | Iteration: " << iteration << endl;
+            // Atualiza quantas vezes o alfa foi usado
+            alfaCount[alfaPos] += 1;
 
-            updAlfaCount = 0;
+            // Atualiza o somatório de soluções geradas para o alfa
+            alfaSum[alfaPos] += alfaCost;
+
+            // Atualizando a média de soluções do alfa
+            alfaAvg[alfaPos] = (alfaSum[alfaPos] / alfaCount[alfaPos]);
+
+            alfaUpdCount++;
         }
 
-//        cout << "Count: " << updAlfaCount << endl;
-//        cout << endl << endl;
         iteration++;
     }
 
-    float sumProb = 0;
+    // Procurando pelo alfa que tem a maior probabilidade
+    int alfaBest = 0;
 
-    // Escolhendo alfa com maior probabilidade
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < alfaLength; i++)
     {
-        if(alfaProbList[pos] < alfaProbList[i])
+        if(alfaProb[alfaBest] < alfaProb[i])
         {
-            pos = i;
-            sumProb += alfaProbList[i];
+            alfaBest = i;
         }
-
-        cout << "Prob[" << i << "]: " << alfaProbList[i] <<endl;
     }
 
-    cout << "Soma probabilidades: " << sumProb << endl;
+    cout << "Melhor alfa: " << alfaList[alfaBest] << endl;
+    cout << "Média dos custos gerados pelo melhor alfa: " << alfaAvg[alfaBest] << endl;
 
-    cout << "Melhor alfa: " << alfaList[pos] << endl;
-    cout << "Custo mínimo para o alfa: " << alfaSumCostList[pos] << endl;
-    cout << "Menor custo: " << alfaList[minPos] << endl;
-
-    cout << "Parte Genial do IGOR" << endl;
-    float sum = 0;
-    float sum2 = 0;
-    for(int i = 0; i < 10; i++)
-    {
-        alfaAverageList[i] = (sumCount[i] / alfaCountList[i]);
-    }
-    for(int i = 0; i < 10; i++){
-        sum += alfaAverageList[i];
-    }
-    for(int i = 0; i < 10; i ++){
-        alfaProbList[i] = (alfaAverageList[i] / sum);
-        sum2 += alfaProbList[i];
-        cout << alfaProbList[i] << endl;
-    }
-    cout << "SUM2: " << sum2 << endl;
-
-    return alfaSumCostList[minPos];
+    return minSolution;
 }
 
 float HeuristicIMP::heuristic(float alfa)
@@ -280,9 +227,9 @@ float HeuristicIMP::heuristic(float alfa)
     float dPath = 0; // Custo da solução atual
     int rotaCount = 0; // Quantidade de rotas encontradas para a solução atual
 
-    vector<bool> visited(grafo->getVerticeCount());
+    vector<bool> visited;
+    visited.assign(grafo->getVerticeCount(), false);
 
-//    bool *visited = new bool[grafo->getVerticeCount()]; // Vetor para indicar nós que já foram visitados
     visited[nodeBase] = true; // Marca o nó da base como visitado
     int visitedLength = 1; // Indica a quantidade de nós que foram visitados (A base já foi visitada)
 
@@ -292,29 +239,26 @@ float HeuristicIMP::heuristic(float alfa)
     // Enquanto a quantidade de nós visitados for menor que a quantidade de nós do grafo
     while(visitedLength < grafo->getVerticeCount())
     {
-//        OrderedList<Adjacencia> *caminho = new OrderedList<Adjacencia>(); // Caminho feito em uma rota
-//        OrderedList<InsertCalculation> *calculo = new OrderedList<InsertCalculation>(); // ??
+        // Caminho feito em uma rota
+        shared_ptr<OrderedList<Adjacencia>> caminho = make_shared<OrderedList<Adjacencia>>();
 
-        shared_ptr<OrderedList<Adjacencia>> caminho = make_shared<OrderedList<Adjacencia>>(); // Caminho feito em uma rota
-        shared_ptr<OrderedList<InsertCalculation>> calculo = make_shared<OrderedList<InsertCalculation>>(); // ??
+        // Lista de cálculos de novas inserções na rota
+        shared_ptr<OrderedList<InsertCalculation>> calculo = make_shared<OrderedList<InsertCalculation>>();
 
-        bool found = false; // ??
+        bool found = false;
 
-        //ADICIONA AS DUAS PRIMEIRAS ARESTAS A SOLUÇÃO
+        // Adiciona as duas primeiras arestas na solução
         adjBase->start();
         while(adjBase->getCurrentId() != -1 && !found)
         {
-            int idAdj = adjBase->getCurrentInfo()->getIdVertice2(); // Pega o id do nó adjacente à base
+            // Pega o id do nó adjacente à base
+            int idAdj = adjBase->getCurrentInfo()->getIdVertice2();
 
-            if(!visited[idAdj]) // Se o nó ainda não foi visitado
+             // Se o nó ainda não foi visitado
+            if(!visited[idAdj])
             {
-                /**
-                *
-                * Eu deveria verificar aqui se o meu caminhão consegue atender esse vértice?
-                *
-                **/
-
-                truck->removeCapacity(grafo->getVerticeWeight(idAdj)); // Retira da capacidade do veículo a demanda do nó (Problema de entrega)
+                // Retira da capacidade do veículo a demanda do nó (Problema de entrega)
+                truck->removeCapacity(grafo->getVerticeWeight(idAdj));
 
                 // Adjacências de ida (base, nó) e volta (nó, base), formando um ciclo
                 shared_ptr<Adjacencia> ida =  grafo->getAdjacencia(idAdj, nodeBase);
@@ -324,20 +268,9 @@ float HeuristicIMP::heuristic(float alfa)
                 caminho->insert(ida->getWeight(), ida, ListStart);
                 caminho->insert(volta->getWeight(), volta, ListStart);
 
-                // Mais um nó foi visitado
-
-                /**
-                *
-                * Não seria melhor usar o id lá de cima?
-                *
-                **/
-
-                visited[adjBase->getCurrentId()] = true;
+                // Marca o nó como visitado
+                visited[idAdj] = true;
                 visitedLength++;
-
-//                    cout << "PRIMEIRO NO: " << adjBase->getCurrentId() << endl;
-//                    for(int i = 0; i < grafo->getVerticeCount(); i ++)
-//                        cout << i << ": visited = " << visited[i] << endl;
 
                 found = true;
             }
@@ -345,32 +278,30 @@ float HeuristicIMP::heuristic(float alfa)
             adjBase->next();
         }
 
-        //TRABALHA EM CIMA DA SOLUÇÃO ADICIONANDO VÉRTICES ENQUANTO O VEÍCULO POSSUI CAPACIDADE
+        // Trabalha em cima da solução adicionando novos vértices
         while(truck->getCapacity() >= 0)
         {
-            //AS DUAS UÚLTIMAS ARESTAS ADICIONADAS (a1, a2)
+            // As duas últimas arestas adicionadas
             caminho->start();
             shared_ptr<Adjacencia> a2 = caminho->getCurrentInfo();
 
             caminho->next();
             shared_ptr<Adjacencia> a1 = caminho->getCurrentInfo();
 
-            // CUSTO DA INSERÇÃO DE NOVAS ARESTAS
-            shared_ptr<InsertCalculation> solution;
+//            // Custo da inserção de novas arestas
+//            shared_ptr<InsertCalculation> solution;
 
-            // NOVAS ARESTAS DA SOLUÇÃO (s1, s2)
-            shared_ptr<Adjacencia> s1;
-            shared_ptr<Adjacencia> s2;
+//            // Novas arestas da solução
+//            shared_ptr<Adjacencia> s1;
+//            shared_ptr<Adjacencia> s2;
 
-            //ARESTA A SER REMOVIDA DA SOLUÇÃO
-            shared_ptr<Adjacencia> removed;
+//            // Aresta a ser removida da solução
+//            shared_ptr<Adjacencia> removed;
 
             shared_ptr<OrderedList<Adjacencia>> adj1 = grafo->getAdjacenciaList(a1->getIdVertice1());
             shared_ptr<OrderedList<Adjacencia>> adj2 = grafo->getAdjacenciaList(a2->getIdVertice1());
 
-//                printf("a1: %d -> %d\n",a1->getIdVertice1(),a1->getIdVertice2());
-
-            //CÁLCULO DE a1
+            // Cálculo de a1
             adj1->start();
             while(adj1->getCurrentId() != -1)
             {
@@ -395,10 +326,7 @@ float HeuristicIMP::heuristic(float alfa)
                 adj1->next();
             }
 
-
-//                printf("a2: %d -> %d\n",a2->getIdVertice1(),a2->getIdVertice2());
-
-            //CÁLCULO DE a2
+            // Cálculo de a2
             adj2->start();
             while(adj2->getCurrentId() != -1)
             {
@@ -423,92 +351,60 @@ float HeuristicIMP::heuristic(float alfa)
                 adj2->next();
             }
 
-//            for(int i = 0; i < grafo->getVerticeCount(); i ++)
-//                cout << i << ": visited = " << visited[i] << endl;
-
-//
-//                cout << " -- CALCULOS -- " << endl;
-//                calculo->start();
-//
-//                while(calculo->getCurrentId() != -1)
-//                {
-//                    shared_ptr<InsertCalculation> ic = calculo->getNodeInfo(calculo->getCurrentId());
-//                    cout << ic->idVertice1 << " -> " << ic->idVertice2 << ": node= " << ic->nodeId << " deltaPath= " << ic->difPath << " visited[" <<  ic->nodeId << "] " << visited[ic->nodeId] << endl;
-//                    calculo->next();
-//
-//                }
-//                cout << endl << endl;
-
-
-            //SE A LISTA DE CÁLCULOS ESTIVER VAZIA NÃO HÁ MAIS NÓS QUE SEJA POSSÍVEL INSERIR NO CAMINHO
+            // Se a lista de cálculos estiver vazia, não há mais nós que podem ser inseridos no caminho
             if(calculo->isEmpty())
             {
                 caminho->start();
-//                cout << " --- CAMINHO FINAL --- " << endl;
 
                 while(!caminho->isEnd())
                 {
+                    // Conta o custo do caminho atual
                     dPath += caminho->getCurrentInfo()->getWeight();
-//                    cout << caminho->getCurrentInfo()->getIdVertice1() << " -> " << caminho->getCurrentInfo()->getIdVertice2() << endl;
                     caminho->next();
                 }
 
-//                cout << endl << endl;
+                // Atualiza a quantidade de rotas geradas
                 rotaCount++;
                 break;
             }
 
 
             // Insere uma solução de forma randomizada
-//                cout << "Length: " << calculo->getLength() << endl;
             int r = rand();
-//                cout << "Rand: " << r << endl;
             int pos = (int)(alfa * calculo->getLength());
-//                cout << "Position: " << pos << endl;
             int idSolution = (pos != 0) ? r % pos : 0;
-            solution = calculo->get(idSolution);
 
-//                //INSERE A MELHOR SOLUÇÃO (GULOSA)
-//                calculo->start();
-//                solution = calculo->getCurrentInfo();
-//                cout << "ADD NO: " << solution->nodeId << endl;
+            // Custo da inserção de novas arestas
+            shared_ptr<InsertCalculation> solution = calculo->get(idSolution);
 
-            removed = grafo->getAdjacencia(solution->idVertice1, solution->idVertice2); // Adjacência que será removida da solução
-//                cout << "REMOVE PATH: " << removed->getIdVertice1() << " -> " << removed->getIdVertice2() << endl;
+            // Aresta a ser removida da solução
+            shared_ptr<Adjacencia> removed = grafo->getAdjacencia(solution->idVertice1, solution->idVertice2);
 
             // Novas arestas que substituirão a que será removida
-            s1 = grafo->getAdjacencia(removed->getIdVertice1(), solution->nodeId);
-            s2 = grafo->getAdjacencia(solution->nodeId, removed->getIdVertice2());
+
+            // Novas arestas da solução
+            shared_ptr<Adjacencia> s1 = grafo->getAdjacencia(removed->getIdVertice1(), solution->nodeId);
+            shared_ptr<Adjacencia> s2 = grafo->getAdjacencia(solution->nodeId, removed->getIdVertice2());
 
             // Insere as novas arestas na solução
             caminho->insert(s1->getWeight(), s1, ListStart);
             caminho->insert(s2->getWeight(), s2, ListStart);
 
-//            cout << "Capacidade atual: " << truck->getCapacity() << endl;
-            truck->removeCapacity(grafo->getVerticeWeight(solution->nodeId)); // ??
-//            cout << "Nova capacidade: " << truck->getCapacity() << endl;
+            // Remove capacidade do caminhão
+            truck->removeCapacity(grafo->getVerticeWeight(solution->nodeId));
 
+            // Novo nó visitado
             visited[solution->nodeId] = true;
             visitedLength++;
 
-//                for(int i = 0; i < grafo->getVerticeCount(); i ++)
-//                    cout << i << ": visited = " << visited[i] << endl;
-
-
-            //ATUALIZA OS CÁLCULOS
+            // Atualiza a lista de cálculos
             calculo->start();
-//                cout << "CALC TAM -> " << calculo->getLength() << endl;
             while(!calculo->isEnd() && !calculo->isEmpty())
             {
                 shared_ptr<InsertCalculation> ic = calculo->getCurrentInfo();
 
-//                    cout << "REMOVED (" << removed->getIdVertice1() << " -> " << removed->getIdVertice2();
-//                    cout << ") == (" << ic->idVertice1 << " -> " << ic->idVertice2 << ")" << endl;
-
                 if(removed->equals(ic->idVertice1, ic->idVertice2)|| (truck->getCapacity() - grafo->getVerticeWeight(ic->nodeId) < 0) || visited[ic->nodeId])
                 {
-//                        cout << "TIREI " << ic->idVertice1 << " -> " << ic->idVertice2 << ": node= " << ic->nodeId << " deltaPath= " << ic->difPath << " visited[i] " << visited[ic->nodeId] << endl;
-
                     calculo->remove(calculo->getCurrentId());
                 }
                 else
@@ -517,14 +413,10 @@ float HeuristicIMP::heuristic(float alfa)
                 }
             }
 
-            //REMOVE DO CAMINHO A ARESTA QUE FOI SUBSTITUÍDA
+            // Remove do caminho a aresta que foi substituída
             caminho->start();
             while(!caminho->isEnd() && !caminho->isEmpty())
             {
-//                    cout << " --- REMOVE ARESTA --- " << endl;
-//                    cout << caminho->getCurrentInfo()->getIdVertice1() << " - > " << caminho->getCurrentInfo()->getIdVertice2();
-//                    cout << " == " <<removed->getIdVertice1() << " -> " << removed->getIdVertice2() << endl;
-
                 if(removed->equals(caminho->getCurrentInfo()))
                 {
                     caminho->remove(caminho->getCurrentId());
@@ -536,11 +428,11 @@ float HeuristicIMP::heuristic(float alfa)
                 }
             }
         }
-            // Como uma rota foi fechada, retorna o caminhão para capacidade máxima
+
+        // Como uma rota foi fechada o veículo passa a ter capacidade máxima novamente
         truck->resetCapacity();
     }
 
 //    cout << "Total de rotas: " << rotaCount << endl;
-//    cout << "Custo da solução: " << dPath << endl;
     return dPath;
 }

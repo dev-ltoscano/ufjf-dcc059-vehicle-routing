@@ -3,12 +3,10 @@
 
 #include "Vertice.h"
 #include "../structure/Point.h"
-//#include "../heuristic/FloydWarshall.h"
 
 #include <iostream>
 #include <vector>
 
-class FloydWarshall;
 typedef shared_ptr<Vertice> vertice_ptr;
 
 using namespace std;
@@ -21,6 +19,7 @@ class ListaAdjacenciaVet
     private:
         int verticeCount; // Quantidade de vértices
         vector<vertice_ptr> verticeList; // Vetor de vértices do grafo
+
         bool isDirected; // Define se o grafo é direcionado ou não
 
         bool depth(bool *visited); // Busca em profundidade
@@ -48,7 +47,6 @@ class ListaAdjacenciaVet
         int compConexaCount(); // Verifica quantas componentes conexas o grafo possui
         bool containsCiclo(int startIdVertice); // Verifica se o grafo possui ciclos
         bool containsCaminho(int startIdVertice, int endIdVertice); // Verifica se existe caminho entre dois nós
-        void floydWarshall();
 };
 
 #endif // LISTAADJACENCIAVET_H_INCLUDED

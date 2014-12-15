@@ -5,12 +5,14 @@ shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
     ifstream streamFile;
     streamFile.open(fileName.c_str());
 
+    // Verifica se o arquivo foi aberto
     if (!streamFile.is_open())
     {
         cout << endl << "[ Erro ]: Não foi possível abrir o arquivo da instância" << endl;
     }
     else
     {
+        // Conta as seções que foram lidas
         int sectionRead = 0;
 
         cout << "===== Lendo instância do CVRP =====" << endl << endl;
@@ -19,12 +21,10 @@ shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
 
         string txtLine;
 
+        // Lê linha por linha do arquivo
         while (getline(streamFile, txtLine))
         {
-//            cout << "Line: " << (txtLine.c_str() == string("NODE_COUNT_SECTION\r")) << endl;
-
-//            cout << "Equals: " << strcmp(txtLine.c_str(), string("NODE_COORD_SECTION").c_str()) << endl;
-
+            // Verifica se a linha lida é igual a seção correspondente
             if(strcmp(txtLine.c_str(), string(NODE_COUNT_SECTION).c_str()) == 0)
             {
                 cout << "Section: " << txtLine << endl;
@@ -54,10 +54,12 @@ shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
                 float nodeCoordX;
                 float nodeCoordY;
 
+                // Lê as próximas linhas até o fim da sessão
                 while(getline(streamFile, txtLine) && (strcmp(txtLine.c_str(), string(END_SECTION).c_str())) != 0)
                 {
                     stringstream streamLine(txtLine);
 
+                    // Lê as informações (id X Y) da linha
                     while(streamLine >> nodeId >> nodeCoordX >> nodeCoordY)
                     {
                         cout << "Id: " << nodeId << " -- X: " << nodeCoordX << " -- Y: " << nodeCoordY << endl;
@@ -76,10 +78,12 @@ shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
                 int nodeId;
                 float nodeWeight;
 
+                // Lê as próximas linhas até o fim da sessão
                 while(getline(streamFile, txtLine) && (strcmp(txtLine.c_str(), string(END_SECTION).c_str())) != 0)
                 {
                     stringstream streamLine(txtLine);
 
+                    // Lê as informações da linha (id demanda)
                     while(streamLine >> nodeId >> nodeWeight)
                     {
                         cout << "Id: " << nodeId << " -- Demanda: " << nodeWeight << endl;
@@ -103,6 +107,7 @@ shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
             }
         }
 
+        // Verifica se todas as seções foram lidas
         if(sectionRead < 5)
         {
             instance = NULL;
@@ -110,6 +115,8 @@ shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
         }
 
         cout << "===== END FILE =====" << endl << endl;
+
+        streamFile.close();
 
         return instance;
     }

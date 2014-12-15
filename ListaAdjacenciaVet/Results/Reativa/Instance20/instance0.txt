@@ -1,0 +1,15 @@
+Prob[0]: 0.129836
+Prob[1]: 0.120818
+Prob[2]: 0.112724
+Prob[3]: 0.105994
+Prob[4]: 0.0998547
+Prob[5]: 0.0950167
+Prob[6]: 0.0903908
+Prob[7]: 0.0860366
+Prob[8]: 0.0820636
+Prob[9]: 0.0772648
+Soma de Probabilidades: 1
+Melhor alfa: 0.1
+Média dos custos gerados pelo melhor alfa: 294.839
+Melhor solução gerada: 219.938
+Tempo de execução: 1199.83
