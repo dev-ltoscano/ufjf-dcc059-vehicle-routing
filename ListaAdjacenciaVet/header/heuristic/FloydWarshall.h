@@ -18,7 +18,7 @@ class FloydWarshall
 {
     private:
         // Retorna o custo da adjacência se ela existir ou infinito caso contrário
-        static float getAdjacenciaWeight(shared_ptr<ListaAdjacenciaVet> grafo, int idVertice1, int idVertice2);
+        static float getAdjacenciaWeight(ListaAdjacenciaVet *grafo, int idVertice1, int idVertice2);
 
         // Imprime na tela o caminho mínimo entre dois vértices
         static void shortestPath(int **pij, int i, int j);
@@ -30,7 +30,7 @@ class FloydWarshall
         static void printShortestPath(Floyd floyd, int i, int j);
 
         // Calcula a matriz de custos do grafo
-        static Floyd get(shared_ptr<ListaAdjacenciaVet> grafo);
+        static Floyd get(ListaAdjacenciaVet *grafo);
 };
 
 #endif // FLOYDWARSHALL_H_INCLUDED

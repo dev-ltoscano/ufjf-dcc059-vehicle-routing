@@ -1,6 +1,6 @@
 #include "../../header/heuristic/FloydWarshall.h"
 
-float FloydWarshall::getAdjacenciaWeight(shared_ptr<ListaAdjacenciaVet> grafo, int idVertice1, int idVertice2)
+float FloydWarshall::getAdjacenciaWeight(ListaAdjacenciaVet *grafo, int idVertice1, int idVertice2)
 {
     if(idVertice1 == idVertice2)
     {
@@ -90,7 +90,7 @@ void FloydWarshall::printShortestPath(Floyd floyd, int i, int j)
     }
 }
 
-Floyd FloydWarshall::get(shared_ptr<ListaAdjacenciaVet> grafo)
+Floyd FloydWarshall::get(ListaAdjacenciaVet *grafo)
 {
     Floyd floyd;
     int **pij = Helper::initializeIntegerMatriz(grafo->getVerticeCount());

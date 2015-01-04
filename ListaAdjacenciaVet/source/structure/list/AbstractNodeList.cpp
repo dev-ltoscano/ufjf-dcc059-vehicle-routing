@@ -1,8 +1,8 @@
 #include "../../../header/structure/list/AbstractNodeList.h"
 
-template <class G> AbstractNodeList<G>::AbstractNodeList(int nodeId, float nodeValue, shared_ptr<G> info) : AbstractNodeList(nodeId, nodeValue, info, NULL, NULL) { }
+template <class G> AbstractNodeList<G>::AbstractNodeList(int nodeId, float nodeValue, G *info) : AbstractNodeList(nodeId, nodeValue, info, NULL, NULL) { }
 
-template <class G> AbstractNodeList<G>::AbstractNodeList(int nodeId, float nodeValue, shared_ptr<G> info, shared_ptr<AbstractNodeList<G>> previous, shared_ptr<AbstractNodeList<G>> next)
+template <class G> AbstractNodeList<G>::AbstractNodeList(int nodeId, float nodeValue, G *info, AbstractNodeList<G> *previous, AbstractNodeList<G> *next)
 {
     this->nodeId = nodeId;
     this->nodeValue = nodeValue;
@@ -11,12 +11,17 @@ template <class G> AbstractNodeList<G>::AbstractNodeList(int nodeId, float nodeV
     this->next = next;
 }
 
-template <class G> shared_ptr<G> AbstractNodeList<G>::getInfo()
+template <class G> AbstractNodeList<G>::~AbstractNodeList()
+{
+    delete this->info;
+}
+
+template <class G> G* AbstractNodeList<G>::getInfo()
 {
     return this->info;
 }
 
-template <class G> void AbstractNodeList<G>::setInfo(shared_ptr<G> info)
+template <class G> void AbstractNodeList<G>::setInfo(G* info)
 {
     this->info = info;
 }
@@ -32,22 +37,22 @@ template <class G> float AbstractNodeList<G>::getNodeValue()
 }
 
 
-template <class G> shared_ptr<AbstractNodeList<G>> AbstractNodeList<G>::getPrevious()
+template <class G> AbstractNodeList<G>* AbstractNodeList<G>::getPrevious()
 {
     return this->previous;
 }
 
-template <class G> void AbstractNodeList<G>::setPrevious(shared_ptr<AbstractNodeList<G>> previous)
+template <class G> void AbstractNodeList<G>::setPrevious(AbstractNodeList<G> *previous)
 {
     this->previous = previous;
 }
 
-template <class G> shared_ptr<AbstractNodeList<G>> AbstractNodeList<G>::getNext()
+template <class G> AbstractNodeList<G>* AbstractNodeList<G>::getNext()
 {
     return this->next;
 }
 
-template <class G> void AbstractNodeList<G>::setNext(shared_ptr<AbstractNodeList<G>> next)
+template <class G> void AbstractNodeList<G>::setNext(AbstractNodeList<G> *next)
 {
     this->next = next;
 }

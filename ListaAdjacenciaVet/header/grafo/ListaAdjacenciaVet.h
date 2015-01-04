@@ -7,8 +7,6 @@
 #include <iostream>
 #include <vector>
 
-typedef shared_ptr<Vertice> vertice_ptr;
-
 using namespace std;
 
 /**
@@ -18,7 +16,7 @@ class ListaAdjacenciaVet
 {
     private:
         int verticeCount; // Quantidade de vértices
-        vector<vertice_ptr> verticeList; // Vetor de vértices do grafo
+        vector<Vertice*> verticeList;
 
         bool isDirected; // Define se o grafo é direcionado ou não
 
@@ -27,20 +25,21 @@ class ListaAdjacenciaVet
     public:
         ListaAdjacenciaVet(int verticeCount, bool isDirected);
         ListaAdjacenciaVet(int verticeCount, bool isDirected, OperationType type);
+        ~ListaAdjacenciaVet();
 
         int getVerticeCount(); // Retorna a quantidade de vértices
         int getVerticeGrau(int idVertice); // Retorna o grau de um vértice
         float getVerticeWeight(int idVertice); // Retorna o peso de um vértice
         void setVerticeWeight(int idVertice, float weight); // Define o peso de um vértice
-        shared_ptr<Point> getVerticePoint(int idVertice); // Retorna a coordenada do vértice
-        void setVerticePoint(int idVertice, shared_ptr<Point> p); // Define a coordenada do vértice
+        Point* getVerticePoint(int idVertice); // Retorna a coordenada do vértice
+        void setVerticePoint(int idVertice, Point* p); // Define a coordenada do vértice
         bool existsVertice(int idVertice); // Verifica se um vértice existe no grafo
 
         void addAdjacencia(int idVertice1, int idVertice2, float weight); // Adiciona um adjacência
         void removeAdjacencia(int idVertice1, int idVertice2); // Remove uma adjacência
         bool existsAdjacencia(int idVertice1, int idVertice2); // Veritica se existe um adjacência
-        shared_ptr<OrderedList<Adjacencia>> getAdjacenciaList(int idVertice); // Retorna a lista de adjacência de um vértice
-        shared_ptr<Adjacencia> getAdjacencia(int idVertice1, int idVertice2); // Retorna uma adjacência de um vértice
+        OrderedList<Adjacencia>* getAdjacenciaList(int idVertice); // Retorna a lista de adjacência de um vértice
+        Adjacencia* getAdjacencia(int idVertice1, int idVertice2); // Retorna uma adjacência de um vértice
         int getAdjacenciaCount(); // Retorna a quantidade de adjacências do grafo
 
         bool isConexo(); // Verifica se o grafo é conexo

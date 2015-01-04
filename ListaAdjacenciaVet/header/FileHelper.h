@@ -40,7 +40,7 @@ class FileHelper
 {
     public:
         // Faz a leitura do arquivo de uma instância do problema CVRP
-        static shared_ptr<CVRPInstance> readInstance(string fileName);
+        static CVRPInstance* readInstance(string fileName);
 };
 
 #endif // FILEHELPER_H_INCLUDED

@@ -16,7 +16,7 @@ float Point::getCoordY()
     return this->y;
 }
 
-float Point::getDistance(shared_ptr<Point> p2)
+float Point::getDistance(Point *p2)
 {
     if(p2 != NULL)
     {
@@ -29,7 +29,7 @@ float Point::getDistance(shared_ptr<Point> p2)
     return INFINITE;
 }
 
-bool Point::equals(shared_ptr<Point> p2)
+bool Point::equals(Point *p2)
 {
     if(p2 != NULL)
     {

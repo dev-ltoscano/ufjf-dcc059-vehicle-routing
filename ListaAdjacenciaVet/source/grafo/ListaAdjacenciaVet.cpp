@@ -11,7 +11,15 @@ ListaAdjacenciaVet::ListaAdjacenciaVet(int verticeCount, bool isDirected, Operat
     // Inicializa o vetor de vértices
     for(int i = 0; i < verticeCount; i++)
     {
-        this->verticeList.push_back(make_shared<Vertice>());
+        this->verticeList.push_back(new Vertice());
+    }
+}
+
+ListaAdjacenciaVet::~ListaAdjacenciaVet()
+{
+    for(int i = 0; i < verticeCount; i++)
+    {
+        delete this->verticeList[i];
     }
 }
 
@@ -34,12 +42,12 @@ bool ListaAdjacenciaVet::depth(bool *visited)
         for(int i = 0; i < this->verticeCount; i++)
         {
             // Pega a lista de adjacência do nó
-            shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[i]).getAdjacenciaList();
+            OrderedList<Adjacencia> *verticeAdjList = (*this->verticeList[i]).getAdjacenciaList();
 
             verticeAdjList->start();
             while(!verticeAdjList->isEnd())
             {
-                shared_ptr<Adjacencia> verticeAdj = verticeAdjList->getCurrentInfo();
+                Adjacencia *verticeAdj = verticeAdjList->getCurrentInfo();
                 verticeAdjList->next();
 
                 // Marca como visitado
@@ -85,12 +93,12 @@ bool ListaAdjacenciaVet::depth(int s, int d)
         queue1.remove(ListStart);
 
         // Pega a lista de adjacência do nó
-        shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[s]).getAdjacenciaList();
+        OrderedList<Adjacencia> *verticeAdjList = (*this->verticeList[s]).getAdjacenciaList();
         verticeAdjList->start();
 
         while(!verticeAdjList->isEnd())
         {
-            shared_ptr<Adjacencia> verticeAdj = verticeAdjList->getCurrentInfo();
+            Adjacencia *verticeAdj = verticeAdjList->getCurrentInfo();
             verticeAdjList->next();
 
             if(verticeAdj->getIdVertice1() == d)
@@ -144,7 +152,7 @@ float ListaAdjacenciaVet::getVerticeWeight(int idVertice)
     return 0;
 }
 
-shared_ptr<Point> ListaAdjacenciaVet::getVerticePoint(int idVertice)
+Point* ListaAdjacenciaVet::getVerticePoint(int idVertice)
 {
     if(existsVertice(idVertice))
     {
@@ -158,7 +166,7 @@ shared_ptr<Point> ListaAdjacenciaVet::getVerticePoint(int idVertice)
     return NULL;
 }
 
-void ListaAdjacenciaVet::setVerticePoint(int idVertice, shared_ptr<Point> coord)
+void ListaAdjacenciaVet::setVerticePoint(int idVertice, Point *coord)
 {
     if(existsVertice(idVertice))
     {
@@ -242,7 +250,7 @@ bool ListaAdjacenciaVet::existsAdjacencia(int idVertice1, int idVertice2)
     return false;
 }
 
-shared_ptr<OrderedList<Adjacencia>> ListaAdjacenciaVet::getAdjacenciaList(int idVertice)
+OrderedList<Adjacencia>* ListaAdjacenciaVet::getAdjacenciaList(int idVertice)
 {
     if(existsVertice(idVertice))
     {
@@ -252,7 +260,7 @@ shared_ptr<OrderedList<Adjacencia>> ListaAdjacenciaVet::getAdjacenciaList(int id
     return NULL;
 }
 
-shared_ptr<Adjacencia> ListaAdjacenciaVet::getAdjacencia(int idVertice1, int idVertice2)
+Adjacencia* ListaAdjacenciaVet::getAdjacencia(int idVertice1, int idVertice2)
 {
     if(existsVertice(idVertice1) && existsVertice(idVertice2) && existsAdjacencia(idVertice1, idVertice2))
     {
@@ -305,7 +313,7 @@ int ListaAdjacenciaVet::compConexaCount()
 
 bool ListaAdjacenciaVet::containsCiclo(int startIdVertice)
 {
-    shared_ptr<OrderedList<Adjacencia>> verticeAdjList = (*this->verticeList[startIdVertice]).getAdjacenciaList();
+    OrderedList<Adjacencia> *verticeAdjList = (*this->verticeList[startIdVertice]).getAdjacenciaList();
     verticeAdjList->start();
 
     if(verticeAdjList->getCurrentInfo() != NULL)

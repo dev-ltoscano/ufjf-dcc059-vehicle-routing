@@ -8,7 +8,7 @@ CVRPInstance::CVRPInstance()
     this->grafo = NULL;
 }
 
-shared_ptr<ListaAdjacenciaVet> CVRPInstance::getInstance()
+ListaAdjacenciaVet* CVRPInstance::getInstance()
 {
     if(grafo != NULL)
     {
@@ -18,8 +18,8 @@ shared_ptr<ListaAdjacenciaVet> CVRPInstance::getInstance()
             {
                 if((i != j) && !grafo->existsAdjacencia(i, j)) // Sem arestas paralelas e sem laços
                 {
-                    shared_ptr<Point> p1 = this->grafo->getVerticePoint(i);
-                    shared_ptr<Point> p2 = this->grafo->getVerticePoint(j);
+                    Point *p1 = this->grafo->getVerticePoint(i);
+                    Point *p2 = this->grafo->getVerticePoint(j);
                     float weight = p1->getDistance(p2);
                     grafo->addAdjacencia(i, j, weight);
                 }
@@ -40,7 +40,7 @@ void CVRPInstance::setVerticeCount(int verticeCount)
     if(verticeCount >= 2)
     {
         this->verticeCount = verticeCount;
-        this->grafo = make_shared<ListaAdjacenciaVet>(verticeCount, true, ListOrdered);
+        this->grafo = new ListaAdjacenciaVet(verticeCount, true, ListOrdered);
     }
     else
     {
@@ -90,7 +90,7 @@ void CVRPInstance::setVerticeBase(int nodeId)
     }
 }
 
-void CVRPInstance::addVerticePoint(int idVertice, shared_ptr<Point> verticePoint)
+void CVRPInstance::addVerticePoint(int idVertice, Point *verticePoint)
 {
     if(grafo != NULL)
     {

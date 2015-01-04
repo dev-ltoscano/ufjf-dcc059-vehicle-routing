@@ -2,7 +2,6 @@
 #define ADJACENCIA_H_INCLUDED
 
 #include <iostream>
-#include <memory>
 
 using namespace std;
 
@@ -29,7 +28,7 @@ class Adjacencia
 
         // Verifica se duas adjacências são iguais
         bool equals(int idVertice1, int idVertice2);
-        bool equals(shared_ptr<Adjacencia> adj);
+        bool equals(Adjacencia *adj);
 };
 
 #endif // ADJACENCIA_H_INCLUDED

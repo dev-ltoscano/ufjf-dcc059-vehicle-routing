@@ -4,7 +4,6 @@
 #include "../Helper.h"
 
 #include <iostream>
-#include <memory>
 #include <cmath>
 
 using namespace std;
@@ -24,10 +23,10 @@ class Point
         float getCoordY();
 
         // Retorna a distância entre dois pontos
-        float getDistance(shared_ptr<Point> p2);
+        float getDistance(Point *p2);
 
         // Verifica se os pontos são iguais
-        bool equals(shared_ptr<Point> p2);
+        bool equals(Point *p2);
 };
 
 #endif // POINT_H_INCLUDED

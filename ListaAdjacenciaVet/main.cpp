@@ -145,8 +145,10 @@ int main(int argc, char *argv[])
             cout << (argv[1] == string("gulosa")) << endl;
             if((argv[1] != NULL) && (argv[1] == string("gulosa")) && (argv[2] != NULL))
             {
-                shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>(string(argv[2]));
+                HeuristicIMP *h = new HeuristicIMP(string(argv[2]));
                 cout << "Custo mínimo: " << h->runGulosa() << endl;
+
+                delete h;
             }
             else
             {
@@ -177,11 +179,13 @@ int main(int argc, char *argv[])
             {
                 if((argv[2] != NULL) && (argv[3] != NULL) && (argv[4] != NULL))
                 {
-                    shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>(string(argv[2]));
+                    HeuristicIMP *h = new HeuristicIMP(string(argv[2]));
 
                     float alfa = atof(argv[3]);
                     int maxIteration = atoi(argv[4]);
                     cout << "Custo mínimo: " << h->runRandom(alfa, maxIteration) << endl;
+
+                    delete h;
                 }
                 else
                 {
@@ -193,12 +197,14 @@ int main(int argc, char *argv[])
             {
                 if((argv[2] != NULL) && (argv[3] != NULL) && (argv[4] != NULL))
                 {
-                    shared_ptr<HeuristicIMP> h = make_shared<HeuristicIMP>(string(argv[2]));
+                    HeuristicIMP *h = new HeuristicIMP(string(argv[2]));
 
                     float alfa = atol(argv[3]);
                     int maxIteration = atol(argv[4]);
 
-                    cout << "Custo mínimo: " << h->runReativa("Results/" + string(argv[2]), alfa, maxIteration) << endl;
+                    cout << "Custo mínimo: " << h->runReativa(alfa, maxIteration) << endl;
+
+                    delete h;
                 }
                 else
                 {

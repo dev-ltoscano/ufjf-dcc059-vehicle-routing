@@ -2,7 +2,7 @@
 
 HeuristicIMP::HeuristicIMP(string filename)
 {
-    shared_ptr<CVRPInstance> instance = FileHelper::readInstance(filename);
+    CVRPInstance *instance = FileHelper::readInstance(filename);
 
     if(instance != NULL)
     {
@@ -17,6 +17,13 @@ HeuristicIMP::HeuristicIMP(string filename)
         ready = false;
         cout << "[ Erro ]: A instância não foi carregada corretamente! " << endl;
     }
+
+    delete instance;
+}
+
+HeuristicIMP::~HeuristicIMP()
+{
+    delete this->grafo;
 }
 
 bool HeuristicIMP::isReady()
@@ -71,7 +78,7 @@ float HeuristicIMP::runRandom(float alfa, int maxIteration)
     return minCost;
 }
 
-float HeuristicIMP::runReativa(string outputFile, int alfaUpdate, int maxIteration)
+float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
 {
     // Se a instância não foi carregada corretamente, retorna
     if(!ready)
@@ -146,6 +153,7 @@ float HeuristicIMP::runReativa(string outputFile, int alfaUpdate, int maxIterati
         alfaAvg[i] = (alfaSum[i] / alfaCount[i]);
     }
 
+    cout << "Gerando solução randomizada [ AlfaUpdate = " << alfaUpdate << " | maxIteration = " << maxIteration << "]"<< endl;
     cout << "Iteração: " << endl;
 
     // Executa o processo até o máximo de iterações
@@ -216,7 +224,7 @@ float HeuristicIMP::runReativa(string outputFile, int alfaUpdate, int maxIterati
         }
     }
 
-    cout << "Melhor alfa: " << alfaList[alfaBest] << endl;
+    cout << endl << "Melhor alfa: " << alfaList[alfaBest] << endl;
     cout << "Média dos custos gerados pelo melhor alfa: " << alfaAvg[alfaBest] << endl;
 
     return minSolution;
@@ -233,17 +241,17 @@ float HeuristicIMP::heuristic(float alfa)
     visited[nodeBase] = true; // Marca o nó da base como visitado
     int visitedLength = 1; // Indica a quantidade de nós que foram visitados (A base já foi visitada)
 
-    shared_ptr<Vehicle> truck = make_shared<Vehicle>(1, vehicleCapacity); // Cria um novo veículo para resolver o problema
-    shared_ptr<OrderedList<Adjacencia>> adjBase = grafo->getAdjacenciaList(nodeBase); // Pega todas as adjacências da base
+    Vehicle *truck = new Vehicle(1, vehicleCapacity); // Cria um novo veículo para resolver o problema
+    OrderedList<Adjacencia> *adjBase = grafo->getAdjacenciaList(nodeBase); // Pega todas as adjacências da base
 
     // Enquanto a quantidade de nós visitados for menor que a quantidade de nós do grafo
     while(visitedLength < grafo->getVerticeCount())
     {
         // Caminho feito em uma rota
-        shared_ptr<OrderedList<Adjacencia>> caminho = make_shared<OrderedList<Adjacencia>>();
+        OrderedList<Adjacencia> *caminho = new OrderedList<Adjacencia>(false);
 
         // Lista de cálculos de novas inserções na rota
-        shared_ptr<OrderedList<InsertCalculation>> calculo = make_shared<OrderedList<InsertCalculation>>();
+        OrderedList<InsertCalculation> *calculo = new OrderedList<InsertCalculation>(true);
 
         bool found = false;
 
@@ -261,8 +269,8 @@ float HeuristicIMP::heuristic(float alfa)
                 truck->removeCapacity(grafo->getVerticeWeight(idAdj));
 
                 // Adjacências de ida (base, nó) e volta (nó, base), formando um ciclo
-                shared_ptr<Adjacencia> ida =  grafo->getAdjacencia(idAdj, nodeBase);
-                shared_ptr<Adjacencia> volta = grafo->getAdjacencia(nodeBase, idAdj);
+                Adjacencia *ida =  grafo->getAdjacencia(idAdj, nodeBase);
+                Adjacencia *volta = grafo->getAdjacencia(nodeBase, idAdj);
 
                 // Insere as adjacências de ida e volta na solução
                 caminho->insert(ida->getWeight(), ida, ListStart);
@@ -283,23 +291,13 @@ float HeuristicIMP::heuristic(float alfa)
         {
             // As duas últimas arestas adicionadas
             caminho->start();
-            shared_ptr<Adjacencia> a2 = caminho->getCurrentInfo();
+            Adjacencia *a2 = caminho->getCurrentInfo();
 
             caminho->next();
-            shared_ptr<Adjacencia> a1 = caminho->getCurrentInfo();
+            Adjacencia *a1 = caminho->getCurrentInfo();
 
-//            // Custo da inserção de novas arestas
-//            shared_ptr<InsertCalculation> solution;
-
-//            // Novas arestas da solução
-//            shared_ptr<Adjacencia> s1;
-//            shared_ptr<Adjacencia> s2;
-
-//            // Aresta a ser removida da solução
-//            shared_ptr<Adjacencia> removed;
-
-            shared_ptr<OrderedList<Adjacencia>> adj1 = grafo->getAdjacenciaList(a1->getIdVertice1());
-            shared_ptr<OrderedList<Adjacencia>> adj2 = grafo->getAdjacenciaList(a2->getIdVertice1());
+            OrderedList<Adjacencia> *adj1 = grafo->getAdjacenciaList(a1->getIdVertice1());
+            OrderedList<Adjacencia> *adj2 = grafo->getAdjacenciaList(a2->getIdVertice1());
 
             // Cálculo de a1
             adj1->start();
@@ -310,7 +308,7 @@ float HeuristicIMP::heuristic(float alfa)
                 // Verifica se o nó ainda não foi visitado, se o veículo tem capacidade e se existe adjacência entre um vértice da solução e o novo vértice
                 if(!visited[idAdj] && ((truck->getCapacity() - grafo->getVerticeWeight(idAdj)) > 0) && grafo->existsAdjacencia(idAdj, a1->getIdVertice2()))
                 {
-                    shared_ptr<InsertCalculation> ic = make_shared<InsertCalculation>();
+                    InsertCalculation *ic = new InsertCalculation();
 
                     ic->nodeId = idAdj; // Id do vértice
                     ic->idVertice1 = a1->getIdVertice1(); // Id do vértice 1 da adjacência
@@ -335,7 +333,7 @@ float HeuristicIMP::heuristic(float alfa)
                 // Verifica se o nó ainda não foi visitado, se o veículo tem capacidade e se existe adjacência entre um vértice da solução e o novo vértice
                 if(!visited[idAdj] && ((truck->getCapacity() - grafo->getVerticeWeight(idAdj)) > 0) && grafo->existsAdjacencia(idAdj, a2->getIdVertice2()))
                 {
-                    shared_ptr<InsertCalculation> ic = make_shared<InsertCalculation>();
+                    InsertCalculation *ic = new InsertCalculation();
 
                     ic->nodeId = idAdj; // Id do vértice
                     ic->idVertice1 = a2->getIdVertice1(); // Id do vértice 1 da adjacência
@@ -375,16 +373,16 @@ float HeuristicIMP::heuristic(float alfa)
             int idSolution = (pos != 0) ? r % pos : 0;
 
             // Custo da inserção de novas arestas
-            shared_ptr<InsertCalculation> solution = calculo->get(idSolution);
+            InsertCalculation *solution = calculo->get(idSolution);
 
             // Aresta a ser removida da solução
-            shared_ptr<Adjacencia> removed = grafo->getAdjacencia(solution->idVertice1, solution->idVertice2);
+            Adjacencia *removed = grafo->getAdjacencia(solution->idVertice1, solution->idVertice2);
 
             // Novas arestas que substituirão a que será removida
 
             // Novas arestas da solução
-            shared_ptr<Adjacencia> s1 = grafo->getAdjacencia(removed->getIdVertice1(), solution->nodeId);
-            shared_ptr<Adjacencia> s2 = grafo->getAdjacencia(solution->nodeId, removed->getIdVertice2());
+            Adjacencia *s1 = grafo->getAdjacencia(removed->getIdVertice1(), solution->nodeId);
+            Adjacencia *s2 = grafo->getAdjacencia(solution->nodeId, removed->getIdVertice2());
 
             // Insere as novas arestas na solução
             caminho->insert(s1->getWeight(), s1, ListStart);
@@ -401,7 +399,7 @@ float HeuristicIMP::heuristic(float alfa)
             calculo->start();
             while(!calculo->isEnd() && !calculo->isEmpty())
             {
-                shared_ptr<InsertCalculation> ic = calculo->getCurrentInfo();
+                InsertCalculation *ic = calculo->getCurrentInfo();
 
                 if(removed->equals(ic->idVertice1, ic->idVertice2)|| (truck->getCapacity() - grafo->getVerticeWeight(ic->nodeId) < 0) || visited[ic->nodeId])
                 {
@@ -429,9 +427,14 @@ float HeuristicIMP::heuristic(float alfa)
             }
         }
 
+        delete caminho;
+        delete calculo;
+
         // Como uma rota foi fechada o veículo passa a ter capacidade máxima novamente
         truck->resetCapacity();
     }
+
+    delete truck;
 
 //    cout << "Total de rotas: " << rotaCount << endl;
     return dPath;

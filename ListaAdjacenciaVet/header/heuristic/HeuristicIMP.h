@@ -14,10 +14,8 @@
 #include <fstream>
 #include <cstdlib>
 #include <vector>
-#include <chrono>
 
 using namespace std;
-using namespace std::chrono;
 
 /**
 *   Heurística para o problema de roteamento de veículos capacitados
@@ -27,19 +25,20 @@ class HeuristicIMP
     private:
         int nodeBase; // Vértice base do problema
         float vehicleCapacity; // Capacidade máxima do veículo utilizado no problema
-        shared_ptr<ListaAdjacenciaVet> grafo; // Grafo do problema
+        ListaAdjacenciaVet *grafo; // Grafo do problema
 
         bool ready; // Indica se a instância foi construída corretamente
 
         float heuristic(float alfa); // Heurística da inserção mais próxima
     public:
         HeuristicIMP(string filename);
+        ~HeuristicIMP();
 
         bool isReady();
 
         float runGulosa();
         float runRandom(float alfa, int maxIteration);
-        float runReativa(string outputFile, int alfaUpdate, int maxIteration);
+        float runReativa(int alfaUpdate, int maxIteration);
 };
 
 #endif // HEURISTICIMP_H

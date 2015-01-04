@@ -1,6 +1,6 @@
 #include "../header/FileHelper.h"
 
-shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
+CVRPInstance* FileHelper::readInstance(string fileName)
 {
     ifstream streamFile;
     streamFile.open(fileName.c_str());
@@ -17,7 +17,7 @@ shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
 
         cout << "===== Lendo instância do CVRP =====" << endl << endl;
 
-        shared_ptr<CVRPInstance> instance = make_shared<CVRPInstance>();
+        CVRPInstance* instance = new CVRPInstance();
 
         string txtLine;
 
@@ -63,7 +63,7 @@ shared_ptr<CVRPInstance> FileHelper::readInstance(string fileName)
                     while(streamLine >> nodeId >> nodeCoordX >> nodeCoordY)
                     {
                         cout << "Id: " << nodeId << " -- X: " << nodeCoordX << " -- Y: " << nodeCoordY << endl;
-                        instance->addVerticePoint(nodeId, make_shared<Point>(nodeCoordX, nodeCoordY));
+                        instance->addVerticePoint(nodeId, new Point(nodeCoordX, nodeCoordY));
                     }
                 }
 

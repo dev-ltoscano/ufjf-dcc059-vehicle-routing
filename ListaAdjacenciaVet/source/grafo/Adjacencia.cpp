@@ -27,7 +27,7 @@ void Adjacencia::setWeight(float weight)
     this->weight = weight;
 }
 
-bool Adjacencia::equals(shared_ptr<Adjacencia> adj)
+bool Adjacencia::equals(Adjacencia *adj)
 {
     return this->equals(adj->getIdVertice1(),adj->getIdVertice2());
 }

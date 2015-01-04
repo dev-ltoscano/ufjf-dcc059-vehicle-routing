@@ -17,7 +17,7 @@ class CVRPInstance
         int vehicleCapacity; // Capacidade do veículo utilizado
         int verticeBase; // Id do vértice da base
 
-        shared_ptr<ListaAdjacenciaVet> grafo; // Grafo do problema
+        ListaAdjacenciaVet *grafo; // Grafo do problema
     public:
         CVRPInstance();
 
@@ -30,10 +30,10 @@ class CVRPInstance
         int getVerticeBase();
         void setVerticeBase(int nodeId);
 
-        void addVerticePoint(int idVertice, shared_ptr<Point> verticePoint); // Define as coordenadas do vértice
+        void addVerticePoint(int idVertice, Point *verticePoint); // Define as coordenadas do vértice
         void addVerticeDemand(int idVertice, float demand); // Define a demanda do vértice
 
-        shared_ptr<ListaAdjacenciaVet> getInstance(); // Cria um grafo completo para o problema
+        ListaAdjacenciaVet* getInstance(); // Cria um grafo completo para o problema
 };
 
 #endif // CVRPINSTANCE_H_INCLUDED
