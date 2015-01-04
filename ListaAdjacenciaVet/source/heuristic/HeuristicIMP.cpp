@@ -71,7 +71,7 @@ float HeuristicIMP::runRandom(float alfa, int maxIteration)
     return minCost;
 }
 
-float HeuristicIMP::runReativa(string outputFile, int alfaUpdate, int maxIteration)
+float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
 {
     // Se a instância não foi carregada corretamente, retorna
     if(!ready)

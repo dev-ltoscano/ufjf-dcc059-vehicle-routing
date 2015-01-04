@@ -39,7 +39,7 @@ class HeuristicIMP
 
         float runGulosa();
         float runRandom(float alfa, int maxIteration);
-        float runReativa(string outputFile, int alfaUpdate, int maxIteration);
+        float runReativa(int alfaUpdate, int maxIteration);
 };
 
 #endif // HEURISTICIMP_H

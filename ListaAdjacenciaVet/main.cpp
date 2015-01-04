@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
                     float alfa = atol(argv[3]);
                     int maxIteration = atol(argv[4]);
 
-                    cout << "Custo mínimo: " << h->runReativa("Results/" + string(argv[2]), alfa, maxIteration) << endl;
+                    cout << "Custo mínimo: " << h->runReativa(alfa, maxIteration) << endl;
                 }
                 else
                 {
