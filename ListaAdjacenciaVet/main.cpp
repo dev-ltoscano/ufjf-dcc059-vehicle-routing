@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
         case 5:
         {
             // Solução randomizada
-            if((argv[1] != NULL) && (argv[1] == string("rand")))
+            if((argv[1] != NULL) && (argv[1] == string("random")))
             {
                 if((argv[2] != NULL) && (argv[3] != NULL) && (argv[4] != NULL))
                 {
@@ -193,7 +193,7 @@ int main(int argc, char *argv[])
                 }
             }
             //Solução reativa
-            else if((argv[1] != NULL) && (argv[1] == string("reat")))
+            else if((argv[1] != NULL) && (argv[1] == string("reativa")))
             {
                 if((argv[2] != NULL) && (argv[3] != NULL) && (argv[4] != NULL))
                 {

@@ -129,29 +129,8 @@ float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
     // Posição do alfa atual
     int alfaPos = 0;
 
-    // Gerando soluções iniciais para cada alfa
-    for(int i = 0; i < alfaLength; i++)
-    {
-        alfa = alfaList[i];
-
-        // Gera um custo usando o alfa atual
-        alfaCost = this->heuristic(alfa);
-
-        // Atualiza a melhor solução gerada
-        if(alfaCost < minSolution)
-        {
-            minSolution = alfaCost;
-        }
-
-        // Atualiza quantas vezes o alfa foi usado
-        alfaCount[i] += 1;
-
-        // Atualiza o somatório de soluções geradas para o alfa
-        alfaSum[i] += alfaCost;
-
-        // Atualizando a média de soluções do alfa
-        alfaAvg[i] = (alfaSum[i] / alfaCount[i]);
-    }
+    // Quantidade de execuções para o alfa atual
+    int alfaUpdCount = 0;
 
     cout << "Gerando solução randomizada [ AlfaUpdate = " << alfaUpdate << " | maxIteration = " << maxIteration << "]"<< endl;
     cout << "Iteração: " << endl;
@@ -159,8 +138,36 @@ float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
     // Executa o processo até o máximo de iterações
     while(iteration < maxIteration)
     {
-        cout << iteration << " ";
+        alfaUpdCount = 0;
 
+        // Gera soluções com um determinado alfa até chegar no momento da troca de alfas
+        while(alfaUpdCount < alfaUpdate)
+        {
+            cout << iteration << " ";
+
+            alfa = alfaList[alfaPos];
+            alfaCost = this->heuristic(alfa);
+
+            // Atualiza a melhor solução gerada
+            if(alfaCost < minSolution)
+            {
+                minSolution = alfaCost;
+            }
+
+            // Atualiza quantas vezes o alfa foi usado
+            alfaCount[alfaPos] += 1;
+
+            // Atualiza o somatório de soluções geradas para o alfa
+            alfaSum[alfaPos] += alfaCost;
+
+            // Atualizando a média de soluções do alfa
+            alfaAvg[alfaPos] = (alfaSum[alfaPos] / alfaCount[alfaPos]);
+
+            alfaUpdCount++;
+            iteration++;
+        }
+
+        // Assumindo que é o melhor alfa
         alfaPos = 0;
 
         // Somatório da qualidade dos alfas
@@ -183,49 +190,22 @@ float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
                 alfaPos = i;
             }
         }
-
-        int alfaUpdCount = 0;
-
-        // Gera soluções com um determinado alfa até chegar no momento da troca de alfas
-        while(alfaUpdCount < alfaUpdate)
-        {
-            alfa = alfaList[alfaPos];
-            alfaCost = this->heuristic(alfa);
-
-            // Atualiza a melhor solução gerada
-            if(alfaCost < minSolution)
-            {
-                minSolution = alfaCost;
-            }
-
-            // Atualiza quantas vezes o alfa foi usado
-            alfaCount[alfaPos] += 1;
-
-            // Atualiza o somatório de soluções geradas para o alfa
-            alfaSum[alfaPos] += alfaCost;
-
-            // Atualizando a média de soluções do alfa
-            alfaAvg[alfaPos] = (alfaSum[alfaPos] / alfaCount[alfaPos]);
-
-            alfaUpdCount++;
-        }
-
-        iteration++;
     }
+
+    // Assumindo que o alfa da posição inicial é o melhor
+    alfaPos = 0;
 
     // Procurando pelo alfa que tem a maior probabilidade
-    int alfaBest = 0;
-
     for(int i = 0; i < alfaLength; i++)
     {
-        if(alfaProb[alfaBest] < alfaProb[i])
+        if(alfaProb[alfaPos] < alfaProb[i])
         {
-            alfaBest = i;
+            alfaPos = i;
         }
     }
 
-    cout << endl << "Melhor alfa: " << alfaList[alfaBest] << endl;
-    cout << "Média dos custos gerados pelo melhor alfa: " << alfaAvg[alfaBest] << endl;
+    cout << endl << "Melhor alfa: " << alfaList[alfaPos] << endl;
+    cout << "Média dos custos gerados pelo melhor alfa: " << alfaAvg[alfaPos] << endl;
 
     return minSolution;
 }
