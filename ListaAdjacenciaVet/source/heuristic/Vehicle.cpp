@@ -1,6 +1,6 @@
 #include "../../header/heuristic/Vehicle.h"
 
-Vehicle::Vehicle(int id, float initialCapacity)
+Vehicle::Vehicle(int id, int initialCapacity)
 {
     this->id = id;
     this->initialCapacity = initialCapacity;
@@ -12,19 +12,19 @@ int Vehicle::getId()
     return this->id;
 }
 
-float Vehicle::getInitialCapacity()
+int Vehicle::getInitialCapacity()
 {
     return this->initialCapacity;
 }
 
-float Vehicle::getCapacity()
+int Vehicle::getCapacity()
 {
     return this->capacity;
 }
 
-void Vehicle::addCapacity(float increase)
+void Vehicle::addCapacity(int increase)
 {
-    float sum = this->capacity + increase;
+	int sum = this->capacity + increase;
 
     if(sum < this->initialCapacity)
     {
@@ -32,9 +32,9 @@ void Vehicle::addCapacity(float increase)
     }
 }
 
-void Vehicle::removeCapacity(float decrease)
+void Vehicle::removeCapacity(int decrease)
 {
-    float sum = this->capacity - decrease;
+	int sum = this->capacity - decrease;
 
     if(sum > 0)
     {

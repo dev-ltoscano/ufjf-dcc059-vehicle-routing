@@ -36,19 +36,19 @@ float HeuristicIMP::runGulosa()
     // Se a instância não foi carregada corretamente, retorna
     if(!ready)
     {
-        return -1;
+        return INFINITE;
     }
 
     cout << "Gerando solução gulosa..." << endl;
     return this->heuristic(0); // Gera uma solução gulosa
 }
 
-float HeuristicIMP::runRandom(float alfa, int maxIteration)
+float HeuristicIMP::runRandom(double alfa, int maxIteration)
 {
     // Se a instância não foi carregada corretamente, retorna
     if(!ready)
     {
-        return -1;
+        return INFINITE;
     }
 
     cout << "Gerando solução randomizada [ Alfa = " << alfa << " | maxIteration = " << maxIteration << "]"<< endl;
@@ -83,14 +83,14 @@ float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
     // Se a instância não foi carregada corretamente, retorna
     if(!ready)
     {
-        return -1;
+        return INFINITE;
     }
 
     // Quantidade de alfas
     float alfaLength = 10;
 
     // Alfa atual
-    float alfa = 0.1;
+    double alfa = 0.1;
 
     // Vetor de alfas
     vector<float> alfaList;
@@ -106,15 +106,15 @@ float HeuristicIMP::runReativa(int alfaUpdate, int maxIteration)
     alfaCount.assign(alfaLength, 0);
 
     // Vetor com o somatório das soluções geradas pelo alfa
-    vector<float> alfaSum;
-    alfaSum.assign(alfaLength, 0);
+    vector<double> alfaSum;
+    alfaSum.assign(alfaLength, 0.0);
 
     // Vetor que guarda a média dos resultados de cada alfa
-    vector<float> alfaAvg;
-    alfaAvg.assign(alfaLength, 0);
+    vector<double> alfaAvg;
+	alfaAvg.assign(alfaLength, 0.0);
 
     // Vetor que guarda as probabilidades de cada alfa
-    vector<float> alfaProb;
+	vector<double> alfaProb;
     alfaProb.assign(alfaLength, 0.1);
 
     // Melhor solução gerada
@@ -341,8 +341,6 @@ float HeuristicIMP::heuristic(float alfa)
                     caminho->next();
                 }
 
-                // Atualiza a quantidade de rotas geradas
-                rotaCount++;
                 break;
             }
 
@@ -410,12 +408,15 @@ float HeuristicIMP::heuristic(float alfa)
         delete caminho;
         delete calculo;
 
+        // Atualiza a quantidade de rotas geradas
+        rotaCount++;
+
         // Como uma rota foi fechada o veículo passa a ter capacidade máxima novamente
         truck->resetCapacity();
     }
 
     delete truck;
 
-//    cout << "Total de rotas: " << rotaCount << endl;
+//    cout << endl << "Total de rotas: " << rotaCount << endl;
     return dPath;
 }

@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
                 {
                     HeuristicIMP *h = new HeuristicIMP(string(argv[2]));
 
-                    float alfa = atof(argv[3]);
+                    double alfa = atof(argv[3]);
                     int maxIteration = atoi(argv[4]);
                     cout << "Custo mínimo: " << h->runRandom(alfa, maxIteration) << endl;
 
@@ -199,7 +199,7 @@ int main(int argc, char *argv[])
                 {
                     HeuristicIMP *h = new HeuristicIMP(string(argv[2]));
 
-                    float alfa = atol(argv[3]);
+                    long alfa = atol(argv[3]);
                     int maxIteration = atol(argv[4]);
 
                     cout << "Custo mínimo: " << h->runReativa(alfa, maxIteration) << endl;
@@ -216,13 +216,19 @@ int main(int argc, char *argv[])
         }
         default:
         {
-            cout << "[ Erro ]: Nenhum comando válido!" << endl;
+            HeuristicIMP *h = new HeuristicIMP("C:\\Users\\Luis Augusto\\Documents\\Visual Studio 2013\\Projects\\CVRProblem\\Debug\\Instance\\instance20.txt");
+            cout << "Custo mínimo: " << h->runRandom(0.1, 100) << endl;
+            delete h;
+
+            //cout << "[ Erro ]: Nenhum comando válido!" << endl;
         }
     }
 
     // Tempo final da execução
     high_resolution_clock::time_point t2 = high_resolution_clock::now();
     cout << "Tempo de execução (Segundos): " << ((float)chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() / SCALERATIO) << endl;
+
+	//system("PAUSE");
 
     return 0;
 }

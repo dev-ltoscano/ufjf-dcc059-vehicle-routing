@@ -20,7 +20,7 @@ struct Floyd
 struct InsertCalculation
 {
     int nodeId;
-    int difPath;
+    float difPath;
     int idVertice1;
     int idVertice2;
 };

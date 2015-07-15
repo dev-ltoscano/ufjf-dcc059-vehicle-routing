@@ -115,7 +115,7 @@ bool ListaAdjacenciaVet::depth(int s, int d)
         }
     }
 
-    delete visited;
+    delete [] visited;
     return false;
 }
 
@@ -288,7 +288,7 @@ bool ListaAdjacenciaVet::isConexo()
 
     bool conexo = this->depth(visited);
 
-    delete visited;
+    delete [] visited;
     return conexo;
 }
 
@@ -307,7 +307,7 @@ int ListaAdjacenciaVet::compConexaCount()
         }
     }
 
-    delete visited;
+    delete [] visited;
     return count;
 }
 

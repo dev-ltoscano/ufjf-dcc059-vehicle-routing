@@ -24,7 +24,7 @@ class HeuristicIMP
 {
     private:
         int nodeBase; // Vértice base do problema
-        float vehicleCapacity; // Capacidade máxima do veículo utilizado no problema
+        int vehicleCapacity; // Capacidade máxima do veículo utilizado no problema
         ListaAdjacenciaVet *grafo; // Grafo do problema
 
         bool ready; // Indica se a instância foi construída corretamente
@@ -37,7 +37,7 @@ class HeuristicIMP
         bool isReady();
 
         float runGulosa();
-        float runRandom(float alfa, int maxIteration);
+        float runRandom(double alfa, int maxIteration);
         float runReativa(int alfaUpdate, int maxIteration);
 };
 
