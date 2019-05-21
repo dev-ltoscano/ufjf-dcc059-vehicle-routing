@@ -1,4 +1,4 @@
-GrafosListaAdjacencia
+Vehicle Routing
 =====================
 
-Implementação de um TAD para representar um grafo por lista de adjacências
+Implementação de heurísticas gulosas para o problema de roteamento de veículos capacitados
